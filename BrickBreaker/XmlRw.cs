@@ -13,6 +13,8 @@ namespace BrickBreaker
         // Indications
         public const int SUCCESS = 0;
         public const int XML_READ_ERR = 1;
+        public const int INVALID_FILE = 2;
+        public const int XML_WRITE_ERR = 3;
 
         // Blocks from level
         public List<Block> blocks = new List<Block>();
@@ -21,9 +23,17 @@ namespace BrickBreaker
         // High scores
         public List<int> highScores = new List<int>();
 
+        // Keep track of level
+        int level = -1;
+
         public XmlRw()
         {
 
+        }
+
+        public List<Block> allBlocks()
+        {
+            return blocks;
         }
 
         // TODO: When power-ups are added, add a "powerUp" argument
@@ -60,6 +70,18 @@ namespace BrickBreaker
         // Call "levelN.xml" or "level_saveN.xml"
         public int loadLevel(string filePath)
         {
+            if (filePath != null)
+            {
+                string levelNString = filePath.Replace("level", "").Replace(".xml", "");
+                level = Convert.ToInt32(levelNString);
+                Console.WriteLine($"level: {level}");
+            } else
+            {
+                return INVALID_FILE;
+            }
+
+            blocks.Clear();
+
             XmlReader reader = XmlReader.Create($"../../levels/{filePath}");
 
             reader.ReadStartElement("level");
@@ -122,6 +144,20 @@ namespace BrickBreaker
             }
 
             return SUCCESS;
+        }
+
+        // Call this method after a level is completed. If ``loadLevel`` is not called before it will return
+        // ``INVALID_FILE`` (2)
+        public int nextLevel()
+        {
+            if (level == -1)
+            {
+                return INVALID_FILE;
+            }
+
+            level += 1;
+
+            return loadLevel($"level{level}.xml");
         }
     }
 }
