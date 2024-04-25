@@ -39,8 +39,15 @@ namespace BrickBreaker
 
         //Grady Stuff
         public static int speedModBX = 0, speedModBY = 0, speedModPX = 0;
+
         List<Powerup> powerups = new List<Powerup>();
         List<Ball> balls = new List<Ball>();
+
+
+
+
+
+
 
         #endregion
 

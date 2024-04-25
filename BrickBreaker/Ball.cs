@@ -17,18 +17,25 @@ namespace BrickBreaker
             y = _y;
             xSpeed = _xSpeed;
             ySpeed = _ySpeed;
+
             defaultSpeedX = Math.Abs(_xSpeed);
             defaultSpeedY = Math.Abs(_ySpeed);
+
+           
+ 
             size = _ballSize;
 
         }
 
         public void Move()
         {
+
             if(xSpeed < 0 )
             {
                 xSpeed = -Math.Max(0,(defaultSpeedX + GameScreen.speedModBX));
             } else
+
+           
             {
                 xSpeed = Math.Max(0, (defaultSpeedX + GameScreen.speedModBX));
             }
@@ -53,6 +60,12 @@ namespace BrickBreaker
             if (ballRec.IntersectsWith(blockRec))
             {
                 ySpeed *= -1;
+
+                if (ballRec.X + size < blockRec.X + 10 || ballRec.X + 4 > b.x + blockRec.Width)
+                {
+                    xSpeed *= -1;
+                    ySpeed *= -1;
+                }
             }
 
             return blockRec.IntersectsWith(ballRec);
@@ -66,7 +79,40 @@ namespace BrickBreaker
             if (ballRec.IntersectsWith(paddleRec))
             {
                 ySpeed *= -1;
+
+                //paddle width = 80
+
+                if (ballRec.X + size < p.x + 10)
+                {
+                    defaultSpeedX = -20;
+                }
+
+                if (ballRec.X + 4 > p.x + p.width)
+                {
+                    xSpeed *= -1;
+                    ySpeed *= -1;
+                }
+
+                //if (size / 2 + ballRec.X <= p.x + 30)
+                //{
+                //    defaultSpeedX = -6;
+                //}
+                //else if (size / 2 + ballRec.X <= p.x + 50)
+                //{
+                //    defaultSpeedX = -3;
+                //}
+                //else if (size / 2 + ballRec.X >= p.x + 70)
+                //{
+                //    defaultSpeedX = 6;
+                //}
+                //else if (size / 2 + ballRec.X >= p.x + 50)
+                //{
+                //    defaultSpeedX = 3;
+                //}
+
+
             }
+
         }
 
         public void WallCollision(UserControl UC)
