@@ -42,9 +42,14 @@
             this.playButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.playButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.playButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+
             this.playButton.Font = new System.Drawing.Font("Britannic Bold", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playButton.ForeColor = System.Drawing.Color.SaddleBrown;
             this.playButton.Location = new System.Drawing.Point(504, 238);
+
+            this.playButton.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playButton.Location = new System.Drawing.Point(221, 190);
+
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(194, 77);
             this.playButton.TabIndex = 0;
@@ -57,9 +62,13 @@
             this.exitButton.BackColor = System.Drawing.Color.White;
             this.exitButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+
             this.exitButton.Font = new System.Drawing.Font("Britannic Bold", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitButton.ForeColor = System.Drawing.Color.SaddleBrown;
             this.exitButton.Location = new System.Drawing.Point(504, 529);
+
+           
+
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(194, 77);
             this.exitButton.TabIndex = 1;
@@ -111,7 +120,9 @@
             this.Controls.Add(this.fileButton);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.playButton);
+
             this.DoubleBuffered = true;
+
             this.Name = "MenuScreen";
             this.Size = new System.Drawing.Size(1250, 700);
             this.ResumeLayout(false);

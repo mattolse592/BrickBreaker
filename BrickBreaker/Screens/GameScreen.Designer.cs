@@ -52,12 +52,16 @@
             // 
             // GameScreen
             // 
+
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.Controls.Add(this.button1);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+
+          
+
             this.Name = "GameScreen";
             this.Size = new System.Drawing.Size(1250, 700);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameScreen_Paint);
