@@ -130,9 +130,11 @@ namespace BrickBreaker
             {
                 case Keys.Left:
                     leftArrowDown = false;
+                    powerups.Add(new Powerup("BB4", new List<string> { "temp"}));
                     break;
                 case Keys.Right:
                     rightArrowDown = false;
+                    powerups.Add(new Powerup("BBC55"));
                     break;
                 default:
                     break;
@@ -207,6 +209,8 @@ namespace BrickBreaker
 
             for (int i = 0; i < balls.Count; i++)
             {
+                Ball tempBall = new Ball(balls[i].x, balls[i].y, balls[i].xSpeed, balls[i].ySpeed, balls[i].size, balls[i].modifiers);
+
                 if (balls[i] != ball)
                 {
                     balls[i].Move();
@@ -235,7 +239,7 @@ namespace BrickBreaker
                     }
 
                     // Check for ball hitting bottom of screen
-                    if (balls[i].BottomCollision(this))
+                    if (balls[i].BottomCollision(this) || (balls[i].CheckFor("temp") && (tempBall.xSpeed != balls[i].xSpeed || tempBall.ySpeed != balls[i].ySpeed)))
                     {
                         balls.Remove(balls[i]);
                         i--;

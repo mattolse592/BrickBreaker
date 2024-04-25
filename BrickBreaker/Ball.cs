@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,6 +9,7 @@ namespace BrickBreaker
     {
         public int x, y, xSpeed, ySpeed, size, defaultSpeedX, defaultSpeedY;
         public Color colour;
+        public List<String> modifiers = new List<string>();
 
         public static Random rand = new Random();
 
@@ -23,6 +25,22 @@ namespace BrickBreaker
 
            
  
+            size = _ballSize;
+
+        }
+
+        public Ball(int _x, int _y, int _xSpeed, int _ySpeed, int _ballSize, List<String> _modifiers)
+        {
+            x = _x;
+            y = _y;
+            xSpeed = _xSpeed;
+            ySpeed = _ySpeed;
+
+            defaultSpeedX = Math.Abs(_xSpeed);
+            defaultSpeedY = Math.Abs(_ySpeed);
+
+            modifiers = _modifiers;
+
             size = _ballSize;
 
         }
@@ -144,6 +162,18 @@ namespace BrickBreaker
             }
 
             return didCollide;
+        }
+
+        public bool CheckFor(String check)
+        {
+            foreach (String modifier in modifiers)
+            {
+                if (modifier == check)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
     }
