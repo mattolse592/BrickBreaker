@@ -123,11 +123,9 @@ namespace BrickBreaker
             {
                 case Keys.Left:
                     leftArrowDown = false;
-                    powerups.Add(new Powerup("BB3"));
                     break;
                 case Keys.Right:
                     rightArrowDown = false;
-                    powerups.Add(new Powerup("BB2"));
                     break;
                 default:
                     break;
