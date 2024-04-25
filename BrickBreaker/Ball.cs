@@ -6,7 +6,7 @@ namespace BrickBreaker
 {
     public class Ball
     {
-        public int x, y, xSpeed, ySpeed, size;
+        public int x, y, xSpeed, ySpeed, size, defaultSpeedX, defaultSpeedY;
         public Color colour;
 
         public static Random rand = new Random();
@@ -17,12 +17,30 @@ namespace BrickBreaker
             y = _y;
             xSpeed = _xSpeed;
             ySpeed = _ySpeed;
+            defaultSpeedX = Math.Abs(_xSpeed);
+            defaultSpeedY = Math.Abs(_ySpeed);
             size = _ballSize;
 
         }
 
         public void Move()
         {
+            if(xSpeed < 0 )
+            {
+                xSpeed = -Math.Max(0,(defaultSpeedX + GameScreen.speedModBX));
+            } else
+            {
+                xSpeed = Math.Max(0, (defaultSpeedX + GameScreen.speedModBX));
+            }
+            if (ySpeed < 0)
+            {
+                ySpeed = -Math.Max(0, (defaultSpeedY + GameScreen.speedModBY));
+            }
+            else
+            {
+                ySpeed = Math.Max(0, (defaultSpeedY + GameScreen.speedModBY));
+            }
+
             x = x + xSpeed;
             y = y + ySpeed;
         }

@@ -37,6 +37,11 @@ namespace BrickBreaker
         SolidBrush ballBrush = new SolidBrush(Color.White);
         SolidBrush blockBrush = new SolidBrush(Color.Red);
 
+        //Grady Stuff
+        public static int speedModBX = 0, speedModBY = 0, speedModPX = 0;
+        List<Powerup> powerups = new List<Powerup>();
+        List<Ball> balls = new List<Ball>();
+
         #endregion
 
         public GameScreen()
@@ -71,6 +76,9 @@ namespace BrickBreaker
             int ySpeed = 6;
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
+
+            //Grady Code
+            balls.Add(ball);
 
             #region Creates blocks for generic level. Need to replace with code that loads levels.
             
@@ -115,9 +123,11 @@ namespace BrickBreaker
             {
                 case Keys.Left:
                     leftArrowDown = false;
+                    powerups.Add(new Powerup("BB3"));
                     break;
                 case Keys.Right:
                     rightArrowDown = false;
+                    powerups.Add(new Powerup("BB2"));
                     break;
                 default:
                     break;
@@ -178,8 +188,65 @@ namespace BrickBreaker
                 }
             }
 
+            Grady();
+
             //redraw the screen
             Refresh();
+        }
+
+        void Grady()
+        {
+            speedModPX = 0;
+            speedModBY = 0;
+            speedModBX = 0;
+
+            for (int i = 0; i < balls.Count; i++)
+            {
+                if (balls[i] != ball)
+                {
+                    balls[i].Move();
+
+                    // Check for collision with top and side walls
+                    balls[i].WallCollision(this);
+
+                    // Check for collision of ball with paddle, (incl. paddle movement)
+                    balls[i].PaddleCollision(paddle);
+
+                    // Check if ball has collided with any blocks
+                    foreach (Block b in blocks)
+                    {
+                        if (balls[i].BlockCollision(b))
+                        {
+                            blocks.Remove(b);
+
+                            if (blocks.Count == 0)
+                            {
+                                gameTimer.Enabled = false;
+                                OnEnd();
+                            }
+
+                            break;
+                        }
+                    }
+
+                    // Check for ball hitting bottom of screen
+                    if (balls[i].BottomCollision(this))
+                    {
+                        balls.Remove(balls[i]);
+                        i--;
+                    }
+                }
+            }
+
+            for (int i = 0; i < powerups.Count; i++)
+            {
+                balls = powerups[i].Effect(balls);
+                if (powerups[i].Type.Contains("BB"))
+                {
+                    powerups.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         public void OnEnd()
@@ -208,6 +275,12 @@ namespace BrickBreaker
 
             // Draws ball
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
+
+            //Grady
+            foreach(Ball b in balls)
+            {
+                e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);
+            }
         }
     }
 }
