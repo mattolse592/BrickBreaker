@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace BrickBreaker
 {
@@ -21,12 +22,13 @@ namespace BrickBreaker
         {
             if (direction == "left")
             {
-                x -= speed;
+                x -= Math.Max(0, (speed + GameScreen.speedModPX));
             }
             if (direction == "right")
             {
-                x += speed;
+                x += Math.Max(0, (speed + GameScreen.speedModPX));
             }
         }
     }
 }
+

@@ -37,6 +37,12 @@ namespace BrickBreaker
         SolidBrush ballBrush = new SolidBrush(Color.White);
         SolidBrush blockBrush = new SolidBrush(Color.Red);
 
+        //Grady Stuff
+        public static int speedModBX = 0, speedModBY = 0, speedModPX = 0;
+
+        List<Ball> balls = new List<Ball>();
+
+
         #endregion
 
         public GameScreen()
