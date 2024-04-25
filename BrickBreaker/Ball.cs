@@ -17,19 +17,25 @@ namespace BrickBreaker
             y = _y;
             xSpeed = _xSpeed;
             ySpeed = _ySpeed;
-            defaultSpeedX = _xSpeed;
-            defaultSpeedY = _ySpeed;
+
+            defaultSpeedX = Math.Abs(_xSpeed);
+            defaultSpeedY = Math.Abs(_ySpeed);
+
+           
+ 
             size = _ballSize;
 
         }
 
         public void Move()
         {
-            if (xSpeed < 0)
+
+            if(xSpeed < 0 )
             {
-                xSpeed = -Math.Max(0, (defaultSpeedX + GameScreen.speedModBX));
-            }
-            else
+                xSpeed = -Math.Max(0,(defaultSpeedX + GameScreen.speedModBX));
+            } else
+
+           
             {
                 xSpeed = Math.Max(0, (defaultSpeedX + GameScreen.speedModBX));
             }
