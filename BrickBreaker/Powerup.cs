@@ -58,9 +58,31 @@ namespace BrickBreaker
 
             if (Type.Contains("C"))
             {
-                foreach(Ball b in balls)
+                foreach (Ball b in balls)
                 {
-                    double ang = Math.Atan((b.ySpeed + 1) / (b.xSpeed + 1));
+                    Random random = new Random();
+                    double ang = random.Next(0, Convert.ToInt16(2 * Math.PI));
+                    double angleInc = ((2 * Math.PI) / numBurst);
+
+                    for (int i = 0; i < numBurst; i++)
+                    {
+                        if ((ang + (angleInc * i)) % (Math.PI * 2) < (Math.PI / 2) && (ang + (angleInc * i)) % (Math.PI * 2) > 0)
+                        {
+
+                        }
+                        else if ((ang + (angleInc * i)) % (Math.PI * 2) < (Math.PI) && (ang + (angleInc * i)) % (Math.PI * 2) > 0)
+                        {
+
+                        }
+                        else if ((ang + (angleInc * i)) % (Math.PI * 2) < (Math.PI / 2) && (ang + (angleInc * i)) % (Math.PI * 2) > 0)
+                        {
+
+                        }
+                        else if ((ang + (angleInc * i)) % (Math.PI * 2) < (Math.PI / 2) && (ang + (angleInc * i)) % (Math.PI * 2) > 0)
+                        {
+
+                        }
+                    }
                 }
             }
             else
