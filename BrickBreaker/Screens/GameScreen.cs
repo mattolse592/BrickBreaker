@@ -60,6 +60,19 @@ namespace BrickBreaker
 
         public void OnStart()
         {
+            // ----
+            XmlRw r = new XmlRw();
+            List<Block> blocks = new List<Block>();
+            blocks.Add(new Block(3, 6, 7, Color.Black));
+            blocks.Add(new Block(3, 6, 8, Color.Red));
+            int ret = r.saveLevel("level_save1.xml", blocks);
+
+            if (ret == XmlRw.SUCCESS)
+            {
+                int rhowuhwhewhu = 0;
+            }
+
+            // ---
             //set life counter
             lives = 3;
 

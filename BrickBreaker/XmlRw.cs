@@ -39,11 +39,13 @@ namespace BrickBreaker
         // TODO: When power-ups are added, add a "powerUp" argument
         public int saveLevel(string filePath, List<Block> blocks)
         {
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
             XmlWriter writer;
 
             try
             {
-                writer = XmlWriter.Create($"../../levels/{filePath}");
+                writer = XmlWriter.Create($"../../levels/{filePath}", settings);
             } catch (System.IO.FileNotFoundException)
             {
                 return INVALID_FILE;
