@@ -48,7 +48,8 @@ namespace BrickBreaker
                 writer = XmlWriter.Create($"../../levels/{filePath}", settings);
             } catch (System.IO.FileNotFoundException)
             {
-                return INVALID_FILE;
+                System.IO.File.Create($"../../levels/{filePath}");
+                writer = XmlWriter.Create($"../../levels/{filePath}", settings);
             }
 
             writer.WriteStartElement("level");

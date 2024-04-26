@@ -24,6 +24,8 @@ namespace BrickBreaker
 
         // Game values
         int lives;
+        int currentLevel;
+        bool isSavedLevel = false;
 
         // Paddle and Ball objects
         Paddle paddle;
@@ -60,21 +62,10 @@ namespace BrickBreaker
 
         public void OnStart()
         {
-            // ----
-            XmlRw r = new XmlRw();
-            List<Block> blocks = new List<Block>();
-            blocks.Add(new Block(3, 6, 7, Color.Black));
-            blocks.Add(new Block(3, 6, 8, Color.Red));
-            int ret = r.saveLevel("level_save1.xml", blocks);
-
-            if (ret == XmlRw.SUCCESS)
-            {
-                int rhowuhwhewhu = 0;
-            }
-
-            // ---
             //set life counter
             lives = 3;
+            // For now
+            currentLevel = 1;
 
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
@@ -105,14 +96,7 @@ namespace BrickBreaker
             //TODO - replace all the code in this region eventually with code that loads levels from xml files
             
             blocks.Clear();
-            int x = 10;
-
-            while (blocks.Count < 12)
-            {
-                x += 57;
-                Block b1 = new Block(x, 10, 1, Color.White);
-                blocks.Add(b1);
-            }
+            Nathan();
 
             #endregion
 
@@ -265,6 +249,48 @@ namespace BrickBreaker
                     i--;
                 }
             }
+        }
+
+        // Level loading
+        void Nathan_loadLevel()
+        {
+            string file;
+
+            if (isSavedLevel)
+            {
+                file = $"level_save{currentLevel}.xml";
+            } else
+            {
+                file = $"level{currentLevel}.xml";
+            }
+
+            XmlRw xmlRw = new XmlRw();
+            int ret = xmlRw.loadLevel(file);
+
+            switch (ret)
+            {
+                // ``loadLevel`` will return ``XML_READ_ERR`` until powerups are implemented for XmlRw
+                case XmlRw.SUCCESS | XmlRw.XML_READ_ERR:
+                    foreach (Block block in xmlRw.blocks)
+                    {
+                        // Add spacing between blocks
+                        block.x += 57;
+                        block.y += 32;
+
+                        blocks.Add(block);
+                    }
+                    break;
+                default:
+                    Console.WriteLine("oops");
+                    break;
+            }
+        }
+
+        // Save level
+        void Nathan_saveLevel()
+        {
+            XmlRw saver = new XmlRw();
+            saver.saveLevel($"level_save{currentLevel}.xml", blocks);
         }
 
         public void OnEnd()
