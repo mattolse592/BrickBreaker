@@ -141,7 +141,7 @@ namespace BrickBreaker
                 xSpeed *= -1;
             }
             // Collision with right wall
-            if (x >= (UC.Width - size))
+            if (x >= (950))
             {
                 xSpeed *= -1;
             }
@@ -174,6 +174,21 @@ namespace BrickBreaker
                 }
             }
             return false;
+        }
+
+        public void CleanModifiers()
+        {
+            for(int i = 0; i < modifiers.Count; i++)
+            {
+                for (int j = 0; j < modifiers.Count; j++)
+                {
+                    if (modifiers[i] == modifiers[j] && i != j)
+                    {
+                        modifiers.RemoveAt(j);
+                        j--;
+                    }
+                }
+            }
         }
 
     }
