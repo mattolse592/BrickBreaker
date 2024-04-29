@@ -123,7 +123,7 @@ namespace BrickBreaker
                 xSpeed *= -1;
             }
             // Collision with right wall
-            if (x >= (UC.Width - size))
+            if (x >= (950 - size)) //UC.Width
             {
                 xSpeed *= -1;
             }

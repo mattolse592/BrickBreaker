@@ -37,15 +37,13 @@ namespace BrickBreaker
         SolidBrush ballBrush = new SolidBrush(Color.White);
         SolidBrush blockBrush = new SolidBrush(Color.Red);
 
+        Pen sidebarPen = new Pen(Color.SaddleBrown, 3);
+
         //Grady Stuff
         public static int speedModBX = 0, speedModBY = 0, speedModPX = 0;
 
         List<Powerup> powerups = new List<Powerup>();
         List<Ball> balls = new List<Ball>();
-
-
-
-
 
 
 
@@ -286,6 +284,18 @@ namespace BrickBreaker
             {
                 e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);
             }
+
+
+            //Valentina
+            //Shop sidebar
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 1, 700);
+
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 100);
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 200);
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 300);
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 400);
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 500);
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 600);
         }
     }
 }
