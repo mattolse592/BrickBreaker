@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,6 +9,7 @@ namespace BrickBreaker
     {
         public int x, y, xSpeed, ySpeed, size, defaultSpeedX, defaultSpeedY;
         public Color colour;
+        public List<String> modifiers = new List<string>();
 
         public static Random rand = new Random();
 
@@ -17,19 +19,41 @@ namespace BrickBreaker
             y = _y;
             xSpeed = _xSpeed;
             ySpeed = _ySpeed;
-            defaultSpeedX = _xSpeed;
-            defaultSpeedY = _ySpeed;
+
+            defaultSpeedX = Math.Abs(_xSpeed);
+            defaultSpeedY = Math.Abs(_ySpeed);
+
+           
+ 
+            size = _ballSize;
+
+        }
+
+        public Ball(int _x, int _y, int _xSpeed, int _ySpeed, int _ballSize, List<String> _modifiers)
+        {
+            x = _x;
+            y = _y;
+            xSpeed = _xSpeed;
+            ySpeed = _ySpeed;
+
+            defaultSpeedX = Math.Abs(_xSpeed);
+            defaultSpeedY = Math.Abs(_ySpeed);
+
+            modifiers = _modifiers;
+
             size = _ballSize;
 
         }
 
         public void Move()
         {
-            if (xSpeed < 0)
+
+            if(xSpeed < 0 )
             {
-                xSpeed = -Math.Max(0, (defaultSpeedX + GameScreen.speedModBX));
-            }
-            else
+                xSpeed = -Math.Max(0,(defaultSpeedX + GameScreen.speedModBX));
+            } else
+
+           
             {
                 xSpeed = Math.Max(0, (defaultSpeedX + GameScreen.speedModBX));
             }
@@ -102,7 +126,9 @@ namespace BrickBreaker
                 xSpeed *= -1;
             }
             // Collision with right wall
-            if (x >= (UC.Width - size))
+
+            if (x >= (950 - size)) //UC.Width
+
             {
                 xSpeed *= -1;
             }
@@ -123,6 +149,33 @@ namespace BrickBreaker
             }
 
             return didCollide;
+        }
+
+        public bool CheckFor(String check)
+        {
+            foreach (String modifier in modifiers)
+            {
+                if (modifier == check)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void CleanModifiers()
+        {
+            for(int i = 0; i < modifiers.Count; i++)
+            {
+                for (int j = 0; j < modifiers.Count; j++)
+                {
+                    if (modifiers[i] == modifiers[j] && i != j)
+                    {
+                        modifiers.RemoveAt(j);
+                        j--;
+                    }
+                }
+            }
         }
 
     }

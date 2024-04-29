@@ -22,7 +22,9 @@ namespace BrickBreaker
         {
             if (direction == "left")
             {
-                x -= Math.Max(0, (speed + GameScreen.speedModPX));
+
+                x -= Math.Max(0,(speed + GameScreen.speedModPX));
+
             }
             if (direction == "right")
             {

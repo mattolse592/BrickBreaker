@@ -19,12 +19,30 @@ namespace BrickBreaker
 
         public static Random rand = new Random();
 
+        public List<String> modifiers = new List<string>();
+
         public Block(int _x, int _y, int _hp, Color _colour)
         {
             x = _x;
             y = _y;
             hp = _hp;
             colour = _colour;
+        }
+
+        public void PassCondition(Ball ball)
+        {
+            if (ball.modifiers.Contains("fire"))
+            {
+                modifiers.Add("ONFIRE");
+            }
+        }
+
+        public void setCurrent()
+        {
+            if (modifiers.Contains("ONFIRE"))
+            {
+                hp--;
+            }
         }
     }
 }
