@@ -96,7 +96,7 @@ namespace BrickBreaker
             //TODO - replace all the code in this region eventually with code that loads levels from xml files
             
             blocks.Clear();
-            Nathan();
+            Nathan_loadLevel();
 
             #endregion
 
