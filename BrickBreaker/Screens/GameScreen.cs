@@ -39,6 +39,8 @@ namespace BrickBreaker
         SolidBrush ballBrush = new SolidBrush(Color.White);
         SolidBrush blockBrush = new SolidBrush(Color.Red);
 
+        Pen sidebarPen = new Pen(Color.SaddleBrown, 3);
+
         //Grady Stuff
         public static int speedModBX = 0, speedModBY = 0, speedModPX = 0;
 
@@ -46,8 +48,8 @@ namespace BrickBreaker
         List<Ball> balls = new List<Ball>();
         SolidBrush fireBrush = new SolidBrush(Color.Red);
 
-        public static Font healthFont = new Font(new FontFamily("Perpetua"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
 
+        public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
 
 
 
@@ -378,6 +380,18 @@ namespace BrickBreaker
             {
                 e.Graphics.DrawString(b.hp.ToString(), healthFont, ballBrush, b.x, b.y);
             }
+
+
+            //Valentina
+            //Shop sidebar
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 1, 700);
+
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 100);
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 200);
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 300);
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 400);
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 500);
+            e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 600);
         }
     }
 }
