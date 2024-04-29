@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,6 +9,7 @@ namespace BrickBreaker
     {
         public int x, y, xSpeed, ySpeed, size, defaultSpeedX, defaultSpeedY;
         public Color colour;
+        public List<String> modifiers = new List<string>();
 
         public static Random rand = new Random();
 
@@ -23,6 +25,22 @@ namespace BrickBreaker
 
            
  
+            size = _ballSize;
+
+        }
+
+        public Ball(int _x, int _y, int _xSpeed, int _ySpeed, int _ballSize, List<String> _modifiers)
+        {
+            x = _x;
+            y = _y;
+            xSpeed = _xSpeed;
+            ySpeed = _ySpeed;
+
+            defaultSpeedX = Math.Abs(_xSpeed);
+            defaultSpeedY = Math.Abs(_ySpeed);
+
+            modifiers = _modifiers;
+
             size = _ballSize;
 
         }
@@ -80,37 +98,22 @@ namespace BrickBreaker
             {
                 ySpeed *= -1;
 
-                //paddle width = 80
 
-                if (ballRec.X + size < p.x + 10)
-                {
-                    defaultSpeedX = -20;
-                }
-
-                if (ballRec.X + 4 > p.x + p.width)
+                if (x + size <= p.x + 7)
                 {
                     xSpeed *= -1;
-                    ySpeed *= -1;
+                    x -= 8;
+                    defaultSpeedY = 3;
+                    defaultSpeedX = 20;
                 }
 
-                //if (size / 2 + ballRec.X <= p.x + 30)
-                //{
-                //    defaultSpeedX = -6;
-                //}
-                //else if (size / 2 + ballRec.X <= p.x + 50)
-                //{
-                //    defaultSpeedX = -3;
-                //}
-                //else if (size / 2 + ballRec.X >= p.x + 70)
-                //{
-                //    defaultSpeedX = 6;
-                //}
-                //else if (size / 2 + ballRec.X >= p.x + 50)
-                //{
-                //    defaultSpeedX = 3;
-                //}
-
-
+                if (x >= p.x + p.width - 7)
+                {
+                    x += 8;
+                    xSpeed *= -1;
+                    defaultSpeedY = 3; 
+                    defaultSpeedX = 20;
+                }
             }
 
         }
@@ -123,7 +126,9 @@ namespace BrickBreaker
                 xSpeed *= -1;
             }
             // Collision with right wall
+
             if (x >= (950 - size)) //UC.Width
+
             {
                 xSpeed *= -1;
             }
@@ -144,6 +149,33 @@ namespace BrickBreaker
             }
 
             return didCollide;
+        }
+
+        public bool CheckFor(String check)
+        {
+            foreach (String modifier in modifiers)
+            {
+                if (modifier == check)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void CleanModifiers()
+        {
+            for(int i = 0; i < modifiers.Count; i++)
+            {
+                for (int j = 0; j < modifiers.Count; j++)
+                {
+                    if (modifiers[i] == modifiers[j] && i != j)
+                    {
+                        modifiers.RemoveAt(j);
+                        j--;
+                    }
+                }
+            }
         }
 
     }

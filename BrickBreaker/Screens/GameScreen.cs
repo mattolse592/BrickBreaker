@@ -1,7 +1,7 @@
 ﻿/*  Created by: 
  *  Project: Brick Breaker
  *  Date: 
- */ 
+ */
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +24,8 @@ namespace BrickBreaker
 
         // Game values
         int lives;
+        int currentLevel;
+        bool isSavedLevel = false;
 
         // Paddle and Ball objects
         Paddle paddle;
@@ -44,6 +46,10 @@ namespace BrickBreaker
 
         List<Powerup> powerups = new List<Powerup>();
         List<Ball> balls = new List<Ball>();
+        SolidBrush fireBrush = new SolidBrush(Color.Red);
+
+
+        public static Font healthFont = new Font(new FontFamily("Perpetua"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
 
 
 
@@ -60,6 +66,8 @@ namespace BrickBreaker
         {
             //set life counter
             lives = 3;
+            // For now
+            currentLevel = 1;
 
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
@@ -86,18 +94,14 @@ namespace BrickBreaker
             balls.Add(ball);
 
             #region Creates blocks for generic level. Need to replace with code that loads levels.
-            
-            //TODO - replace all the code in this region eventually with code that loads levels from xml files
-            
-            blocks.Clear();
-            int x = 10;
 
-            while (blocks.Count < 12)
-            {
-                x += 57;
-                Block b1 = new Block(x, 10, 1, Color.White);
-                blocks.Add(b1);
-            }
+            //TODO - replace all the code in this region eventually with code that loads levels from xml files
+
+            blocks.Clear();
+
+
+            Nathan_loadLevel();
+
 
             #endregion
 
@@ -128,9 +132,11 @@ namespace BrickBreaker
             {
                 case Keys.Left:
                     leftArrowDown = false;
+                    powerups.Add(new Powerup("BB5", new List<string> { "fire" }));
                     break;
                 case Keys.Right:
                     rightArrowDown = false;
+                    powerups.Add(new Powerup("P", new List<string> { "fire" }));
                     break;
                 default:
                     break;
@@ -205,39 +211,54 @@ namespace BrickBreaker
 
             for (int i = 0; i < balls.Count; i++)
             {
-                if (balls[i] != ball)
+                Ball tempBall = new Ball(balls[i].x, balls[i].y, balls[i].xSpeed, balls[i].ySpeed, balls[i].size, balls[i].modifiers);
+                balls[i].Move();
+
+                // Check for collision with top and side walls
+                balls[i].WallCollision(this);
+
+                // Check for collision of ball with paddle, (incl. paddle movement)
+                balls[i].PaddleCollision(paddle);
+
+                for(int j = 0; j < blocks.Count; j++)
                 {
-                    balls[i].Move();
-
-                    // Check for collision with top and side walls
-                    balls[i].WallCollision(this);
-
-                    // Check for collision of ball with paddle, (incl. paddle movement)
-                    balls[i].PaddleCollision(paddle);
-
-                    // Check if ball has collided with any blocks
-                    foreach (Block b in blocks)
+                    blocks[j].setCurrent();
+                    if (blocks[j].hp <= 0)
                     {
-                        if (balls[i].BlockCollision(b))
+                        blocks.RemoveAt(j);
+                        j--;
+                    }
+                }
+
+                // Check if ball has collided with any blocks
+                foreach (Block b in blocks)
+                {
+                    if (balls[i].BlockCollision(b))
+                    {
+                        b.hp--;
+                        if (b.hp <= 0)
                         {
                             blocks.Remove(b);
-
-                            if (blocks.Count == 0)
-                            {
-                                gameTimer.Enabled = false;
-                                OnEnd();
-                            }
-
-                            break;
                         }
-                    }
+                        b.PassCondition(balls[i]);
 
-                    // Check for ball hitting bottom of screen
-                    if (balls[i].BottomCollision(this))
-                    {
-                        balls.Remove(balls[i]);
-                        i--;
+                        if (blocks.Count == 0)
+                        {
+                            gameTimer.Enabled = false;
+                            OnEnd();
+                        }
+
+                        break;
                     }
+                }
+
+                balls[i].CleanModifiers();
+
+                // Check for ball hitting bottom of screen
+                if (balls[i].BottomCollision(this) || (balls[i].CheckFor("temp") && (tempBall.xSpeed != balls[i].xSpeed || tempBall.ySpeed != balls[i].ySpeed)))
+                {
+                    balls.Remove(balls[i]);
+                    i--;
                 }
             }
 
@@ -250,6 +271,69 @@ namespace BrickBreaker
                     i--;
                 }
             }
+
+            if (lives == 0)
+            {
+                gameTimer.Enabled = false;
+                OnEnd();
+            }
+        }
+
+        void CleanPowerups()
+        {
+            for (int i = 0; i < powerups.Count; i++)
+            {
+                for (int j = 0; j < powerups.Count; j++)
+                {
+                    if (powerups[i] == powerups[j] && i != j)
+                    {
+                        powerups.RemoveAt(j);
+                        j--;
+                    }
+                }
+            }
+        }
+
+        // Level loading
+        void Nathan_loadLevel()
+        {
+            string file;
+
+            if (isSavedLevel)
+            {
+                file = $"level_save{currentLevel}.xml";
+            } else
+            {
+                file = $"level{currentLevel}.xml";
+            }
+
+            XmlRw xmlRw = new XmlRw();
+            int ret = xmlRw.loadLevel(file);
+
+            switch (ret)
+            {
+                // ``loadLevel`` will return ``XML_READ_ERR`` until powerups are implemented for XmlRw
+                case XmlRw.SUCCESS | XmlRw.XML_READ_ERR:
+                    foreach (Block block in xmlRw.blocks)
+                    {
+                        // Add spacing between blocks
+                        block.x += 57;
+                        block.y += 32;
+
+                        blocks.Add(block);
+                    }
+                    break;
+                default:
+                    Console.WriteLine("oops");
+                    break;
+            }
+        }
+
+        // Save level
+        void Nathan_saveLevel()
+        {
+            XmlRw saver = new XmlRw();
+            saver.saveLevel($"level_save{currentLevel}.xml", blocks);
         }
 
         public void OnEnd()
@@ -257,7 +341,7 @@ namespace BrickBreaker
             // Goes to the game over screen
             Form form = this.FindForm();
             MenuScreen ps = new MenuScreen();
-            
+
             ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
 
             form.Controls.Add(ps);
@@ -280,9 +364,21 @@ namespace BrickBreaker
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
 
             //Grady
-            foreach(Ball b in balls)
+            foreach (Ball b in balls)
             {
-                e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);
+                if (b.modifiers.Contains("fire"))
+                {
+                    e.Graphics.FillRectangle(fireBrush, b.x, b.y, b.size, b.size);
+                }
+                else
+                {
+                    e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);
+                }
+            }
+
+            foreach (Block b in blocks)
+            {
+                e.Graphics.DrawString(b.hp.ToString(), healthFont, ballBrush, b.x, b.y);
             }
 
 
