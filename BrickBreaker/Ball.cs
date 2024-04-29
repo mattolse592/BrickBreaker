@@ -74,37 +74,22 @@ namespace BrickBreaker
             {
                 ySpeed *= -1;
 
-                //paddle width = 80
 
-                if (ballRec.X + size < p.x + 10)
-                {
-                    defaultSpeedX = -20;
-                }
-
-                if (ballRec.X + 4 > p.x + p.width)
+                if (x + size <= p.x + 7)
                 {
                     xSpeed *= -1;
-                    ySpeed *= -1;
+                    x -= 8;
+                    defaultSpeedY = 3;
+                    defaultSpeedX = 20;
                 }
 
-                //if (size / 2 + ballRec.X <= p.x + 30)
-                //{
-                //    defaultSpeedX = -6;
-                //}
-                //else if (size / 2 + ballRec.X <= p.x + 50)
-                //{
-                //    defaultSpeedX = -3;
-                //}
-                //else if (size / 2 + ballRec.X >= p.x + 70)
-                //{
-                //    defaultSpeedX = 6;
-                //}
-                //else if (size / 2 + ballRec.X >= p.x + 50)
-                //{
-                //    defaultSpeedX = 3;
-                //}
-
-
+                if (x >= p.x + p.width - 7)
+                {
+                    x += 8;
+                    xSpeed *= -1;
+                    defaultSpeedY = 3; 
+                    defaultSpeedX = 20;
+                }
             }
 
         }
