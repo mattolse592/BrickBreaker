@@ -49,7 +49,7 @@ namespace BrickBreaker
         SolidBrush fireBrush = new SolidBrush(Color.Red);
 
 
-        public static Font healthFont = new Font(new FontFamily("Perpetua"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
+        public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
 
 
 
