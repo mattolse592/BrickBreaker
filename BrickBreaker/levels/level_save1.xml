@@ -1,1 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?><level><block><x>4</x><y>5</y><hp>94</hp><colour>Color [White]</colour></block></level>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<level>
+  <block>
+    <x>3</x>
+    <y>6</y>
+    <hp>7</hp>
+    <colour>Color [Black]</colour>
+  </block>
+  <block>
+    <x>3</x>
+    <y>6</y>
+    <hp>8</hp>
+    <colour>Color [Red]</colour>
+  </block>
+</level>
