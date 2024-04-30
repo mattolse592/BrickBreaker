@@ -180,5 +180,43 @@ namespace BrickBreaker
 
             return loadLevel($"level{level}.xml");
         }
+
+        // -----
+        // Level generation stuff
+        // -----
+
+        // Pyrimad thing
+        public void triangleBlocks(bool upright, int width, int x, int y)
+        {
+            int minX = x;
+            int maxX = x;
+
+           if (upright)
+           {
+                blocks.Add(new Block(x, y, 1, Color.Red));
+                for (int py = 0; py < width; py++)
+                {
+                    for (int px = minX; px < maxX; px++)
+                    {
+                        blocks.Add(new Block(px, py, 1, Color.Red));
+                    }
+
+                    minX -= 1;
+                    maxX += 1;
+                }
+           }
+        }
+
+        public void bigBlock(int width, int x, int y)
+        {
+            blocks.Add(new Block(x, y, 1, Color.Red));
+            for (int py = y; py < y + width; py++)
+            {
+                for (int px = x; px < x + width; px++)
+                {
+                    blocks.Add(new Block(px, py, 1, Color.Red));
+                }
+            }
+        }
     }
 }
