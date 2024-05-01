@@ -25,9 +25,10 @@ namespace BrickBreaker
         // Game values
         int currentLevel;
         bool isSavedLevel = false;
+        public static bool stick = false;
 
         // Paddle and Ball objects
-        Paddle paddle;
+        public static Paddle paddle;
         Ball ball;
 
         // list of all blocks for current level
@@ -115,6 +116,21 @@ namespace BrickBreaker
                 case Keys.Left:
                     leftArrowDown = true;
                     break;
+                case Keys.Up:
+                    if (stick)
+                    {
+                        stick = false;
+                        if (ball.ySpeed > 0)
+                        {
+                            ball.ySpeed *= -1;
+                        }
+                        ball.defaultSpeedX = 0;
+                        ball.defaultSpeedY = 6;
+                    }
+                    break;
+                case Keys.F:
+                    powerups.Add(new Powerup("BB5", new List<string> { "fire" }));
+                    break;
                 case Keys.Right:
                     rightArrowDown = true;
                     break;
@@ -130,11 +146,11 @@ namespace BrickBreaker
             {
                 case Keys.Left:
                     leftArrowDown = false;
-                    powerups.Add(new Powerup("BB5", new List<string> { "fire" }));
+                    // powerups.Add(new Powerup("BB5", new List<string> { "fire" }));
                     break;
                 case Keys.Right:
                     rightArrowDown = false;
-                    powerups.Add(new Powerup("P", new List<string> { "fire" }));
+                    // powerups.Add(new Powerup("P", new List<string> { "fire" }));
                     break;
                 default:
                     break;
@@ -148,7 +164,7 @@ namespace BrickBreaker
             {
                 paddle.Move("left");
             }
-            if (rightArrowDown && paddle.x < (this.Width - paddle.width))
+            if (rightArrowDown && paddle.x + paddle.width < 950)
             {
                 paddle.Move("right");
             }
@@ -163,6 +179,12 @@ namespace BrickBreaker
             // Check for ball hitting bottom of screen
             if (ball.BottomCollision(this))
             {
+
+             
+
+                stick = true;
+
+
                 // Moves the ball back to origin
                 ball.x = ((paddle.x - (ball.size / 2)) + (paddle.width / 2));
                 ball.y = (this.Height - paddle.height) - 85;
@@ -177,7 +199,11 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
-                    blocks.Remove(b);
+                    if (b.hp <= 0)
+                    {
+                        blocks.Remove(b);
+                    }
+                    b.PassCondition(ball);
 
                     if (blocks.Count == 0)
                     {
@@ -212,7 +238,7 @@ namespace BrickBreaker
                 // Check for collision of ball with paddle, (incl. paddle movement)
                 balls[i].PaddleCollision(paddle);
 
-                for(int j = 0; j < blocks.Count; j++)
+                for (int j = 0; j < blocks.Count; j++)
                 {
                     blocks[j].setCurrent();
                     if (blocks[j].hp <= 0)
@@ -227,7 +253,7 @@ namespace BrickBreaker
                 {
                     if (balls[i].BlockCollision(b))
                     {
-                        b.hp--;
+
                         if (b.hp <= 0)
                         {
                             blocks.Remove(b);
@@ -263,7 +289,6 @@ namespace BrickBreaker
                     i--;
                 }
             }
-
         }
 
         void CleanPowerups()
@@ -289,7 +314,8 @@ namespace BrickBreaker
             if (isSavedLevel)
             {
                 file = $"level_save{currentLevel}.xml";
-            } else
+            }
+            else
             {
                 file = $"level{currentLevel}.xml";
             }
