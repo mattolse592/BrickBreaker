@@ -27,6 +27,5 @@ namespace BrickBreaker
             // Goes to the game screen
             Form1.ChangeScreen(this, new GameScreen());
         }
-
     }
 }
