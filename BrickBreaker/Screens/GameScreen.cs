@@ -332,7 +332,6 @@ namespace BrickBreaker
                         // Add spacing between blocks
                         block.x += 57 * block.x;
                         block.y += 32 * block.y;
-
                         blocks.Add(block);
                     }
                     break;
@@ -384,7 +383,7 @@ namespace BrickBreaker
             //draw blocks
             foreach (Block b in blocks)
             {
-                SolidBrush brush = new SolidBrush(Color.Red);
+                SolidBrush brush = new SolidBrush(b.colour);
                 e.Graphics.FillRectangle(brush, b.x, b.y, b.width, b.height);
                 e.Graphics.DrawString(b.hp.ToString(), healthFont, ballBrush, b.x, b.y);
             }
