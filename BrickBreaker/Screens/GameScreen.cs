@@ -151,7 +151,6 @@ namespace BrickBreaker
                     break;
             }
         }
-
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
             //player 1 button releases
@@ -173,11 +172,11 @@ namespace BrickBreaker
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             // Move the paddle
-            if (leftArrowDown && paddle.x > 0)
+            if (leftArrowDown == true && paddle.x > 0)
             {
                 paddle.Move("left");
             }
-            if (rightArrowDown && paddle.x + paddle.width < 950)
+            if (rightArrowDown == true && paddle.x + paddle.width < 950)
             {
                 paddle.Move("right");
             }
@@ -381,6 +380,8 @@ namespace BrickBreaker
             Form1.ChangeScreen(this, new MenuScreen());
 
         }
+
+
 
         // Save level
         void Nathan_saveLevel()
