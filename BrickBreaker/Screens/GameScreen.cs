@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
+using System.Drawing.Drawing2D;
 
 namespace BrickBreaker
 {
@@ -40,6 +41,7 @@ namespace BrickBreaker
         SolidBrush blockBrush = new SolidBrush(Color.Red);
 
         Pen sidebarPen = new Pen(Color.SaddleBrown, 3);
+        SolidBrush transparentBrush = new SolidBrush(Color.Transparent);
 
         //Grady Stuff
         public static int speedModBX = 0, speedModBY = 0, speedModPX = 0;
@@ -51,6 +53,9 @@ namespace BrickBreaker
 
         public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
 
+        //currency
+        int sandwiches;
+        Rectangle rec1 = new Rectangle(950, 200, 300, 100);
 
 
         #endregion
@@ -67,6 +72,9 @@ namespace BrickBreaker
             //set life counter
             // For now
             currentLevel = 1;
+
+            sandwiches = 0;
+            //sandwichLabel.Text = $"{sandwiches}";
 
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
@@ -104,6 +112,7 @@ namespace BrickBreaker
 
             #endregion
 
+
             // start the game engine loop
             gameTimer.Enabled = true;
         }
@@ -129,6 +138,7 @@ namespace BrickBreaker
                     }
                     break;
                 case Keys.F:
+
                     powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
                     break;
                 case Keys.G:
@@ -351,10 +361,25 @@ namespace BrickBreaker
             }
         }
 
+
+
+        //Shop Controls
+        private void GameScreen_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (rec1.Contains(new Point(e.X, e.Y)) && sandwiches == 30)
+                {
+                    sandwiches = sandwiches - 30;
+                    //sandwichLabel.Text = $"{sandwiches}";
+                }
+            }
+        }
         private void exitLabel_Click(object sender, EventArgs e)
         {
             gameTimer.Enabled = false;
             Form1.ChangeScreen(this, new MenuScreen());
+
         }
 
         // Save level
@@ -377,7 +402,6 @@ namespace BrickBreaker
             paddleBrush.Color = paddle.colour;
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
 
-
             //Grady
             foreach (Ball b in balls)
             {
@@ -396,6 +420,8 @@ namespace BrickBreaker
             //draw blocks
             foreach (Block b in blocks)
             {
+                SolidBrush brush = new SolidBrush(Color.Red);
+                e.Graphics.FillRectangle(brush, b.x, b.y, b.width, b.height);
                 e.Graphics.DrawString(b.hp.ToString(), healthFont, ballBrush, b.x, b.y);
             }
 
@@ -410,6 +436,8 @@ namespace BrickBreaker
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 400);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 500);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 600);
+
+            e.Graphics.FillRectangle(transparentBrush, rec1);
 
         }
 
