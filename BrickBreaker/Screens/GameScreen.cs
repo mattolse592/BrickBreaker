@@ -159,6 +159,7 @@ namespace BrickBreaker
             ball.Move();
 
             // Check for collision with top and side walls
+           
             ball.WallCollision(this);
 
             // Check for ball hitting bottom of screen
@@ -175,11 +176,12 @@ namespace BrickBreaker
                     gameTimer.Enabled = false;
                     OnEnd();
                 }
-            }
+            } 
 
             // Check for collision of ball with paddle, (incl. paddle movement)
             ball.PaddleCollision(paddle);
 
+            
             // Check if ball has collided with any blocks
             foreach (Block b in blocks)
             {
@@ -196,8 +198,8 @@ namespace BrickBreaker
                     break;
                 }
             }
-
-            Grady();
+            
+            //Grady();
 
             //redraw the screen
             Refresh();
@@ -339,13 +341,7 @@ namespace BrickBreaker
         public void OnEnd()
         {
             // Goes to the game over screen
-            Form form = this.FindForm();
-            MenuScreen ps = new MenuScreen();
-
-            ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
-
-            form.Controls.Add(ps);
-            form.Controls.Remove(this);
+            Form1.ChangeScreen(this, new MenuScreen());
         }
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
