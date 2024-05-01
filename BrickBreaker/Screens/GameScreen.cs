@@ -138,7 +138,11 @@ namespace BrickBreaker
                     }
                     break;
                 case Keys.F:
-                    //powerups.Add(new Powerup("BB5", new List<string> { "fire" }));
+
+                    powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
+                    break;
+                case Keys.G:
+                    powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 5) }));
                     break;
                 case Keys.Right:
                     rightArrowDown = true;
@@ -155,13 +159,11 @@ namespace BrickBreaker
             {
                 case Keys.Left:
                     leftArrowDown = false;
-
                     //powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 5)}));
                     break;
                 case Keys.Right:
                     rightArrowDown = false;
                     //powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
-
                     break;
                 default:
                     break;
@@ -403,20 +405,17 @@ namespace BrickBreaker
             //Grady
             foreach (Ball b in balls)
             {
-                foreach (Modifier modifier in b.modifiers)
+                if (b.CheckFor("fire"))
                 {
-
-                    if (modifier.mod.Contains("fire"))
-                    {
-                        e.Graphics.FillRectangle(fireBrush, b.x, b.y, b.size, b.size);
-                    }
-                    else
-                    {
-                        e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);
-                    }
-
+                    e.Graphics.FillEllipse(fireBrush, b.x, b.y, b.size, b.size);
+                }
+                else
+                {
+                    e.Graphics.FillEllipse(ballBrush, b.x, b.y, b.size, b.size);
                 }
             }
+
+            e.Graphics.FillEllipse(ballBrush, ball.x, ball.y, ball.size, ball.size);
 
             //draw blocks
             foreach (Block b in blocks)
@@ -438,9 +437,9 @@ namespace BrickBreaker
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 500);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 600);
 
-
             e.Graphics.FillRectangle(transparentBrush, rec1);
 
         }
+
     }
 }
