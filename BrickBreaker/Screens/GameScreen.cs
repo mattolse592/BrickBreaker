@@ -391,6 +391,8 @@ namespace BrickBreaker
                 }
             }
 
+            e.Graphics.FillEllipse(ballBrush, ball.x, ball.y, ball.size, ball.size);
+
             //draw blocks
             foreach (Block b in blocks)
             {
