@@ -451,29 +451,7 @@
             this.exitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.exitLabel.Click += new System.EventHandler(this.exitLabel_Click);
 
-            // 
-            // sandwichLabel
-            // 
-            this.sandwichLabel.AutoSize = true;
-            this.sandwichLabel.Font = new System.Drawing.Font("Britannic Bold", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sandwichLabel.ForeColor = System.Drawing.Color.White;
-            this.sandwichLabel.Location = new System.Drawing.Point(71, 662);
-            this.sandwichLabel.Name = "sandwichLabel";
-            this.sandwichLabel.Size = new System.Drawing.Size(23, 23);
-            this.sandwichLabel.TabIndex = 37;
-            this.sandwichLabel.Text = "0";
-            // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("Britannic Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(3, 656);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(62, 37);
-            this.label5.TabIndex = 38;
-            this.label5.Text = "N/A";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
+            
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
