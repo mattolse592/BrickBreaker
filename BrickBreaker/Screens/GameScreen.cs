@@ -74,7 +74,7 @@ namespace BrickBreaker
             currentLevel = 1;
 
             sandwiches = 0;
-            sandwichLabel.Text = $"{sandwiches}";
+            //sandwichLabel.Text = $"{sandwiches}";
 
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
@@ -138,7 +138,11 @@ namespace BrickBreaker
                     }
                     break;
                 case Keys.F:
-                    powerups.Add(new Powerup("BB5", new List<string> { "fire" }));
+
+                    powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
+                    break;
+                case Keys.G:
+                    powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 5) }));
                     break;
                 case Keys.Right:
                     rightArrowDown = true;
@@ -147,7 +151,6 @@ namespace BrickBreaker
                     break;
             }
         }
-
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
             //player 1 button releases
@@ -155,13 +158,11 @@ namespace BrickBreaker
             {
                 case Keys.Left:
                     leftArrowDown = false;
-
                     //powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 5)}));
                     break;
                 case Keys.Right:
                     rightArrowDown = false;
                     //powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
-
                     break;
                 default:
                     break;
@@ -171,11 +172,11 @@ namespace BrickBreaker
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             // Move the paddle
-            if (leftArrowDown && paddle.x > 0)
+            if (leftArrowDown == true && paddle.x > 0)
             {
                 paddle.Move("left");
             }
-            if (rightArrowDown && paddle.x + paddle.width < 950)
+            if (rightArrowDown == true && paddle.x + paddle.width < 950)
             {
                 paddle.Move("right");
             }
@@ -184,14 +185,14 @@ namespace BrickBreaker
             ball.Move();
 
             // Check for collision with top and side walls
-           
+
             ball.WallCollision(this);
 
             // Check for ball hitting bottom of screen
             if (ball.BottomCollision(this))
             {
 
-             
+
 
                 stick = true;
 
@@ -199,12 +200,12 @@ namespace BrickBreaker
                 // Moves the ball back to origin
                 ball.x = ((paddle.x - (ball.size / 2)) + (paddle.width / 2));
                 ball.y = (this.Height - paddle.height) - 85;
-            } 
+            }
 
             // Check for collision of ball with paddle, (incl. paddle movement)
             ball.PaddleCollision(paddle);
 
-            
+
             // Check if ball has collided with any blocks
             foreach (Block b in blocks)
             {
@@ -228,7 +229,7 @@ namespace BrickBreaker
                     break;
                 }
             }
-            
+
             Grady();
 
             //redraw the screen
@@ -364,21 +365,23 @@ namespace BrickBreaker
         //Shop Controls
         private void GameScreen_MouseDown(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
-                if(rec1.Contains(new Point (e.X, e.Y)) && sandwiches == 30)
+                if (rec1.Contains(new Point(e.X, e.Y)) && sandwiches == 30)
                 {
                     sandwiches = sandwiches - 30;
                     //sandwichLabel.Text = $"{sandwiches}";
                 }
             }
-
+        }
         private void exitLabel_Click(object sender, EventArgs e)
         {
             gameTimer.Enabled = false;
             Form1.ChangeScreen(this, new MenuScreen());
 
         }
+
+
 
         // Save level
         void Nathan_saveLevel()
@@ -395,33 +398,31 @@ namespace BrickBreaker
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
-            
+
             // Draws paddle
             paddleBrush.Color = paddle.colour;
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
 
-            
             //Grady
             foreach (Ball b in balls)
             {
-                foreach (Modifier modifier in b.modifiers)
+                if (b.CheckFor("fire"))
                 {
-
-                    if (modifier.mod.Contains("fire"))
-                    {
-                        e.Graphics.FillRectangle(fireBrush, b.x, b.y, b.size, b.size);
-                    }
-                    else
-                    {
-                        e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);
-                    }
-
+                    e.Graphics.FillEllipse(fireBrush, b.x, b.y, b.size, b.size);
+                }
+                else
+                {
+                    e.Graphics.FillEllipse(ballBrush, b.x, b.y, b.size, b.size);
                 }
             }
+
+            e.Graphics.FillEllipse(ballBrush, ball.x, ball.y, ball.size, ball.size);
 
             //draw blocks
             foreach (Block b in blocks)
             {
+                SolidBrush brush = new SolidBrush(Color.Red);
+                e.Graphics.FillRectangle(brush, b.x, b.y, b.width, b.height);
                 e.Graphics.DrawString(b.hp.ToString(), healthFont, ballBrush, b.x, b.y);
             }
 
@@ -437,9 +438,9 @@ namespace BrickBreaker
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 500);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 600);
 
-
             e.Graphics.FillRectangle(transparentBrush, rec1);
 
         }
+
     }
 }
