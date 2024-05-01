@@ -132,11 +132,11 @@ namespace BrickBreaker
             {
                 case Keys.Left:
                     leftArrowDown = false;
-                    powerups.Add(new Powerup("BB5", new List<string> { "fire" }));
+                    //powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 5)}));
                     break;
                 case Keys.Right:
                     rightArrowDown = false;
-                    powerups.Add(new Powerup("P", new List<string> { "fire" }));
+                    //powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
                     break;
                 default:
                     break;
@@ -185,7 +185,12 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
-                    blocks.Remove(b);
+                    b.hp--;
+                    if (b.hp <= 0)
+                    {
+                        blocks.Remove(b);
+                    }
+                    b.PassCondition(ball);
 
                     if (blocks.Count == 0)
                     {
@@ -220,16 +225,6 @@ namespace BrickBreaker
                 // Check for collision of ball with paddle, (incl. paddle movement)
                 balls[i].PaddleCollision(paddle);
 
-                for(int j = 0; j < blocks.Count; j++)
-                {
-                    blocks[j].setCurrent();
-                    if (blocks[j].hp <= 0)
-                    {
-                        blocks.RemoveAt(j);
-                        j--;
-                    }
-                }
-
                 // Check if ball has collided with any blocks
                 foreach (Block b in blocks)
                 {
@@ -250,6 +245,8 @@ namespace BrickBreaker
 
                         break;
                     }
+
+                    b.CleanModifiers();
                 }
 
                 balls[i].CleanModifiers();
@@ -262,6 +259,17 @@ namespace BrickBreaker
                 }
             }
 
+            for (int j = 0; j < blocks.Count; j++)
+            {
+                blocks[j].CleanModifiers();
+                blocks[j].setCurrent();
+                if (blocks[j].hp <= 0)
+                {
+                    blocks.RemoveAt(j);
+                    j--;
+                }
+            }
+
             for (int i = 0; i < powerups.Count; i++)
             {
                 balls = powerups[i].Effect(balls);
@@ -270,12 +278,6 @@ namespace BrickBreaker
                     powerups.RemoveAt(i);
                     i--;
                 }
-            }
-
-            if (lives == 0)
-            {
-                gameTimer.Enabled = false;
-                OnEnd();
             }
         }
 
@@ -366,13 +368,16 @@ namespace BrickBreaker
             //Grady
             foreach (Ball b in balls)
             {
-                if (b.modifiers.Contains("fire"))
+                foreach (Modifier modifier in b.modifiers)
                 {
-                    e.Graphics.FillRectangle(fireBrush, b.x, b.y, b.size, b.size);
-                }
-                else
-                {
-                    e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);
+                    if (modifier.mod.Contains("fire"))
+                    {
+                        e.Graphics.FillRectangle(fireBrush, b.x, b.y, b.size, b.size);
+                    }
+                    else
+                    {
+                        e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);
+                    }
                 }
             }
 
