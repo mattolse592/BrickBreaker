@@ -9,7 +9,7 @@ namespace BrickBreaker
     {
         public int x, y, xSpeed, ySpeed, size, defaultSpeedX, defaultSpeedY;
         public Color colour;
-        public List<String> modifiers = new List<string>();
+        public List<Modifier> modifiers = new List<Modifier>();
 
         public static Random rand = new Random();
 
@@ -29,7 +29,7 @@ namespace BrickBreaker
 
         }
 
-        public Ball(int _x, int _y, int _xSpeed, int _ySpeed, int _ballSize, List<String> _modifiers)
+        public Ball(int _x, int _y, int _xSpeed, int _ySpeed, int _ballSize, List<Modifier> _modifiers)
         {
             x = _x;
             y = _y;
@@ -219,9 +219,9 @@ namespace BrickBreaker
 
         public bool CheckFor(String check)
         {
-            foreach (String modifier in modifiers)
+            foreach (Modifier modifier in modifiers)
             {
-                if (modifier == check)
+                if (modifier.mod == check)
                 {
                     return true;
                 }
