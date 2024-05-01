@@ -55,7 +55,7 @@ namespace BrickBreaker
 
         //currency
         int sandwiches;
-        Rectangle rec1 = new Rectangle(950, 200, 100, 200);
+        Rectangle rec1 = new Rectangle(950, 200, 300, 100);
 
 
         #endregion
@@ -74,7 +74,7 @@ namespace BrickBreaker
             // For now
             currentLevel = 1;
 
-            sandwiches = 30;
+            sandwiches = 0;
             sandwichLabel.Text = $"{sandwiches}";
 
             //set all button presses to false.
@@ -339,6 +339,7 @@ namespace BrickBreaker
         }
 
 
+        //Shop Controls
         private void GameScreen_MouseDown(object sender, MouseEventArgs e)
         {
             if(e.Button == MouseButtons.Left)
@@ -415,7 +416,7 @@ namespace BrickBreaker
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 500);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 600);
 
-            e.Graphics.FillRectangle(paddleBrush, rec1);
+            e.Graphics.FillRectangle(transparentBrush, rec1);
         }
     }
 }
