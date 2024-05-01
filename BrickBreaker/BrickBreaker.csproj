@@ -72,6 +72,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modifier.cs" />
     <Compile Include="Paddle.cs" />
     <Compile Include="Powerup.cs" />
     <Compile Include="Program.cs" />
