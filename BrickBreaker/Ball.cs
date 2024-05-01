@@ -9,7 +9,7 @@ namespace BrickBreaker
     {
         public int x, y, xSpeed, ySpeed, size, defaultSpeedX, defaultSpeedY;
         public Color colour;
-        public List<String> modifiers = new List<string>();
+        public List<Modifier> modifiers = new List<Modifier>();
 
         public static Random rand = new Random();
 
@@ -23,13 +23,13 @@ namespace BrickBreaker
             defaultSpeedX = Math.Abs(_xSpeed);
             defaultSpeedY = Math.Abs(_ySpeed);
 
-           
- 
+
+
             size = _ballSize;
 
         }
 
-        public Ball(int _x, int _y, int _xSpeed, int _ySpeed, int _ballSize, List<String> _modifiers)
+        public Ball(int _x, int _y, int _xSpeed, int _ySpeed, int _ballSize, List<Modifier> _modifiers)
         {
             x = _x;
             y = _y;
@@ -48,12 +48,19 @@ namespace BrickBreaker
         public void Move()
         {
 
-            if(xSpeed < 0 )
+            if (GameScreen.stick)
             {
-                xSpeed = -Math.Max(0,(defaultSpeedX + GameScreen.speedModBX));
-            } else
+                x = (GameScreen.paddle.x + (GameScreen.paddle.width / 2)) - (size / 2);
+                y = GameScreen.paddle.y - size - 20;
+            }
 
-           
+            if (xSpeed < 0)
+            {
+                xSpeed = -Math.Max(0, (defaultSpeedX + GameScreen.speedModBX));
+            }
+            else
+
+
             {
                 xSpeed = Math.Max(0, (defaultSpeedX + GameScreen.speedModBX));
             }
@@ -79,10 +86,27 @@ namespace BrickBreaker
             {
                 ySpeed *= -1;
 
-                if (ballRec.X + size < blockRec.X + 10 || ballRec.X + 4 > b.x + blockRec.Width)
+                b.hp -= 1;
+
+                if (ballRec.X + size < blockRec.X + 10)
                 {
                     xSpeed *= -1;
                     ySpeed *= -1;
+                    x = b.x - size - 3;
+                }
+                else if (ballRec.X + 4 > b.x + blockRec.Width)
+                {
+                    xSpeed *= -1;
+                    ySpeed *= -1;
+                    x = b.x + b.width + 3;
+                }
+                else if (y + size < b.y + 6)
+                {
+                    y = b.y - size - 3;
+                }
+                else
+                {
+                    y = b.y + b.height + 3;
                 }
             }
 
@@ -98,21 +122,62 @@ namespace BrickBreaker
             {
                 ySpeed *= -1;
 
-
-                if (x + size <= p.x + 7)
+                if (x + size <= p.x + 7 && xSpeed > 0)
                 {
                     xSpeed *= -1;
-                    x -= 8;
-                    defaultSpeedY = 3;
-                    defaultSpeedX = 20;
+                    x = p.x - size - 6;
+                    defaultSpeedY = 4;
+                    defaultSpeedX = 15;
                 }
-
-                if (x >= p.x + p.width - 7)
+                else if (x >= p.x + p.width - 7 && xSpeed < 0)
                 {
-                    x += 8;
+                    x = p.x + p.width + 6;
                     xSpeed *= -1;
-                    defaultSpeedY = 3; 
-                    defaultSpeedX = 20;
+                    defaultSpeedY = 4;
+                    defaultSpeedX = 15;
+                }
+                else if (x + (size / 2) < p.x + (p.width / 4))
+                {
+                    defaultSpeedY = 6;
+                    defaultSpeedX = 6;
+                    y = p.y - size - 4;
+                    if (xSpeed > 0)
+                    {
+                        xSpeed *= -1;
+                    }
+
+                }
+                else if (x + (size / 2) < p.x + ((p.width / 4) * 2))
+                {
+                    defaultSpeedY = 6;
+                    defaultSpeedX = 3;
+                    y = p.y - size - 4;
+                    if (xSpeed > 0)
+                    {
+                        xSpeed *= -1;
+                    }
+
+                }
+                else if (x + (size / 2) < p.x + ((p.width / 4) * 3))
+                {
+                    defaultSpeedY = 6;
+                    defaultSpeedX = 3;
+                    y = p.y - size - 4;
+                    if (xSpeed < 0)
+                    {
+                        xSpeed *= -1;
+                    }
+
+                }
+                else
+                {
+                    defaultSpeedY = 6;
+                    defaultSpeedX = 6;
+                    y = p.y - size - 4;
+                    if (xSpeed < 0)
+                    {
+                        xSpeed *= -1;
+                    }
                 }
             }
 
@@ -130,6 +195,7 @@ namespace BrickBreaker
             if (x >= (950 - size)) //UC.Width
 
             {
+                x = 950 - size;
                 xSpeed *= -1;
             }
             // Collision with top wall
@@ -153,9 +219,9 @@ namespace BrickBreaker
 
         public bool CheckFor(String check)
         {
-            foreach (String modifier in modifiers)
+            foreach (Modifier modifier in modifiers)
             {
-                if (modifier == check)
+                if (modifier.mod == check)
                 {
                     return true;
                 }
@@ -165,7 +231,7 @@ namespace BrickBreaker
 
         public void CleanModifiers()
         {
-            for(int i = 0; i < modifiers.Count; i++)
+            for (int i = 0; i < modifiers.Count; i++)
             {
                 for (int j = 0; j < modifiers.Count; j++)
                 {

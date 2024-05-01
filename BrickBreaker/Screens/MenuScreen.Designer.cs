@@ -41,11 +41,11 @@
             this.playButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.playButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.playButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.playButton.Font = new System.Drawing.Font("Britannic Bold", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playButton.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.playButton.Location = new System.Drawing.Point(508, 259);
+            this.playButton.Location = new System.Drawing.Point(525, 239);
             this.playButton.Name = "playButton";
-            this.playButton.Size = new System.Drawing.Size(194, 77);
+            this.playButton.Size = new System.Drawing.Size(200, 75);
             this.playButton.TabIndex = 0;
             this.playButton.Text = "Play";
             this.playButton.UseVisualStyleBackColor = false;
@@ -56,11 +56,11 @@
             this.exitButton.BackColor = System.Drawing.Color.White;
             this.exitButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exitButton.Font = new System.Drawing.Font("Britannic Bold", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitButton.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.exitButton.Location = new System.Drawing.Point(508, 539);
+            this.exitButton.Location = new System.Drawing.Point(525, 539);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(194, 77);
+            this.exitButton.Size = new System.Drawing.Size(200, 75);
             this.exitButton.TabIndex = 1;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = false;
@@ -71,11 +71,11 @@
             this.fileButton.BackColor = System.Drawing.Color.White;
             this.fileButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.fileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fileButton.Font = new System.Drawing.Font("Britannic Bold", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fileButton.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.fileButton.Location = new System.Drawing.Point(508, 394);
+            this.fileButton.Location = new System.Drawing.Point(525, 389);
             this.fileButton.Name = "fileButton";
-            this.fileButton.Size = new System.Drawing.Size(194, 77);
+            this.fileButton.Size = new System.Drawing.Size(200, 75);
             this.fileButton.TabIndex = 2;
             this.fileButton.Text = "Files";
             this.fileButton.UseVisualStyleBackColor = false;
@@ -84,9 +84,9 @@
             // 
             this.instructionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.instructionButton.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.instructionButton.Location = new System.Drawing.Point(1132, 598);
+            this.instructionButton.Location = new System.Drawing.Point(1157, 609);
             this.instructionButton.Name = "instructionButton";
-            this.instructionButton.Size = new System.Drawing.Size(75, 62);
+            this.instructionButton.Size = new System.Drawing.Size(60, 60);
             this.instructionButton.TabIndex = 4;
             this.instructionButton.Text = "?";
             this.instructionButton.UseVisualStyleBackColor = true;

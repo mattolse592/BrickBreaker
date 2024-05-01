@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<level>
+  <block>
+    <x>31</x>
+    <y>29</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>32</x>
+    <y>29</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>33</x>
+    <y>29</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>34</x>
+    <y>29</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>35</x>
+    <y>29</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>36</x>
+    <y>29</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>37</x>
+    <y>29</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>39</x>
+    <y>28</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>40</x>
+    <y>28</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>41</x>
+    <y>28</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>42</x>
+    <y>28</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>43</x>
+    <y>28</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>44</x>
+    <y>28</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>46</x>
+    <y>27</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>47</x>
+    <y>27</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>48</x>
+    <y>27</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>49</x>
+    <y>27</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>50</x>
+    <y>27</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>52</x>
+    <y>26</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>53</x>
+    <y>26</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>54</x>
+    <y>26</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>55</x>
+    <y>26</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>57</x>
+    <y>25</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>58</x>
+    <y>25</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>59</x>
+    <y>25</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>61</x>
+    <y>24</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>62</x>
+    <y>24</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+  <block>
+    <x>64</x>
+    <y>23</y>
+    <hp>1</hp>
+    <colour>Color [Red]</colour>
+  </block>
+</level>
