@@ -23,7 +23,6 @@ namespace BrickBreaker
         Boolean leftArrowDown, rightArrowDown;
 
         // Game values
-        int lives;
         int currentLevel;
         bool isSavedLevel = false;
         public static bool stick = false;
@@ -66,7 +65,6 @@ namespace BrickBreaker
         public void OnStart()
         {
             //set life counter
-            lives = 3;
             // For now
             currentLevel = 1;
 
@@ -175,29 +173,27 @@ namespace BrickBreaker
             ball.Move();
 
             // Check for collision with top and side walls
+           
             ball.WallCollision(this);
 
             // Check for ball hitting bottom of screen
             if (ball.BottomCollision(this))
             {
-                lives--;
+
+             
 
                 stick = true;
+
 
                 // Moves the ball back to origin
                 ball.x = ((paddle.x - (ball.size / 2)) + (paddle.width / 2));
                 ball.y = (this.Height - paddle.height) - 85;
-
-                if (lives == 0)
-                {
-                    gameTimer.Enabled = false;
-                    OnEnd();
-                }
-            }
+            } 
 
             // Check for collision of ball with paddle, (incl. paddle movement)
             ball.PaddleCollision(paddle);
 
+            
             // Check if ball has collided with any blocks
             foreach (Block b in blocks)
             {
@@ -218,7 +214,7 @@ namespace BrickBreaker
                     break;
                 }
             }
-
+            
             Grady();
 
             //redraw the screen
@@ -293,8 +289,6 @@ namespace BrickBreaker
                     i--;
                 }
             }
-
-
         }
 
         void CleanPowerups()
@@ -336,8 +330,8 @@ namespace BrickBreaker
                     foreach (Block block in xmlRw.blocks)
                     {
                         // Add spacing between blocks
-                        block.x += 57;
-                        block.y += 32;
+                        block.x += 57 * block.x;
+                        block.y += 32 * block.y;
 
                         blocks.Add(block);
                     }
@@ -346,6 +340,12 @@ namespace BrickBreaker
                     Console.WriteLine("oops");
                     break;
             }
+        }
+
+        private void exitLabel_Click(object sender, EventArgs e)
+        {
+            gameTimer.Enabled = false;
+            Form1.ChangeScreen(this, new MenuScreen());
         }
 
         // Save level
@@ -358,43 +358,31 @@ namespace BrickBreaker
         public void OnEnd()
         {
             // Goes to the game over screen
-            Form form = this.FindForm();
-            MenuScreen ps = new MenuScreen();
-
-            ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
-
-            form.Controls.Add(ps);
-            form.Controls.Remove(this);
+            Form1.ChangeScreen(this, new MenuScreen());
         }
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            
             // Draws paddle
             paddleBrush.Color = paddle.colour;
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
 
-            // Draws blocks
-            foreach (Block b in blocks)
-            {
-                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
-            }
-
-            // Draws ball
-            e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
-
+            
             //Grady
             foreach (Ball b in balls)
             {
                 if (b.modifiers.Contains("fire"))
                 {
-                    e.Graphics.FillRectangle(fireBrush, b.x, b.y, b.size, b.size);
+                    e.Graphics.FillEllipse(fireBrush, b.x, b.y, b.size, b.size);
                 }
                 else
                 {
-                    e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);
+                    e.Graphics.FillEllipse(ballBrush, b.x, b.y, b.size, b.size);
                 }
             }
 
+            //draw blocks
             foreach (Block b in blocks)
             {
                 e.Graphics.DrawString(b.hp.ToString(), healthFont, ballBrush, b.x, b.y);
@@ -411,6 +399,7 @@ namespace BrickBreaker
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 400);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 500);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 600);
+            
         }
     }
 }
