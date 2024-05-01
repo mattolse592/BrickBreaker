@@ -367,7 +367,6 @@ namespace BrickBreaker
             // Draws paddle
             paddleBrush.Color = paddle.colour;
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
-
             
             //Grady
             foreach (Ball b in balls)
@@ -385,6 +384,8 @@ namespace BrickBreaker
             //draw blocks
             foreach (Block b in blocks)
             {
+                SolidBrush brush = new SolidBrush(Color.Red);
+                e.Graphics.FillRectangle(brush, b.x, b.y, b.width, b.height);
                 e.Graphics.DrawString(b.hp.ToString(), healthFont, ballBrush, b.x, b.y);
             }
 
