@@ -491,6 +491,7 @@
             this.Size = new System.Drawing.Size(1250, 700);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameScreen_Paint);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameScreen_KeyUp);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameScreen_MouseDown);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.GameScreen_PreviewKeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -500,6 +501,9 @@
         #endregion
 
         private System.Windows.Forms.Timer gameTimer;
+
+      
+
         private System.Windows.Forms.Label upgrade1Title;
         private System.Windows.Forms.Label upgrade1Description;
         private System.Windows.Forms.Label upgrade1Icon;
@@ -533,5 +537,6 @@
         private System.Windows.Forms.Label statisticsButton;
         private System.Windows.Forms.Label htpButton;
         private System.Windows.Forms.Label exitLabel;
+
     }
 }
