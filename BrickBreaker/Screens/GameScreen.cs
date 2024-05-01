@@ -129,7 +129,10 @@ namespace BrickBreaker
                     }
                     break;
                 case Keys.F:
-                    powerups.Add(new Powerup("BB5", new List<string> { "fire" }));
+                    powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
+                    break;
+                case Keys.G:
+                    powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 5) }));
                     break;
                 case Keys.Right:
                     rightArrowDown = true;
@@ -146,13 +149,11 @@ namespace BrickBreaker
             {
                 case Keys.Left:
                     leftArrowDown = false;
-
                     //powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 5)}));
                     break;
                 case Keys.Right:
                     rightArrowDown = false;
                     //powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
-
                     break;
                 default:
                     break;
@@ -175,14 +176,14 @@ namespace BrickBreaker
             ball.Move();
 
             // Check for collision with top and side walls
-           
+
             ball.WallCollision(this);
 
             // Check for ball hitting bottom of screen
             if (ball.BottomCollision(this))
             {
 
-             
+
 
                 stick = true;
 
@@ -190,12 +191,12 @@ namespace BrickBreaker
                 // Moves the ball back to origin
                 ball.x = ((paddle.x - (ball.size / 2)) + (paddle.width / 2));
                 ball.y = (this.Height - paddle.height) - 85;
-            } 
+            }
 
             // Check for collision of ball with paddle, (incl. paddle movement)
             ball.PaddleCollision(paddle);
 
-            
+
             // Check if ball has collided with any blocks
             foreach (Block b in blocks)
             {
@@ -219,7 +220,7 @@ namespace BrickBreaker
                     break;
                 }
             }
-            
+
             Grady();
 
             //redraw the screen
@@ -371,27 +372,22 @@ namespace BrickBreaker
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
-            
+
             // Draws paddle
             paddleBrush.Color = paddle.colour;
             e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
 
-            
+
             //Grady
             foreach (Ball b in balls)
             {
-                foreach (Modifier modifier in b.modifiers)
+                if (b.CheckFor("fire"))
                 {
-
-                    if (modifier.mod.Contains("fire"))
-                    {
-                        e.Graphics.FillRectangle(fireBrush, b.x, b.y, b.size, b.size);
-                    }
-                    else
-                    {
-                        e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);
-                    }
-
+                    e.Graphics.FillEllipse(fireBrush, b.x, b.y, b.size, b.size);
+                }
+                else
+                {
+                    e.Graphics.FillEllipse(ballBrush, b.x, b.y, b.size, b.size);
                 }
             }
 
@@ -412,7 +408,8 @@ namespace BrickBreaker
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 400);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 500);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 600);
-            
+
         }
+
     }
 }
