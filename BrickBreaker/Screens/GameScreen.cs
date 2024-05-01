@@ -304,8 +304,8 @@ namespace BrickBreaker
                     foreach (Block block in xmlRw.blocks)
                     {
                         // Add spacing between blocks
-                        block.x += 57;
-                        block.y += 32;
+                        block.x += 57 * block.x;
+                        block.y += 32 * block.y;
 
                         blocks.Add(block);
                     }
