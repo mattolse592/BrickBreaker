@@ -69,7 +69,6 @@ namespace BrickBreaker
 
         public void OnStart()
         {
-            //set life counter
             // For now
             currentLevel += 1;
 
@@ -193,11 +192,7 @@ namespace BrickBreaker
             // Check for ball hitting bottom of screen
             if (ball.BottomCollision(this))
             {
-
-
-
                 stick = true;
-
 
                 // Moves the ball back to origin
                 ball.x = ((paddle.x - (ball.size / 2)) + (paddle.width / 2));
