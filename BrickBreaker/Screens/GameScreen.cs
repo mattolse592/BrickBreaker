@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 using System.Drawing.Drawing2D;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BrickBreaker
 {
@@ -59,13 +60,14 @@ namespace BrickBreaker
         int sandwiches;
         Rectangle rec1 = new Rectangle(950, 200, 300, 100);
 
-
+        public static int width;
         #endregion
 
         public GameScreen()
         {
             InitializeComponent();
             OnStart();
+
         }
 
 
@@ -123,6 +125,8 @@ namespace BrickBreaker
 
             #endregion
 
+            //derick 
+            width = this.Width;
 
             // start the game engine loop
             gameTimer.Enabled = true;
@@ -144,6 +148,12 @@ namespace BrickBreaker
                         {
                             ball.ySpeed *= -1;
                         }
+
+                        int mag = (int)Math.Sqrt(Math.Pow(ball.y + 2, 2) + Math.Pow(ball.x - ball.throwX, 2));
+                        float yScale = ((ball.y + 2) / mag);
+                        float xScale = ((ball.x - ball.throwX) / mag);
+                        
+
                         ball.defaultSpeedX = 0;
                         ball.defaultSpeedY = 6;
                     }
@@ -220,7 +230,7 @@ namespace BrickBreaker
                 if (ball.BlockCollision(b))
                 {
 
-                    b.hp--;
+                    
 
                     if (b.hp <= 0)
                     {
@@ -451,6 +461,11 @@ namespace BrickBreaker
                 e.Graphics.DrawString(b.hp.ToString(), healthFont, ballBrush, b.x, b.y);
             }
 
+            //Derick 
+            if (stick)
+            {
+                e.Graphics.DrawLine(sidebarPen, new Point(ball.throwX, 0), new Point(ball.x + (ball.size /2), ball.y + 2));
+            }
 
             //Valentina
             //Shop sidebar

@@ -9,6 +9,8 @@ namespace BrickBreaker
     public class Ball
     {
         public int x, y, xSpeed, ySpeed, size, defaultSpeedX, defaultSpeedY;
+        public int lineSpeed = 25;
+        public int throwX = 0;
         public Color colour;
         public List<Modifier> modifiers = new List<Modifier>();
         public Rectangle ballRec = new Rectangle();
@@ -52,6 +54,11 @@ namespace BrickBreaker
 
             if (GameScreen.stick)
             {
+                if (throwX >= 950 || throwX < 0)
+                {
+                    lineSpeed *= -1;
+                }
+                throwX += lineSpeed;
                 x = (GameScreen.paddle.x + (GameScreen.paddle.width / 2)) - (size / 2);
                 y = GameScreen.paddle.y - size - 20;
             }
@@ -100,29 +107,35 @@ namespace BrickBreaker
 
             if (ballRec.IntersectsWith(blockRec) && shouldMove)
             {
-                ySpeed *= -1;
+                
 
                 b.hp -= 1;
 
-                if (ballRec.X + size < blockRec.X + 10)
+                if (x + size < b.x + 10 && xSpeed > 0)
                 {
+                    x = b.x - size - 2;
                     xSpeed *= -1;
-                    ySpeed *= -1;
-                    x = b.x - size - 3;
+
                 }
-                else if (ballRec.X + 4 > b.x + blockRec.Width)
+
+                else if (x > b.x + b.width  - 10 && xSpeed < 0)
                 {
+                    x = b.x + b.width + 2;
                     xSpeed *= -1;
+                }
+
+                if (y + size < b.y + 6)
+                {
                     ySpeed *= -1;
-                    x = b.x + b.width + 3;
+
+                    y = b.y - size - 2;
                 }
-                else if (y + size < b.y + 6)
+
+                else if (y > b.y + b.height - 6)
                 {
-                    y = b.y - size - 3;
-                }
-                else
-                {
-                    y = b.y + b.height + 3;
+                    ySpeed *= -1;
+
+                    y = b.y + b.height + 2;
                 }
             }
             else if (ballRec.IntersectsWith(blockRec))
@@ -142,19 +155,27 @@ namespace BrickBreaker
             {
                 ySpeed *= -1;
 
-                if (x + size <= p.x + 7 && xSpeed > 0)
+                if (x + size <= p.x + 7 && xSpeed >= -1)
                 {
+                    if (xSpeed == 0)
+                    {
+                        xSpeed *= -1;
+                    }
                     xSpeed *= -1;
                     x = p.x - size - 6;
                     defaultSpeedY = 4;
-                    defaultSpeedX = 15;
+                    defaultSpeedX = 10;
                 }
-                else if (x >= p.x + p.width - 7 && xSpeed < 0)
+                else if (x >= p.x + p.width - 7 && xSpeed <= -1)
                 {
+                    if (xSpeed == 0)
+                    {
+                        xSpeed *= -1;
+                    }
                     x = p.x + p.width + 6;
                     xSpeed *= -1;
                     defaultSpeedY = 4;
-                    defaultSpeedX = 15;
+                    defaultSpeedX = 10;
                 }
                 else if (x + (size / 2) < p.x + (p.width / 4))
                 {
