@@ -46,13 +46,13 @@ namespace BrickBreaker
             {
                 return setSimple(balls);
             }
-            if (Type.Contains("BB"))
+            else if (Type.Contains("BE") || Type.Contains("BF"))
+            {
+                return AddType(balls);
+            }
+            else if (Type.Contains("BB"))
             {
                 return BallBurst(balls);
-            }
-            else if (Type.Contains("BF"))
-            {
-                return AddFlame(balls);
             }
             else
             {
@@ -154,12 +154,19 @@ namespace BrickBreaker
             return newBall;
         }
 
-        List<Ball> AddFlame(List<Ball> balls)
+        List<Ball> AddType(List<Ball> balls)
         {
             List<Ball> newBall = new List<Ball>();
             if (Type.Contains("P"))
             {
                 newBall = setSimple(balls);
+            }
+            else
+            {
+                foreach(Ball b in balls)
+                {
+                    newBall.Add(new Ball(b.x,b.y, b.xSpeed,b.ySpeed, b.size, setModifiers(b)));
+                }
             }
             return newBall;
         }
