@@ -24,7 +24,7 @@ namespace BrickBreaker
         Boolean leftArrowDown, rightArrowDown;
 
         // Game values
-        int currentLevel;
+        int currentLevel = 0;
         bool isSavedLevel = false;
         public static bool stick = false;
 
@@ -70,7 +70,7 @@ namespace BrickBreaker
         public void OnStart()
         {
             // For now
-            currentLevel = 1;
+            currentLevel += 1;
 
             sandwiches = 0;
             //sandwichLabel.Text = $"{sandwiches}";
@@ -85,6 +85,8 @@ namespace BrickBreaker
             int paddleY = (this.Height - paddleHeight) - 60;
             int paddleSpeed = 8;
             paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
+
+            balls.Clear();
 
             // setup starting ball values
             int ballX = this.Width / 2 - 10;
@@ -218,7 +220,8 @@ namespace BrickBreaker
                     if (blocks.Count == 0)
                     {
                         gameTimer.Enabled = false;
-                        OnEnd();
+                        OnStart(); // Restart game
+                        //OnEnd();
                     }
 
                     break;
@@ -374,8 +377,6 @@ namespace BrickBreaker
             Form1.ChangeScreen(this, new MenuScreen());
 
         }
-
-
 
         // Save level
         void Nathan_saveLevel()
