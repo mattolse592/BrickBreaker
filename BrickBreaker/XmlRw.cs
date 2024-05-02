@@ -217,5 +217,20 @@ namespace BrickBreaker
                 }
             }
         }
-    }
+
+        public void line(bool horizontal, int length, int x, int y)
+        {
+            if (horizontal)
+            {
+                for (int p = 0; p < length; p++)
+                {
+                    blocks.Add(new Block(x + p; y, 1, Color.Red);
+                }
+            } else {
+                for (int p = 0; p < length; p++)
+                {
+                    blocks.Add(new Block(x; y + p, 1, Color.Red);
+                }
+            }
+        }
 }
