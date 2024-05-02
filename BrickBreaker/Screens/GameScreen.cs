@@ -137,6 +137,12 @@ namespace BrickBreaker
                         {
                             ball.ySpeed *= -1;
                         }
+
+                        int mag = (int)Math.Sqrt(Math.Pow(ball.y + 2, 2) + Math.Pow(ball.x - ball.throwX, 2));
+                        float yScale = ((ball.y + 2) / mag);
+                        float xScale = ((ball.x - ball.throwX) / mag);
+                        
+
                         ball.defaultSpeedX = 0;
                         ball.defaultSpeedY = 6;
                     }
