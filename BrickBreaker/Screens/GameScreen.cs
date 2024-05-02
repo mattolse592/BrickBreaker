@@ -70,7 +70,15 @@ namespace BrickBreaker
         public void OnStart()
         {
             // For now
-            currentLevel += 1;
+            if (currentLevel == 10)
+            {
+                currentLevel = 1;
+            }
+            else
+            {
+                currentLevel++;
+            }
+
 
             sandwiches = 0;
             //sandwichLabel.Text = $"{sandwiches}";
@@ -139,7 +147,6 @@ namespace BrickBreaker
                     }
                     break;
                 case Keys.F:
-
                     powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
                     break;
                 case Keys.G:
@@ -217,13 +224,6 @@ namespace BrickBreaker
                     }
                     b.PassCondition(ball);
 
-                    if (blocks.Count == 0)
-                    {
-                        gameTimer.Enabled = false;
-                        OnStart(); // Restart game
-                        //OnEnd();
-                    }
-
                     break;
                 }
             }
@@ -254,6 +254,7 @@ namespace BrickBreaker
                 // Check if ball has collided with any blocks
                 foreach (Block b in blocks)
                 {
+
                     if (balls[i].BlockCollision(b))
                     {
 
@@ -266,16 +267,18 @@ namespace BrickBreaker
                         if (blocks.Count == 0)
                         {
                             gameTimer.Enabled = false;
-                            OnEnd();
+                            OnStart(); // Restart game
                         }
-
                         break;
                     }
 
                     b.CleanModifiers();
                 }
 
-                balls[i].CleanModifiers();
+                
+                    balls[i].CleanModifiers();
+                
+
 
                 // Check for ball hitting bottom of screen
                 if (balls[i].BottomCollision(this) || (balls[i].CheckFor("temp") && (tempBall.xSpeed != balls[i].xSpeed || tempBall.ySpeed != balls[i].ySpeed)))
