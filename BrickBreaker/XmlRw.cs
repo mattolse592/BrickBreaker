@@ -61,7 +61,7 @@ namespace BrickBreaker
                 writer.WriteElementString("x", $"{block.x}");
                 writer.WriteElementString("y", $"{block.y}");
                 writer.WriteElementString("hp", $"{block.hp}");
-                writer.WriteElementString("colour", block.colour.ToString());
+                writer.WriteElementString("colour", $"{block.colour.ToKnownColor()}");
 
                 writer.WriteEndElement();
             }
@@ -158,7 +158,6 @@ namespace BrickBreaker
                 }
                 string colour = reader.ReadString();
                 block.colour = Color.FromName(colour);
-
                 Console.WriteLine($"x: {block.x}, y: {block.y}, hp: {block.hp}, color: {block.colour}");
                 blocks.Add(block);
                 reader.ReadEndElement();
