@@ -49,6 +49,8 @@ namespace BrickBreaker
         List<Powerup> powerups = new List<Powerup>();
         List<Ball> balls = new List<Ball>();
         SolidBrush fireBrush = new SolidBrush(Color.Red);
+        SolidBrush bombBrush = new SolidBrush(Color.Black);
+        SolidBrush fireBallOuter = new SolidBrush(Color.OrangeRed);
 
 
         public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -147,10 +149,12 @@ namespace BrickBreaker
                     }
                     break;
                 case Keys.F:
-                    powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
+
+                    powerups.Add(new Powerup("BE", new List<Modifier> { new Modifier("explode") }));
+//powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
                     break;
                 case Keys.G:
-                    powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 5) }));
+                    powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
                     break;
                 case Keys.Right:
                     rightArrowDown = true;
@@ -262,7 +266,7 @@ namespace BrickBreaker
                         {
                             blocks.Remove(b);
                         }
-                        b.PassCondition(balls[i]);
+                        balls[i] = b.PassCondition(balls[i]);
 
                         if (blocks.Count == 0)
                         {
@@ -275,13 +279,27 @@ namespace BrickBreaker
                     b.CleanModifiers();
                 }
 
-                
-                    balls[i].CleanModifiers();
-                
+
+                balls[i].CleanModifiers();
+                balls[i].SetCurrent();
+
+                if (balls[i].modifiers.Any())
+                {
+                    if (balls[i].modifiers[balls[i].modifiers.Count - 1].mod == "remove")
+                    {
+                        balls.Remove(balls[i]);
+                        i--;
+                    }
+                    else if (balls[i].BottomCollision(this) || (balls[i].CheckFor("temp") && (tempBall.xSpeed != balls[i].xSpeed || tempBall.ySpeed != balls[i].ySpeed)))
+                    {
+                        balls.Remove(balls[i]);
+                        i--;
+                    }
+                }
 
 
                 // Check for ball hitting bottom of screen
-                if (balls[i].BottomCollision(this) || (balls[i].CheckFor("temp") && (tempBall.xSpeed != balls[i].xSpeed || tempBall.ySpeed != balls[i].ySpeed)))
+                else if (balls[i].BottomCollision(this) || (balls[i].CheckFor("temp") && (tempBall.xSpeed != balls[i].xSpeed || tempBall.ySpeed != balls[i].ySpeed)))
                 {
                     balls.Remove(balls[i]);
                     i--;
@@ -404,9 +422,18 @@ namespace BrickBreaker
             //Grady
             foreach (Ball b in balls)
             {
-                if (b.CheckFor("fire"))
+                if (b.CheckFor("fade"))
+                {
+                    b.MakeBallRec();
+                    e.Graphics.FillEllipse(fireBallOuter, b.ballRec.X, b.ballRec.Y, b.ballRec.Width, b.ballRec.Height);
+                }
+                else if (b.CheckFor("fire"))
                 {
                     e.Graphics.FillEllipse(fireBrush, b.x, b.y, b.size, b.size);
+                }
+                else if (b.CheckFor("explode"))
+                {
+                    e.Graphics.FillEllipse(bombBrush, b.x, b.y, b.size, b.size);
                 }
                 else
                 {
@@ -414,7 +441,7 @@ namespace BrickBreaker
                 }
             }
 
-            e.Graphics.FillEllipse(ballBrush, ball.x, ball.y, ball.size, ball.size);
+            //e.Graphics.FillEllipse(ballBrush, ball.x, ball.y, ball.size, ball.size);
 
             //draw blocks
             foreach (Block b in blocks)
