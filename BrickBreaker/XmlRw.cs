@@ -46,7 +46,8 @@ namespace BrickBreaker
             try
             {
                 writer = XmlWriter.Create($"../../levels/{filePath}", settings);
-            } catch (System.IO.FileNotFoundException)
+            }
+            catch (System.IO.FileNotFoundException)
             {
                 System.IO.File.Create($"../../levels/{filePath}");
                 writer = XmlWriter.Create($"../../levels/{filePath}", settings);
@@ -85,7 +86,8 @@ namespace BrickBreaker
                 string levelNString = filePath.Replace("level", "").Replace(".xml", "");
                 level = Convert.ToInt32(levelNString);
                 Console.WriteLine($"level: {level}");
-            } else
+            }
+            else
             {
                 return INVALID_FILE;
             }
@@ -97,10 +99,12 @@ namespace BrickBreaker
             try
             {
                 reader = XmlReader.Create($"../../levels/{filePath}");
-            } catch (System.IO.FileNotFoundException)
+            }
+            catch (System.IO.FileNotFoundException)
             {
                 return INVALID_FILE;
-            } catch (ArgumentNullException)
+            }
+            catch (ArgumentNullException)
             {
                 return INVALID_FILE;
             }
@@ -190,8 +194,8 @@ namespace BrickBreaker
             int minX = x;
             int maxX = x;
 
-           if (upright)
-           {
+            if (upright)
+            {
                 blocks.Add(new Block(x, y, 1, Color.Red));
                 for (int py = 0; py < width; py++)
                 {
@@ -203,7 +207,7 @@ namespace BrickBreaker
                     minX -= 1;
                     maxX += 1;
                 }
-           }
+            }
         }
 
         public void bigBlock(int width, int x, int y)
@@ -224,13 +228,16 @@ namespace BrickBreaker
             {
                 for (int p = 0; p < length; p++)
                 {
-                    blocks.Add(new Block(x + p; y, 1, Color.Red);
+                    blocks.Add(new Block(x + p, y, 1, Color.Red));
                 }
-            } else {
+            }
+            else
+            {
                 for (int p = 0; p < length; p++)
                 {
-                    blocks.Add(new Block(x; y + p, 1, Color.Red);
+                    blocks.Add(new Block(x, y + p, 1, Color.Red));
                 }
             }
         }
+    }
 }
