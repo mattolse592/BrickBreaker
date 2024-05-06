@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -12,6 +13,7 @@ namespace BrickBreaker
         public int throwX = 0;
         public Color colour;
         public List<Modifier> modifiers = new List<Modifier>();
+        public Rectangle ballRec = new Rectangle();
 
         public static Random rand = new Random();
 
@@ -87,9 +89,23 @@ namespace BrickBreaker
         public bool BlockCollision(Block b)
         {
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
-            Rectangle ballRec = new Rectangle(x, y, size, size);
+            ballRec = new Rectangle(x, y, size, size);
+            bool shouldMove = true;
 
-            if (ballRec.IntersectsWith(blockRec))
+            shouldMove = !CheckFor("explode");
+
+            if (CheckFor("fade"))
+            {
+                foreach(Modifier m in modifiers)
+                {
+                    if (m.mod == "fade")
+                    {
+                        ballRec = new Rectangle(x + ((size / 2) - ((size / (m.effCount+ 1))/2)), y + ((size / 2) - ((size / (m.effCount + 1)) / 2)), size / (m.effCount + 1), size / (m.effCount + 1));
+                    }
+                }
+            }
+
+            if (ballRec.IntersectsWith(blockRec) && shouldMove)
             {
                 
 
@@ -121,6 +137,10 @@ namespace BrickBreaker
 
                     y = b.y + b.height + 2;
                 }
+            }
+            else if (ballRec.IntersectsWith(blockRec))
+            {
+                b.hp -= 1;
             }
 
             return blockRec.IntersectsWith(ballRec);
@@ -250,6 +270,31 @@ namespace BrickBreaker
             return false;
         }
 
+        public void SetCurrent()
+        {
+            List<Modifier> hold = new List<Modifier>();
+            foreach (Modifier m in modifiers)
+            {
+                if(m.effCount != -55555)
+                {
+                    m.effCount--;
+                    if (m.effCount >= 0)
+                    {
+                        hold.Add(m);
+                    }
+                    else if (m.effCount < 0 && m.mod == "fade")
+                    {
+                        hold.Add(new Modifier("remove"));
+                    }
+                }
+                else
+                {
+                    hold.Add(m);
+                }
+            }
+            modifiers = hold;
+        }
+
         public void CleanModifiers()
         {
             for (int i = 0; i < modifiers.Count; i++)
@@ -265,5 +310,15 @@ namespace BrickBreaker
             }
         }
 
+        public void MakeBallRec()
+        {
+            foreach (Modifier m in modifiers)
+            {
+                if (m.mod == "fade")
+                {
+                    ballRec = new Rectangle(x + ((size / 2) - ((size / (m.effCount + 1)) / 2)), y + ((size / 2) - ((size / (m.effCount + 1)) / 2)), size / (m.effCount + 1), size / (m.effCount + 1));
+                }
+            }
+        }
     }
 }

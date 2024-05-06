@@ -2,169 +2,43 @@
 <level>
 	<block>
 		<x>6</x>
-		<y>6</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>6</x>
-		<y>6</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>7</x>
-		<y>6</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>8</x>
-		<y>6</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>9</x>
-		<y>6</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>10</x>
-		<y>6</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>6</x>
 		<y>7</y>
 		<hp>1</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
-		<x>7</x>
-		<y>7</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>8</x>
-		<y>7</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>9</x>
-		<y>7</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>10</x>
-		<y>7</y>
+		<x>5</x>
+		<y>1</y>
 		<hp>1</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
 		<x>6</x>
-		<y>8</y>
+		<y>1</y>
 		<hp>1</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
-		<x>7</x>
-		<y>8</y>
+		<x>4</x>
+		<y>2</y>
 		<hp>1</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
-		<x>8</x>
-		<y>8</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>9</x>
-		<y>8</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>10</x>
-		<y>8</y>
-		<hp>1</hp>
+		<x>5</x>
+		<y>2</y>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
 		<x>6</x>
-		<y>9</y>
-		<hp>1</hp>
+		<y>2</y>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
 		<x>7</x>
-		<y>9</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>8</x>
-		<y>9</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>9</x>
-		<y>9</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>10</x>
-		<y>9</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>6</x>
-		<y>10</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>7</x>
-		<y>10</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>8</x>
-		<y>10</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>9</x>
-		<y>10</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>10</x>
-		<y>10</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>2</x>
-		<y>3</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>2</x>
-		<y>3</y>
+		<y>2</y>
 		<hp>1</hp>
 		<colour>Red</colour>
 	</block>
@@ -176,6 +50,30 @@
 	</block>
 	<block>
 		<x>4</x>
+		<y>3</y>
+		<hp>3</hp>
+		<colour>Red</colour>
+	</block>
+	<block>
+		<x>5</x>
+		<y>3</y>
+		<hp>3</hp>
+		<colour>Red</colour>
+	</block>
+	<block>
+		<x>6</x>
+		<y>3</y>
+		<hp>3</hp>
+		<colour>Red</colour>
+	</block>
+	<block>
+		<x>7</x>
+		<y>3</y>
+		<hp>3</hp>
+		<colour>Red</colour>
+	</block>
+	<block>
+		<x>8</x>
 		<y>3</y>
 		<hp>1</hp>
 		<colour>Red</colour>
@@ -189,12 +87,48 @@
 	<block>
 		<x>3</x>
 		<y>4</y>
-		<hp>1</hp>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
 		<x>4</x>
 		<y>4</y>
+		<hp>3</hp>
+		<colour>Red</colour>
+	</block>
+	<block>
+		<x>5</x>
+		<y>4</y>
+		<hp>3</hp>
+		<colour>Red</colour>
+	</block>
+	<block>
+		<x>6</x>
+		<y>4</y>
+		<hp>3</hp>
+		<colour>Red</colour>
+	</block>
+	<block>
+		<x>7</x>
+		<y>4</y>
+		<hp>3</hp>
+		<colour>Red</colour>
+	</block>
+	<block>
+		<x>8</x>
+		<y>4</y>
+		<hp>3</hp>
+		<colour>Red</colour>
+	</block>
+	<block>
+		<x>9</x>
+		<y>4</y>
+		<hp>1</hp>
+		<colour>Red</colour>
+	</block>
+	<block>
+		<x>1</x>
+		<y>5</y>
 		<hp>1</hp>
 		<colour>Red</colour>
 	</block>
@@ -217,61 +151,37 @@
 		<colour>Red</colour>
 	</block>
 	<block>
-		<x>12</x>
-		<y>3</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>12</x>
-		<y>3</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>13</x>
-		<y>3</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>14</x>
-		<y>3</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>12</x>
-		<y>4</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>13</x>
-		<y>4</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>14</x>
-		<y>4</y>
-		<hp>1</hp>
-		<colour>Red</colour>
-	</block>
-	<block>
-		<x>12</x>
+		<x>5</x>
 		<y>5</y>
 		<hp>1</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
-		<x>13</x>
+		<x>6</x>
 		<y>5</y>
 		<hp>1</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
-		<x>14</x>
+		<x>7</x>
+		<y>5</y>
+		<hp>1</hp>
+		<colour>Red</colour>
+	</block>
+	<block>
+		<x>8</x>
+		<y>5</y>
+		<hp>1</hp>
+		<colour>Red</colour>
+	</block>
+	<block>
+		<x>9</x>
+		<y>5</y>
+		<hp>1</hp>
+		<colour>Red</colour>
+	</block>
+	<block>
+		<x>10</x>
 		<y>5</y>
 		<hp>1</hp>
 		<colour>Red</colour>
