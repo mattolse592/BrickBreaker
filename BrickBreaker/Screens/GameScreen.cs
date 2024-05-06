@@ -212,12 +212,7 @@ namespace BrickBreaker
             // Check for ball hitting bottom of screen
             if (ball.BottomCollision(this))
             {
-
                 stick = true;
-
-
-                // Moves the ball back to origin
-              
             }
 
             // Check for collision of ball with paddle, (incl. paddle movement)
