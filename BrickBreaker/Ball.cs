@@ -287,6 +287,10 @@ namespace BrickBreaker
                         hold.Add(new Modifier("remove"));
                     }
                 }
+                else
+                {
+                    hold.Add(m);
+                }
             }
             modifiers = hold;
         }

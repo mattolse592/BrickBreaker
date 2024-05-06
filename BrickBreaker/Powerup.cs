@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,43 +41,62 @@ namespace BrickBreaker
             }
         }
 
+        public List<Ball> PermCheck(List<Ball> balls)
+        {
+            foreach (Ball b in balls) {
+                if (CheckFor("PERM"))
+                {
+                    return new List<Ball> { b };
+                }
+            }
+            return new List<Ball>();
+        }
+
         public List<Ball> Effect(List<Ball> balls)
         {
-            if (Type.Contains("P"))
+            List<Ball> result = PermCheck(balls);
+            if (Type.Substring(0, 1) == "P" && !Type.Contains("PW")) 
             {
                 return setSimple(balls);
             }
             else if (Type.Contains("BE") || Type.Contains("BF"))
             {
-                return AddType(balls);
+                result = AddType(balls);
+                Modifiers.Add(new Modifier("remove"));
+                return result;
             }
             else if (Type.Contains("BB"))
             {
-                return BallBurst(balls);
+                result = BallBurst(balls);
+                Modifiers.Add(new Modifier("remove"));
+                return result;
             }
             else
             {
                 switch (Type)
                 {
-                    case "SpUBX":
+                    case "SPUBX":
                         SpeedUp(balls, 0);
                         break;
-                    case "SpUBY":
+                    case "SPUBY":
                         SpeedUp(balls, 1);
                         break;
-                    case "SpUPX":
+                    case "SPUPX":
                         SpeedUp(balls, 2);
                         break;
-                    case "SpDBX":
+                    case "SPDBX":
                         SpeedDown(balls, 0);
                         break;
-                    case "SpDBY":
+                    case "SPDBY":
                         SpeedDown(balls, 1);
                         break;
-                    case "SpDPX":
+                    case "SPDPX":
                         SpeedDown(balls, 2);
                         break;
-
+                    case "PW":
+                        GameScreen.widthModP++;
+                        Modifiers.Add(new Modifier("remove"));
+                        break;
 
                 }
             }
@@ -146,7 +166,7 @@ namespace BrickBreaker
 
         List<Ball> setSimple(List<Ball> balls)
         {
-            List<Ball> newBall = new List<Ball>();
+            List<Ball> newBall = PermCheck(balls);
             foreach (Ball b in balls)
             {
                 newBall.Add(new Ball(b.x, b.y, b.xSpeed, b.ySpeed, b.size, setModifiers(b)));
@@ -156,7 +176,7 @@ namespace BrickBreaker
 
         List<Ball> AddType(List<Ball> balls)
         {
-            List<Ball> newBall = new List<Ball>();
+            List<Ball> newBall = PermCheck(balls);
             if (Type.Contains("P"))
             {
                 newBall = setSimple(balls);
@@ -174,7 +194,7 @@ namespace BrickBreaker
         List<Ball> BallBurst(List<Ball> balls)
         {
             //double splitvalue = Math.PI / 4;
-            List<Ball> newBall = new List<Ball>();
+            List<Ball> newBall = PermCheck(balls);
 
             if (Type.Contains("C"))
             {
@@ -365,6 +385,7 @@ namespace BrickBreaker
 
         void SpeedUp(List<Ball> balls, int type)
         {
+            Modifiers.Add(new Modifier("remove"));
             switch (type)
             {
                 case 0:
@@ -381,6 +402,7 @@ namespace BrickBreaker
 
         void SpeedDown(List<Ball> balls, int type)
         {
+            Modifiers.Add(new Modifier("remove"));
             switch (type)
             {
                 case 0:
