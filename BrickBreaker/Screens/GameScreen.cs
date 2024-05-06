@@ -202,24 +202,7 @@ namespace BrickBreaker
                 paddle.Move("right");
             }
 
-            // Move ball
-            ball.Move();
-
-            // Check for collision with top and side walls
-
-            ball.WallCollision(this);
-
-            // Check for ball hitting bottom of screen
-            if (ball.BottomCollision(this))
-            {
-                stick = true;
-            }
-
-            // Check for collision of ball with paddle, (incl. paddle movement)
-            ball.PaddleCollision(paddle);
-
-
-      
+           
             Grady();
 
             //redraw the screen
