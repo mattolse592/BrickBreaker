@@ -242,6 +242,13 @@ namespace BrickBreaker
                 // Check for collision of ball with paddle, (incl. paddle movement)
                 balls[i].PaddleCollision(paddle);
 
+                if (blocks.Count == 0)
+                {
+                    gameTimer.Enabled = false;
+                    OnStart(); // Restart game
+                    return;
+                }
+
                 // Check if ball has collided with any blocks
                 for (int j = 0; j < blocks.Count; j++)
                 {
@@ -260,6 +267,7 @@ namespace BrickBreaker
                         {
                             gameTimer.Enabled = false;
                             OnStart(); // Restart game
+                            return;
                         }
                     }
 
@@ -268,7 +276,6 @@ namespace BrickBreaker
                         blocks[j].CleanModifiers();
                     }
                 }
-
 
                 balls[i].CleanModifiers();
                 balls[i].SetCurrent();
