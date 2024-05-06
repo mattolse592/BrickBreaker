@@ -43,7 +43,7 @@ namespace BrickBreaker
                     modifiers.Add(new Modifier("ONFIRE", modifier.effCount));
                 }
 
-                if (modifier.mod.Contains("explode"))
+                if (modifier.mod.Contains("explode") && !ball.CheckFor("fade"))
                 {
                     int explodeSize = 200;
 

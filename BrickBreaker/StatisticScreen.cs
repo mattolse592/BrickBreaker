@@ -12,7 +12,7 @@ namespace BrickBreaker
 {
     public partial class StatisticScreen : UserControl
     {
-        
+        Pen whiteBrush = new Pen(Color.White);
         public StatisticScreen()
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace BrickBreaker
 
         private void backButton_Paint(object sender, PaintEventArgs e)
         {
-            //e.Graphics.DrawLine()
+            e.Graphics.DrawLine(whiteBrush, 25, 0, 25, 700);
         }
     }
 }
