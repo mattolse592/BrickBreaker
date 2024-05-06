@@ -254,7 +254,7 @@
             // 
             this.upgrade4Price.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.upgrade4Price.ForeColor = System.Drawing.Color.White;
-            this.upgrade4Price.Location = new System.Drawing.Point(969, 470);
+            this.upgrade4Price.Location = new System.Drawing.Point(969, 469);
             this.upgrade4Price.Name = "upgrade4Price";
             this.upgrade4Price.Size = new System.Drawing.Size(60, 30);
             this.upgrade4Price.TabIndex = 21;
@@ -265,7 +265,7 @@
             // 
             this.upgrade4Icon.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.upgrade4Icon.ForeColor = System.Drawing.Color.White;
-            this.upgrade4Icon.Location = new System.Drawing.Point(1033, 470);
+            this.upgrade4Icon.Location = new System.Drawing.Point(1033, 469);
             this.upgrade4Icon.Name = "upgrade4Icon";
             this.upgrade4Icon.Size = new System.Drawing.Size(60, 30);
             this.upgrade4Icon.TabIndex = 20;
@@ -419,6 +419,7 @@
             this.statisticsButton.TabIndex = 33;
             this.statisticsButton.Text = "Statistics";
             this.statisticsButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.statisticsButton.Click += new System.EventHandler(this.statisticsButton_Click);
             // 
             // htpButton
             // 

@@ -34,7 +34,7 @@ namespace BrickBreaker
             fireTic = TICSPEED;
         }
 
-        public void PassCondition(Ball ball)
+        public Ball PassCondition(Ball ball)
         {
             foreach (Modifier modifier in ball.modifiers)
             {
@@ -42,7 +42,23 @@ namespace BrickBreaker
                 {
                     modifiers.Add(new Modifier("ONFIRE", modifier.effCount));
                 }
+
+                if (modifier.mod.Contains("explode"))
+                {
+                    int explodeSize = 200;
+
+                    List<Modifier> hold = new List<Modifier>();
+
+                    foreach(Modifier mod in ball.modifiers)
+                    {
+                        hold.Add(mod);
+                    }
+                    hold.Add(new Modifier("fade", 25));
+
+                    return new Ball(ball.x + (ball.size / 2) - (explodeSize / 2), ball.y + (ball.size / 2) - (explodeSize / 2), 0, 0, explodeSize, hold);
+                }
             }
+            return ball;
         }
 
         public void setCurrent()
