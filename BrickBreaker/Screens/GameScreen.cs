@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 using System.Drawing.Drawing2D;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BrickBreaker
 {
@@ -44,11 +45,15 @@ namespace BrickBreaker
         SolidBrush transparentBrush = new SolidBrush(Color.Transparent);
 
         //Grady Stuff
-        public static int speedModBX = 0, speedModBY = 0, speedModPX = 0;
+        public static int speedModBX = 0, speedModBY = 0, speedModPX = 0, widthModP;
+
+        public List<BlackHole> holes = new List<BlackHole>();
 
         List<Powerup> powerups = new List<Powerup>();
         List<Ball> balls = new List<Ball>();
         SolidBrush fireBrush = new SolidBrush(Color.Red);
+        SolidBrush bombBrush = new SolidBrush(Color.Black);
+        SolidBrush fireBallOuter = new SolidBrush(Color.OrangeRed);
 
 
         public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -57,20 +62,31 @@ namespace BrickBreaker
         int sandwiches;
         Rectangle rec1 = new Rectangle(950, 200, 300, 100);
 
-
+        public static int width;
         #endregion
 
         public GameScreen()
         {
             InitializeComponent();
             OnStart();
+
+            //holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 2, 100, true));
+
         }
 
 
         public void OnStart()
         {
             // For now
-            currentLevel += 1;
+            if (currentLevel == 10)
+            {
+                currentLevel = 1;
+            }
+            else
+            {
+                currentLevel++;
+            }
+
 
             sandwiches = 0;
             //sandwichLabel.Text = $"{sandwiches}";
@@ -99,7 +115,7 @@ namespace BrickBreaker
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
 
             //Grady Code
-            balls.Add(ball);
+            balls.Add(new Ball(ball.x, ball.y, ball.xSpeed, ball.ySpeed, ball.size, new List<Modifier>{new Modifier("PERM")}));
 
             #region Creates blocks for generic level. Need to replace with code that loads levels.
 
@@ -113,6 +129,8 @@ namespace BrickBreaker
 
             #endregion
 
+            //derick 
+            width = this.Width;
 
             // start the game engine loop
             gameTimer.Enabled = true;
@@ -134,16 +152,34 @@ namespace BrickBreaker
                         {
                             ball.ySpeed *= -1;
                         }
-                        ball.defaultSpeedX = 0;
-                        ball.defaultSpeedY = 6;
+
+                        int mag = (int)Math.Sqrt(Math.Pow(ball.y + 2, 2) + Math.Pow(ball.x - ball.throwX, 2));
+                        float yScale = (((float)ball.y + 2) / mag);
+                        float xScale = (((float)ball.x - ball.throwX) / mag);
+                        
+                        if (xScale < 0)
+                        {
+                            xScale *= -1;
+                        }
+
+                        ball.xSpeed = Math.Abs(ball.xSpeed); ;
+
+                        ball.defaultSpeedX = (int)(6 * xScale);
+                        ball.defaultSpeedY = (int)(6 * yScale);
+
+                        if (ball.x + (ball.size /2) > ball.throwX)
+                        {
+                            ball.xSpeed *= -1;
+                        }
                     }
                     break;
                 case Keys.F:
-
-                    powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
+                    powerups.Add(new Powerup("PW"));
+                    //powerups.Add(new Powerup("BE", new List<Modifier> { new Modifier("explode") }));
+//powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
                     break;
                 case Keys.G:
-                    powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 5) }));
+                    powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
                     break;
                 case Keys.Right:
                     rightArrowDown = true;
@@ -182,51 +218,6 @@ namespace BrickBreaker
                 paddle.Move("right");
             }
 
-            // Move ball
-            ball.Move();
-
-            // Check for collision with top and side walls
-
-            ball.WallCollision(this);
-
-            // Check for ball hitting bottom of screen
-            if (ball.BottomCollision(this))
-            {
-                stick = true;
-
-                // Moves the ball back to origin
-                ball.x = ((paddle.x - (ball.size / 2)) + (paddle.width / 2));
-                ball.y = (this.Height - paddle.height) - 85;
-            }
-
-            // Check for collision of ball with paddle, (incl. paddle movement)
-            ball.PaddleCollision(paddle);
-
-
-            // Check if ball has collided with any blocks
-            foreach (Block b in blocks)
-            {
-                if (ball.BlockCollision(b))
-                {
-
-                    b.hp--;
-
-                    if (b.hp <= 0)
-                    {
-                        blocks.Remove(b);
-                    }
-                    b.PassCondition(ball);
-
-                    if (blocks.Count == 0)
-                    {
-                        gameTimer.Enabled = false;
-                        OnStart(); // Restart game
-                        //OnEnd();
-                    }
-
-                    break;
-                }
-            }
 
             Grady();
 
@@ -252,36 +243,77 @@ namespace BrickBreaker
                 balls[i].PaddleCollision(paddle);
 
                 // Check if ball has collided with any blocks
-                foreach (Block b in blocks)
+                for (int j = 0; j < blocks.Count; j++)
                 {
-                    if (balls[i].BlockCollision(b))
-                    {
 
-                        if (b.hp <= 0)
+                    if (balls[i].BlockCollision(blocks[j]))
+                    {
+                        balls[i] = blocks[j].PassCondition(balls[i]);
+
+                        if (blocks[j].hp <= 0)
                         {
-                            blocks.Remove(b);
+                            blocks.RemoveAt(j);
+                            j--;
                         }
-                        b.PassCondition(balls[i]);
 
                         if (blocks.Count == 0)
                         {
                             gameTimer.Enabled = false;
-                            OnEnd();
+                            OnStart(); // Restart game
                         }
-
-                        break;
                     }
 
-                    b.CleanModifiers();
+                    if (j >= 0)
+                    {
+                        blocks[j].CleanModifiers();
+                    }
                 }
 
+
                 balls[i].CleanModifiers();
+                balls[i].SetCurrent();
+
+                if (balls[i].modifiers.Any())
+                {
+                    if (balls[i].modifiers[balls[i].modifiers.Count - 1].mod == "remove")
+                    {
+                        if (balls[i].CheckFor("PERM"))
+                        {
+                            stick = true;
+                        }
+                        else
+                        {
+                            balls.Remove(balls[i]);
+                            i--;
+                        }
+                    }
+                    else if (balls[i].BottomCollision(this) || (balls[i].CheckFor("temp") && (tempBall.xSpeed != balls[i].xSpeed || tempBall.ySpeed != balls[i].ySpeed)))
+                    {
+                        if (balls[i].CheckFor("PERM"))
+                        {
+                            stick = true;
+                        }
+                        else
+                        {
+                            balls.Remove(balls[i]);
+                            i--;
+                        }
+                    }
+                }
+
 
                 // Check for ball hitting bottom of screen
-                if (balls[i].BottomCollision(this) || (balls[i].CheckFor("temp") && (tempBall.xSpeed != balls[i].xSpeed || tempBall.ySpeed != balls[i].ySpeed)))
+                else if (balls[i].BottomCollision(this) || (balls[i].CheckFor("temp") && (tempBall.xSpeed != balls[i].xSpeed || tempBall.ySpeed != balls[i].ySpeed)))
                 {
-                    balls.Remove(balls[i]);
-                    i--;
+                    if (balls[i].CheckFor("PERM"))
+                    {
+                        stick = true;
+                    }
+                    else
+                    {
+                        balls.Remove(balls[i]);
+                        i--;
+                    }
                 }
             }
 
@@ -299,10 +331,21 @@ namespace BrickBreaker
             for (int i = 0; i < powerups.Count; i++)
             {
                 balls = powerups[i].Effect(balls);
-                if (powerups[i].Type.Contains("BB"))
+                if (powerups[i].CheckFor("remove"))
                 {
                     powerups.RemoveAt(i);
                     i--;
+                }
+            }
+
+            paddle.CalibrateWidth();
+
+            if (holes.Count > 0)
+            {
+                foreach(BlackHole hole in holes)
+                {
+                    balls = hole.Pull(balls);
+                    blocks = hole.Pull(blocks);
                 }
             }
         }
@@ -378,6 +421,11 @@ namespace BrickBreaker
 
         }
 
+        private void statisticsButton_Click(object sender, EventArgs e)
+        {
+            Form1.ChangeScreen(this, new StatisticScreen());
+        }
+
         // Save level
         void Nathan_saveLevel()
         {
@@ -401,9 +449,18 @@ namespace BrickBreaker
             //Grady
             foreach (Ball b in balls)
             {
-                if (b.CheckFor("fire"))
+                if (b.CheckFor("fade"))
+                {
+                    b.MakeBallRec();
+                    e.Graphics.FillEllipse(fireBallOuter, b.ballRec.X, b.ballRec.Y, b.ballRec.Width, b.ballRec.Height);
+                }
+                else if (b.CheckFor("fire"))
                 {
                     e.Graphics.FillEllipse(fireBrush, b.x, b.y, b.size, b.size);
+                }
+                else if (b.CheckFor("explode"))
+                {
+                    e.Graphics.FillEllipse(bombBrush, b.x, b.y, b.size, b.size);
                 }
                 else
                 {
@@ -411,7 +468,11 @@ namespace BrickBreaker
                 }
             }
 
-            e.Graphics.FillEllipse(ballBrush, ball.x, ball.y, ball.size, ball.size);
+            foreach(BlackHole hole in holes)
+            {
+                e.Graphics.FillEllipse(bombBrush, hole.schwartzchild);
+                e.Graphics.DrawEllipse(sidebarPen, new Rectangle(hole.x - hole.pullField, hole.y - hole.pullField, hole.pullField * 2, hole.pullField * 2));
+            }
 
             //draw blocks
             foreach (Block b in blocks)
@@ -421,6 +482,11 @@ namespace BrickBreaker
                 e.Graphics.DrawString(b.hp.ToString(), healthFont, ballBrush, b.x, b.y);
             }
 
+            //Derick 
+            if (stick)
+            {
+                e.Graphics.DrawLine(sidebarPen, new Point(ball.throwX, 0), new Point(ball.x + (ball.size /2), ball.y + 2));
+            }
 
             //Valentina
             //Shop sidebar

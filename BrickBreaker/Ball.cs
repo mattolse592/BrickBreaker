@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,8 +9,11 @@ namespace BrickBreaker
     public class Ball
     {
         public int x, y, xSpeed, ySpeed, size, defaultSpeedX, defaultSpeedY;
+        public int lineSpeed = 25;
+        public int throwX = 0;
         public Color colour;
         public List<Modifier> modifiers = new List<Modifier>();
+        public Rectangle ballRec = new Rectangle();
 
         public static Random rand = new Random();
 
@@ -50,6 +54,11 @@ namespace BrickBreaker
 
             if (GameScreen.stick)
             {
+                if (throwX >= 950 || throwX < 0)
+                {
+                    lineSpeed *= -1;
+                }
+                throwX += lineSpeed;
                 x = (GameScreen.paddle.x + (GameScreen.paddle.width / 2)) - (size / 2);
                 y = GameScreen.paddle.y - size - 20;
             }
@@ -80,34 +89,58 @@ namespace BrickBreaker
         public bool BlockCollision(Block b)
         {
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
-            Rectangle ballRec = new Rectangle(x, y, size, size);
+            ballRec = new Rectangle(x, y, size, size);
+            bool shouldMove = true;
 
-            if (ballRec.IntersectsWith(blockRec))
+            shouldMove = !CheckFor("explode");
+
+            if (CheckFor("fade"))
             {
-                ySpeed *= -1;
+                foreach(Modifier m in modifiers)
+                {
+                    if (m.mod == "fade")
+                    {
+                        ballRec = new Rectangle(x + ((size / 2) - ((size / (m.effCount+ 1))/2)), y + ((size / 2) - ((size / (m.effCount + 1)) / 2)), size / (m.effCount + 1), size / (m.effCount + 1));
+                    }
+                }
+            }
+
+            if (ballRec.IntersectsWith(blockRec) && shouldMove)
+            {
+                
 
                 b.hp -= 1;
 
-                if (ballRec.X + size < blockRec.X + 10)
+                if (x + size < b.x + 10 && xSpeed > 0)
                 {
+                    x = b.x - size - 2;
                     xSpeed *= -1;
-                    ySpeed *= -1;
-                    x = b.x - size - 3;
+
                 }
-                else if (ballRec.X + 4 > b.x + blockRec.Width)
+
+                else if (x > b.x + b.width  - 10 && xSpeed < 0)
                 {
+                    x = b.x + b.width + 2;
                     xSpeed *= -1;
+                }
+
+                if (y + size < b.y + 6)
+                {
                     ySpeed *= -1;
-                    x = b.x + b.width + 3;
+
+                    y = b.y - size - 2;
                 }
-                else if (y + size < b.y + 6)
+
+                else if (y > b.y + b.height - 6)
                 {
-                    y = b.y - size - 3;
+                    ySpeed *= -1;
+
+                    y = b.y + b.height + 2;
                 }
-                else
-                {
-                    y = b.y + b.height + 3;
-                }
+            }
+            else if (ballRec.IntersectsWith(blockRec))
+            {
+                b.hp -= 1;
             }
 
             return blockRec.IntersectsWith(ballRec);
@@ -122,19 +155,27 @@ namespace BrickBreaker
             {
                 ySpeed *= -1;
 
-                if (x + size <= p.x + 7 && xSpeed > 0)
+                if (x + size <= p.x + 7 && xSpeed >= -1)
                 {
+                    if (xSpeed == 0)
+                    {
+                        xSpeed *= -1;
+                    }
                     xSpeed *= -1;
                     x = p.x - size - 6;
                     defaultSpeedY = 4;
-                    defaultSpeedX = 15;
+                    defaultSpeedX = 10;
                 }
-                else if (x >= p.x + p.width - 7 && xSpeed < 0)
+                else if (x >= p.x + p.width - 7 && xSpeed <= -1)
                 {
+                    if (xSpeed == 0)
+                    {
+                        xSpeed *= -1;
+                    }
                     x = p.x + p.width + 6;
                     xSpeed *= -1;
                     defaultSpeedY = 4;
-                    defaultSpeedX = 15;
+                    defaultSpeedX = 10;
                 }
                 else if (x + (size / 2) < p.x + (p.width / 4))
                 {
@@ -229,6 +270,31 @@ namespace BrickBreaker
             return false;
         }
 
+        public void SetCurrent()
+        {
+            List<Modifier> hold = new List<Modifier>();
+            foreach (Modifier m in modifiers)
+            {
+                if(m.effCount != -55555)
+                {
+                    m.effCount--;
+                    if (m.effCount >= 0)
+                    {
+                        hold.Add(m);
+                    }
+                    else if (m.effCount < 0 && m.mod == "fade")
+                    {
+                        hold.Add(new Modifier("remove"));
+                    }
+                }
+                else
+                {
+                    hold.Add(m);
+                }
+            }
+            modifiers = hold;
+        }
+
         public void CleanModifiers()
         {
             for (int i = 0; i < modifiers.Count; i++)
@@ -244,5 +310,15 @@ namespace BrickBreaker
             }
         }
 
+        public void MakeBallRec()
+        {
+            foreach (Modifier m in modifiers)
+            {
+                if (m.mod == "fade")
+                {
+                    ballRec = new Rectangle(x + ((size / 2) - ((size / (m.effCount + 1)) / 2)), y + ((size / 2) - ((size / (m.effCount + 1)) / 2)), size / (m.effCount + 1), size / (m.effCount + 1));
+                }
+            }
+        }
     }
 }

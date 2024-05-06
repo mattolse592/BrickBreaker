@@ -14,13 +14,13 @@ namespace BrickBreaker
         public Modifier()
         {
             mod = "";
-            effCount = 0;
+            effCount = -55555;
         }
 
         public Modifier(String _mod)
         {
             mod = _mod;
-            effCount = 0;
+            effCount = -55555;
         }
 
         public Modifier(String _mod, int time)
