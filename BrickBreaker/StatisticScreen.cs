@@ -25,7 +25,7 @@ namespace BrickBreaker
 
         private void backButton_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawLine()
+            //e.Graphics.DrawLine()
         }
     }
 }
