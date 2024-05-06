@@ -409,6 +409,11 @@ namespace BrickBreaker
 
         }
 
+        private void statisticsButton_Click(object sender, EventArgs e)
+        {
+            Form1.ChangeScreen(this, new StatisticScreen());
+        }
+
         // Save level
         void Nathan_saveLevel()
         {

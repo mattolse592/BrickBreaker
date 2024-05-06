@@ -419,6 +419,7 @@
             this.statisticsButton.TabIndex = 33;
             this.statisticsButton.Text = "Statistics";
             this.statisticsButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.statisticsButton.Click += new System.EventHandler(this.statisticsButton_Click);
             // 
             // htpButton
             // 
