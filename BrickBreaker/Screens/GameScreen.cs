@@ -219,30 +219,7 @@ namespace BrickBreaker
             ball.PaddleCollision(paddle);
 
 
-            // Check if ball has collided with any blocks
-            foreach (Block b in blocks)
-            {
-                if (ball.BlockCollision(b))
-                {
-
-                    
-
-                    if (b.hp <= 0)
-                    {
-                        blocks.Remove(b);
-                    }
-                    b.PassCondition(ball);
-
-                    if (blocks.Count == 0)
-                    {
-                        gameTimer.Enabled = false;
-                        OnEnd();
-                    }
-
-                    break;
-                }
-            }
-
+      
             Grady();
 
             //redraw the screen
