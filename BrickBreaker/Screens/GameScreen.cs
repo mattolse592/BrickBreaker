@@ -421,22 +421,47 @@ namespace BrickBreaker
             //Grady
             foreach (Ball b in balls)
             {
-                if (b.CheckFor("fade"))
+                if (b.CheckFor("PERM"))
                 {
-                    b.MakeBallRec();
-                    e.Graphics.FillEllipse(fireBallOuter, b.ballRec.X, b.ballRec.Y, b.ballRec.Width, b.ballRec.Height);
-                }
-                else if (b.CheckFor("fire"))
-                {
-                    e.Graphics.FillEllipse(fireBrush, b.x, b.y, b.size, b.size);
-                }
-                else if (b.CheckFor("explode"))
-                {
-                    e.Graphics.FillEllipse(bombBrush, b.x, b.y, b.size, b.size);
+                    e.Graphics.FillEllipse(ballBrush, b.x, b.y, b.size, b.size);
+
+                    if (b.CheckFor("fade"))
+                    {
+                        b.MakeBallRec();
+                        e.Graphics.FillEllipse(fireBallOuter, b.ballRec.X + 5, b.ballRec.Y + 5, b.ballRec.Width - 10, b.ballRec.Height - 10);
+                    }
+                    else if (b.CheckFor("fire"))
+                    {
+                        e.Graphics.FillEllipse(fireBrush, b.ballRec.X + 5, b.ballRec.Y + 5, b.ballRec.Width - 10, b.ballRec.Height - 10);
+                    }
+                    else if (b.CheckFor("explode"))
+                    {
+                        e.Graphics.FillEllipse(bombBrush, b.ballRec.X + 5, b.ballRec.Y + 5, b.ballRec.Width - 10, b.ballRec.Height - 10);
+                    }
+                    else
+                    {
+                        e.Graphics.FillEllipse(ballBrush, b.ballRec.X + 5, b.ballRec.Y + 5, b.ballRec.Width - 10, b.ballRec.Height - 10);
+                    }
                 }
                 else
                 {
-                    e.Graphics.FillEllipse(ballBrush, b.x, b.y, b.size, b.size);
+                    if (b.CheckFor("fade"))
+                    {
+                        b.MakeBallRec();
+                        e.Graphics.FillEllipse(fireBallOuter, b.ballRec.X, b.ballRec.Y, b.ballRec.Width, b.ballRec.Height);
+                    }
+                    else if (b.CheckFor("fire"))
+                    {
+                        e.Graphics.FillEllipse(fireBrush, b.x, b.y, b.size, b.size);
+                    }
+                    else if (b.CheckFor("explode"))
+                    {
+                        e.Graphics.FillEllipse(bombBrush, b.x, b.y, b.size, b.size);
+                    }
+                    else
+                    {
+                        e.Graphics.FillEllipse(ballBrush, b.x, b.y, b.size, b.size);
+                    }
                 }
             }
 
