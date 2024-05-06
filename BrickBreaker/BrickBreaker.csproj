@@ -161,6 +161,8 @@
     <Content Include="levels\level1.xml" />
     <Content Include="levels\level2.xml" />
     <Content Include="levels\level3.xml" />
+    <Content Include="levels\level5.xml" />
+    <Content Include="levels\level6.xml" />
     <Content Include="levels\level_save1.xml" />
     <Content Include="levels\level_save2.xml" />
   </ItemGroup>
