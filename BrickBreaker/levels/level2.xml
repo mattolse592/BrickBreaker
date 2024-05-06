@@ -27,13 +27,13 @@
 	<block>
 		<x>5</x>
 		<y>2</y>
-		<hp>1</hp>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
 		<x>6</x>
 		<y>2</y>
-		<hp>1</hp>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
@@ -51,25 +51,25 @@
 	<block>
 		<x>4</x>
 		<y>3</y>
-		<hp>1</hp>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
 		<x>5</x>
 		<y>3</y>
-		<hp>1</hp>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
 		<x>6</x>
 		<y>3</y>
-		<hp>1</hp>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
 		<x>7</x>
 		<y>3</y>
-		<hp>1</hp>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
@@ -87,37 +87,37 @@
 	<block>
 		<x>3</x>
 		<y>4</y>
-		<hp>1</hp>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
 		<x>4</x>
 		<y>4</y>
-		<hp>1</hp>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
 		<x>5</x>
 		<y>4</y>
-		<hp>1</hp>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
 		<x>6</x>
 		<y>4</y>
-		<hp>1</hp>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
 		<x>7</x>
 		<y>4</y>
-		<hp>1</hp>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>
 		<x>8</x>
 		<y>4</y>
-		<hp>1</hp>
+		<hp>3</hp>
 		<colour>Red</colour>
 	</block>
 	<block>

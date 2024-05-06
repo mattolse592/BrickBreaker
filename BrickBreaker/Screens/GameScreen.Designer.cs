@@ -187,11 +187,11 @@
             // 
             this.upgrade3Quantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.upgrade3Quantity.ForeColor = System.Drawing.Color.White;
-            this.upgrade3Quantity.Location = new System.Drawing.Point(1159, 320);
+            this.upgrade3Quantity.Location = new System.Drawing.Point(1166, 316);
             this.upgrade3Quantity.Name = "upgrade3Quantity";
             this.upgrade3Quantity.Size = new System.Drawing.Size(51, 52);
             this.upgrade3Quantity.TabIndex = 17;
-            this.upgrade3Quantity.Text = "4";
+            this.upgrade3Quantity.Text = "1x";
             this.upgrade3Quantity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // upgrade3Price
@@ -224,7 +224,7 @@
             this.upgrade3Description.Name = "upgrade3Description";
             this.upgrade3Description.Size = new System.Drawing.Size(189, 40);
             this.upgrade3Description.TabIndex = 14;
-            this.upgrade3Description.Text = "Permanently increase ball speed";
+            this.upgrade3Description.Text = "Multiplier for the amount of sandwiches you get per hit";
             this.upgrade3Description.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // upgrade3Title
@@ -234,9 +234,9 @@
             this.upgrade3Title.ForeColor = System.Drawing.Color.White;
             this.upgrade3Title.Location = new System.Drawing.Point(971, 308);
             this.upgrade3Title.Name = "upgrade3Title";
-            this.upgrade3Title.Size = new System.Drawing.Size(170, 20);
+            this.upgrade3Title.Size = new System.Drawing.Size(163, 20);
             this.upgrade3Title.TabIndex = 13;
-            this.upgrade3Title.Text = "Ball Speed Upgrade";
+            this.upgrade3Title.Text = "Sandwich Multiplier";
             this.upgrade3Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // upgrade4Quantity
@@ -419,6 +419,7 @@
             this.statisticsButton.TabIndex = 33;
             this.statisticsButton.Text = "Statistics";
             this.statisticsButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.statisticsButton.Click += new System.EventHandler(this.statisticsButton_Click);
             // 
             // htpButton
             // 
