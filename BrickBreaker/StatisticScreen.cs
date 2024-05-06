@@ -12,7 +12,7 @@ namespace BrickBreaker
 {
     public partial class StatisticScreen : UserControl
     {
-        Pen whiteBrush = new SolidBrush(Color.White);
+        Pen whiteBrush = new Pen(Color.White);
         public StatisticScreen()
         {
             InitializeComponent();
