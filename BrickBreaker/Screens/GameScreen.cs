@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 using System.Drawing.Drawing2D;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BrickBreaker
 {
@@ -61,14 +62,16 @@ namespace BrickBreaker
         int sandwiches;
         Rectangle rec1 = new Rectangle(950, 200, 300, 100);
 
-
+        public static int width;
         #endregion
 
         public GameScreen()
         {
             InitializeComponent();
             OnStart();
+
             //holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 2, 100, true));
+
         }
 
 
@@ -126,6 +129,8 @@ namespace BrickBreaker
 
             #endregion
 
+            //derick 
+            width = this.Width;
 
             // start the game engine loop
             gameTimer.Enabled = true;
@@ -147,8 +152,25 @@ namespace BrickBreaker
                         {
                             ball.ySpeed *= -1;
                         }
-                        ball.defaultSpeedX = 0;
-                        ball.defaultSpeedY = 6;
+
+                        int mag = (int)Math.Sqrt(Math.Pow(ball.y + 2, 2) + Math.Pow(ball.x - ball.throwX, 2));
+                        float yScale = (((float)ball.y + 2) / mag);
+                        float xScale = (((float)ball.x - ball.throwX) / mag);
+                        
+                        if (xScale < 0)
+                        {
+                            xScale *= -1;
+                        }
+
+                        ball.xSpeed = Math.Abs(ball.xSpeed); ;
+
+                        ball.defaultSpeedX = (int)(6 * xScale);
+                        ball.defaultSpeedY = (int)(6 * yScale);
+
+                        if (ball.x + (ball.size /2) > ball.throwX)
+                        {
+                            ball.xSpeed *= -1;
+                        }
                     }
                     break;
                 case Keys.F:
@@ -195,6 +217,7 @@ namespace BrickBreaker
             {
                 paddle.Move("right");
             }
+
 
             Grady();
 
@@ -398,6 +421,11 @@ namespace BrickBreaker
 
         }
 
+        private void statisticsButton_Click(object sender, EventArgs e)
+        {
+            Form1.ChangeScreen(this, new StatisticScreen());
+        }
+
         // Save level
         void Nathan_saveLevel()
         {
@@ -454,6 +482,11 @@ namespace BrickBreaker
                 e.Graphics.DrawString(b.hp.ToString(), healthFont, ballBrush, b.x, b.y);
             }
 
+            //Derick 
+            if (stick)
+            {
+                e.Graphics.DrawLine(sidebarPen, new Point(ball.throwX, 0), new Point(ball.x + (ball.size /2), ball.y + 2));
+            }
 
             //Valentina
             //Shop sidebar
