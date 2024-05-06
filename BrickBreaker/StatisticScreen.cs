@@ -23,9 +23,17 @@ namespace BrickBreaker
             Form1.ChangeScreen(this, new GameScreen());
         }
 
-        private void backButton_Paint(object sender, PaintEventArgs e)
+        private void StatisticScreen_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawLine(whiteBrush, 25, 0, 25, 700);
+            e.Graphics.DrawLine(whiteBrush, 1225, 0, 1225, 700);
+            e.Graphics.DrawLine(whiteBrush, 225, 0, 225, 700);
+            e.Graphics.DrawLine(whiteBrush, 425, 0, 425, 700);
+            e.Graphics.DrawLine(whiteBrush, 625, 0, 625, 700);
+            e.Graphics.DrawLine(whiteBrush, 825, 0, 825, 700);
+            e.Graphics.DrawLine(whiteBrush, 1025, 0, 1025, 700);
+          
+
         }
     }
 }
