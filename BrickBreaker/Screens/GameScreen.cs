@@ -54,6 +54,7 @@ namespace BrickBreaker
         SolidBrush fireBrush = new SolidBrush(Color.Red);
         SolidBrush bombBrush = new SolidBrush(Color.Black);
         SolidBrush fireBallOuter = new SolidBrush(Color.OrangeRed);
+        SolidBrush permBrush = new SolidBrush(Color.Purple);
 
 
         public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -61,6 +62,9 @@ namespace BrickBreaker
         //currency
         int sandwiches;
         Rectangle rec1 = new Rectangle(950, 200, 300, 100);
+
+        int score = 0;
+        int blocksDestroyed = 0;
 
         public static int width;
         #endregion
@@ -70,14 +74,13 @@ namespace BrickBreaker
             InitializeComponent();
             OnStart();
 
-            //holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 2, 100, true));
+           // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 1, 200, true));
 
         }
 
 
-        public void OnStart()
+        public void nextLevel()
         {
-            // For now
             if (currentLevel == 10)
             {
                 currentLevel = 1;
@@ -87,7 +90,11 @@ namespace BrickBreaker
                 currentLevel++;
             }
 
+            Nathan_loadLevel();
+        }
 
+        public void OnStart()
+        {
             sandwiches = 0;
             //sandwichLabel.Text = $"{sandwiches}";
 
@@ -124,8 +131,8 @@ namespace BrickBreaker
             blocks.Clear();
 
 
-            Nathan_loadLevel();
-
+            //Nathan_loadLevel();
+            nextLevel();
 
             #endregion
 
@@ -242,24 +249,34 @@ namespace BrickBreaker
                 // Check for collision of ball with paddle, (incl. paddle movement)
                 balls[i].PaddleCollision(paddle);
 
+                if (blocks.Count == 0)
+                {
+                    gameTimer.Enabled = false;
+                    nextLevel();
+                    return;
+                }
+
                 // Check if ball has collided with any blocks
                 for (int j = 0; j < blocks.Count; j++)
                 {
                     //stinky bum
                     if (balls[i].BlockCollision(blocks[j]))
                     {
+                        score += 1;
                         balls[i] = blocks[j].PassCondition(balls[i]);
 
                         if (blocks[j].hp <= 0)
                         {
                             blocks.RemoveAt(j);
                             j--;
+                            blocksDestroyed += 1;
                         }
 
                         if (blocks.Count == 0)
                         {
                             gameTimer.Enabled = false;
                             OnStart(); // Restart game
+                            return;
                         }
                     }
 
@@ -268,7 +285,6 @@ namespace BrickBreaker
                         blocks[j].CleanModifiers();
                     }
                 }
-
 
                 balls[i].CleanModifiers();
                 balls[i].SetCurrent();
@@ -416,6 +432,9 @@ namespace BrickBreaker
         }
         private void exitLabel_Click(object sender, EventArgs e)
         {
+            XmlRw w = new XmlRw();
+            w.writeStatistics(blocksDestroyed, score, currentLevel);
+
             gameTimer.Enabled = false;
             Form1.ChangeScreen(this, new MenuScreen());
 
@@ -437,6 +456,8 @@ namespace BrickBreaker
         {
             // Goes to the game over screen
             Form1.ChangeScreen(this, new MenuScreen());
+
+            //TODO: save the file to xml
         }
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
@@ -449,22 +470,47 @@ namespace BrickBreaker
             //Grady
             foreach (Ball b in balls)
             {
-                if (b.CheckFor("fade"))
+                if (b.CheckFor("PERM"))
                 {
-                    b.MakeBallRec();
-                    e.Graphics.FillEllipse(fireBallOuter, b.ballRec.X, b.ballRec.Y, b.ballRec.Width, b.ballRec.Height);
-                }
-                else if (b.CheckFor("fire"))
-                {
-                    e.Graphics.FillEllipse(fireBrush, b.x, b.y, b.size, b.size);
-                }
-                else if (b.CheckFor("explode"))
-                {
-                    e.Graphics.FillEllipse(bombBrush, b.x, b.y, b.size, b.size);
+                    e.Graphics.FillEllipse(permBrush, b.x, b.y, b.size, b.size);
+
+                    if (b.CheckFor("fade"))
+                    {
+                        b.MakeBallRec();
+                        e.Graphics.FillEllipse(fireBallOuter, b.ballRec.X + 5, b.ballRec.Y + 5, b.ballRec.Width - 10, b.ballRec.Height - 10);
+                    }
+                    else if (b.CheckFor("fire"))
+                    {
+                        e.Graphics.FillEllipse(fireBrush, b.ballRec.X + 5, b.ballRec.Y + 5, b.ballRec.Width - 10, b.ballRec.Height - 10);
+                    }
+                    else if (b.CheckFor("explode"))
+                    {
+                        e.Graphics.FillEllipse(bombBrush, b.ballRec.X + 5, b.ballRec.Y + 5, b.ballRec.Width - 10, b.ballRec.Height - 10);
+                    }
+                    else
+                    {
+                        e.Graphics.FillEllipse(ballBrush, b.ballRec.X + 5, b.ballRec.Y + 5, b.ballRec.Width - 10, b.ballRec.Height - 10);
+                    }
                 }
                 else
                 {
-                    e.Graphics.FillEllipse(ballBrush, b.x, b.y, b.size, b.size);
+                    if (b.CheckFor("fade"))
+                    {
+                        b.MakeBallRec();
+                        e.Graphics.FillEllipse(fireBallOuter, b.ballRec.X, b.ballRec.Y, b.ballRec.Width, b.ballRec.Height);
+                    }
+                    else if (b.CheckFor("fire"))
+                    {
+                        e.Graphics.FillEllipse(fireBrush, b.x, b.y, b.size, b.size);
+                    }
+                    else if (b.CheckFor("explode"))
+                    {
+                        e.Graphics.FillEllipse(bombBrush, b.x, b.y, b.size, b.size);
+                    }
+                    else
+                    {
+                        e.Graphics.FillEllipse(ballBrush, b.x, b.y, b.size, b.size);
+                    }
                 }
             }
 

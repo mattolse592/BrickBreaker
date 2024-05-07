@@ -31,6 +31,80 @@ namespace BrickBreaker
 
         }
 
+        public int writeStatistics(int blocksDestoryed, int score, int level)
+        {
+            XmlReader reader = XmlReader.Create("../../statistics.xml");
+
+            int totalBlocksDestoryed = 0;
+            int totalScore = 0;
+            int highScore = 0;
+
+            reader.ReadStartElement("statistics");
+
+            while (reader.Read())
+            {
+                reader.ReadToFollowing("total_score");
+                string totalScoreStr = reader.ReadString();
+                if (totalScoreStr != null && totalScoreStr != "")
+                {
+                    totalScore = Convert.ToInt32(totalScoreStr);
+                } else
+                {
+                    Console.WriteLine("oh no0!");
+                }
+                //totalScore = Convert.ToInt32(reader.ReadString());
+
+                reader.ReadToFollowing("high_score");
+                string highScoreStr = reader.ReadString();
+                if (highScoreStr != null && highScoreStr != "")
+                {
+                    highScore = Convert.ToInt32(highScoreStr);
+                } else
+                {
+                    Console.WriteLine("oh no1!");
+                }
+
+                reader.ReadToFollowing("blocks_destroyed");
+                string blocksDestoryedStr = reader.ReadString();
+                if (highScoreStr != null && highScoreStr != "")
+                {
+                    totalBlocksDestoryed = Convert.ToInt32(blocksDestoryedStr);
+                } else
+                {
+                    Console.WriteLine("oh no2!");
+                }
+
+                //reader.ReadEndElement();
+            }
+
+            reader.Close();
+
+
+            totalBlocksDestoryed += blocksDestoryed;
+            totalScore += score;
+            if (score >= highScore)
+            {
+                highScore = score;
+            }
+            Console.WriteLine($"xml file score: {totalScore}, highscore: {highScore}, blocks: {totalBlocksDestoryed}");
+
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            XmlWriter writer = XmlWriter.Create("../../statistics.xml", settings);
+
+
+            writer.WriteStartElement("statistics");
+            writer.WriteStartElement("null", "null");
+            writer.WriteElementString("total_score", totalScore.ToString());
+            writer.WriteElementString("high_score", highScore.ToString());
+            writer.WriteElementString("blocks_destroyed", totalBlocksDestoryed.ToString());
+            writer.WriteEndElement();
+
+            writer.Close();
+
+            return SUCCESS;
+        }
+
         public List<Block> allBlocks()
         {
             return blocks;
@@ -196,12 +270,11 @@ namespace BrickBreaker
 
             if (upright)
             {
-                blocks.Add(new Block(x, y, 1, Color.Red));
                 for (int py = 0; py < width; py++)
                 {
                     for (int px = minX; px < maxX; px++)
                     {
-                        blocks.Add(new Block(px, py, 1, Color.Red));
+                        blocks.Add(new Block(px, py, 3, Color.Red));
                     }
 
                     minX -= 1;
@@ -212,12 +285,11 @@ namespace BrickBreaker
 
         public void bigBlock(int width, int x, int y)
         {
-            blocks.Add(new Block(x, y, 1, Color.Red));
             for (int py = y; py < y + width; py++)
             {
                 for (int px = x; px < x + width; px++)
                 {
-                    blocks.Add(new Block(px, py, 1, Color.Red));
+                    blocks.Add(new Block(px, py, 5, Color.Red));
                 }
             }
         }

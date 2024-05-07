@@ -77,10 +77,10 @@
     <Compile Include="Paddle.cs" />
     <Compile Include="Powerup.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="StatisticScreen.cs">
+    <Compile Include="Screens\StatisticScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="StatisticScreen.Designer.cs">
+    <Compile Include="Screens\StatisticScreen.Designer.cs">
       <DependentUpon>StatisticScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="XmlRw.cs" />
@@ -125,7 +125,7 @@
     <EmbeddedResource Include="Screens\GameScreen.resx">
       <DependentUpon>GameScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StatisticScreen.resx">
+    <EmbeddedResource Include="Screens\StatisticScreen.resx">
       <DependentUpon>StatisticScreen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
@@ -161,8 +161,11 @@
     <Content Include="levels\level1.xml" />
     <Content Include="levels\level2.xml" />
     <Content Include="levels\level3.xml" />
+    <Content Include="levels\level5.xml" />
+    <Content Include="levels\level6.xml" />
     <Content Include="levels\level_save1.xml" />
     <Content Include="levels\level_save2.xml" />
+    <Content Include="statistics.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
