@@ -94,6 +94,7 @@ namespace BrickBreaker
 
 
             writer.WriteStartElement("statistics");
+            writer.WriteStartElement("null", "null");
             writer.WriteElementString("total_score", totalScore.ToString());
             writer.WriteElementString("high_score", highScore.ToString());
             writer.WriteElementString("blocks_destroyed", totalBlocksDestoryed.ToString());
