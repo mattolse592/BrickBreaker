@@ -78,9 +78,8 @@ namespace BrickBreaker
         }
 
 
-        public void OnStart()
+        public void nextLevel()
         {
-            // For now
             if (currentLevel == 10)
             {
                 currentLevel = 1;
@@ -90,7 +89,11 @@ namespace BrickBreaker
                 currentLevel++;
             }
 
+            Nathan_loadLevel();
+        }
 
+        public void OnStart()
+        {
             sandwiches = 0;
             //sandwichLabel.Text = $"{sandwiches}";
 
@@ -127,8 +130,8 @@ namespace BrickBreaker
             blocks.Clear();
 
 
-            Nathan_loadLevel();
-
+            //Nathan_loadLevel();
+            nextLevel();
 
             #endregion
 
@@ -293,7 +296,7 @@ namespace BrickBreaker
                 if (blocks.Count == 0)
                 {
                     gameTimer.Enabled = false;
-                    OnStart(); // Restart game
+                    nextLevel();
                     return;
                 }
 
@@ -473,6 +476,9 @@ namespace BrickBreaker
         }
         private void exitLabel_Click(object sender, EventArgs e)
         {
+            XmlRw w = new XmlRw();
+            w.writeStatistics(blocksDestroyed, score, currentLevel);
+
             gameTimer.Enabled = false;
             Form1.ChangeScreen(this, new MenuScreen());
 
