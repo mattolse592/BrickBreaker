@@ -1,4 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <statistics>
-	<total
+  <null xmlns="null">
+    <total_score>21</total_score>
+    <high_score>9</high_score>
+    <blocks_destroyed>21</blocks_destroyed>
+  </null>
 </statistics>

@@ -39,32 +39,66 @@ namespace BrickBreaker
             int totalScore = 0;
             int highScore = 0;
 
+            reader.ReadStartElement("statistics");
+
             while (reader.Read())
             {
-                reader.ReadToNextSibling("blocks_destroyed");
-                totalBlocksDestoryed = Convert.ToInt32(reader.ReadString());
+                reader.ReadToFollowing("total_score");
+                string totalScoreStr = reader.ReadString();
+                if (totalScoreStr != null && totalScoreStr != "")
+                {
+                    totalScore = Convert.ToInt32(totalScoreStr);
+                } else
+                {
+                    Console.WriteLine("oh no0!");
+                }
+                //totalScore = Convert.ToInt32(reader.ReadString());
 
-                reader.ReadToNextSibling("totalScore");
-                totalScore = Convert.ToInt32(reader.ReadString());
+                reader.ReadToFollowing("high_score");
+                string highScoreStr = reader.ReadString();
+                if (highScoreStr != null && highScoreStr != "")
+                {
+                    highScore = Convert.ToInt32(highScoreStr);
+                } else
+                {
+                    Console.WriteLine("oh no1!");
+                }
 
-                reader.ReadToNextSibling("highScore");
-                highScore = Convert.ToInt32(reader.ReadString());
+                reader.ReadToFollowing("blocks_destroyed");
+                string blocksDestoryedStr = reader.ReadString();
+                if (highScoreStr != null && highScoreStr != "")
+                {
+                    totalBlocksDestoryed = Convert.ToInt32(blocksDestoryedStr);
+                } else
+                {
+                    Console.WriteLine("oh no2!");
+                }
+
+                //reader.ReadEndElement();
             }
 
             reader.Close();
 
-            XmlWriter writer = XmlWriter.Create("../../statistics.xml");
 
-            totalBlocksDestoryed += blocksDestoryed + totalBlocksDestoryed;
+            totalBlocksDestoryed += blocksDestoryed;
             totalScore += score;
             if (score >= highScore)
             {
                 highScore = score;
             }
+            Console.WriteLine($"xml file score: {totalScore}, highscore: {highScore}, blocks: {totalBlocksDestoryed}");
 
-            writer.WriteElementString("blocks_destroyed", totalBlocksDestoryed.ToString());
-            writer.WriteElementString("high_score", highScore.ToString());
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            XmlWriter writer = XmlWriter.Create("../../statistics.xml", settings);
+
+
+            writer.WriteStartElement("statistics");
+            writer.WriteStartElement("null", "null");
             writer.WriteElementString("total_score", totalScore.ToString());
+            writer.WriteElementString("high_score", highScore.ToString());
+            writer.WriteElementString("blocks_destroyed", totalBlocksDestoryed.ToString());
+            writer.WriteEndElement();
 
             writer.Close();
 
