@@ -54,6 +54,7 @@ namespace BrickBreaker
         SolidBrush fireBrush = new SolidBrush(Color.Red);
         SolidBrush bombBrush = new SolidBrush(Color.Black);
         SolidBrush fireBallOuter = new SolidBrush(Color.OrangeRed);
+        SolidBrush permBrush = new SolidBrush(Color.Purple);
 
 
         public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -70,7 +71,7 @@ namespace BrickBreaker
             InitializeComponent();
             OnStart();
 
-            //holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 2, 100, true));
+           // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 1, 200, true));
 
         }
 
@@ -458,7 +459,7 @@ namespace BrickBreaker
             {
                 if (b.CheckFor("PERM"))
                 {
-                    e.Graphics.FillEllipse(ballBrush, b.x, b.y, b.size, b.size);
+                    e.Graphics.FillEllipse(permBrush, b.x, b.y, b.size, b.size);
 
                     if (b.CheckFor("fade"))
                     {
