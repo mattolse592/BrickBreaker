@@ -16,6 +16,11 @@ namespace BrickBreaker
         public const int INVALID_FILE = 2;
         public const int XML_WRITE_ERR = 3;
 
+        // Statistics
+        public int totalBlocksDestoryed = 0;
+        public int totalScore = 0;
+        public int highScore = 0;
+
         // Blocks from level
         public List<Block> blocks = new List<Block>();
         // Power-ups when they are added
@@ -29,6 +34,54 @@ namespace BrickBreaker
         public XmlRw()
         {
 
+        }
+
+        public void getStatistics()
+        {
+            XmlReader reader = XmlReader.Create("../../statistics.xml");
+
+            reader.ReadStartElement("statistics");
+
+            while (reader.Read())
+            {
+                reader.ReadToFollowing("total_score");
+                string totalScoreStr = reader.ReadString();
+                if (totalScoreStr != null && totalScoreStr != "")
+                {
+                    totalScore = Convert.ToInt32(totalScoreStr);
+                }
+                else
+                {
+                    Console.WriteLine("oh no0!");
+                }
+                //totalScore = Convert.ToInt32(reader.ReadString());
+
+                reader.ReadToFollowing("high_score");
+                string highScoreStr = reader.ReadString();
+                if (highScoreStr != null && highScoreStr != "")
+                {
+                    highScore = Convert.ToInt32(highScoreStr);
+                }
+                else
+                {
+                    Console.WriteLine("oh no1!");
+                }
+
+                reader.ReadToFollowing("blocks_destroyed");
+                string blocksDestoryedStr = reader.ReadString();
+                if (highScoreStr != null && highScoreStr != "")
+                {
+                    totalBlocksDestoryed = Convert.ToInt32(blocksDestoryedStr);
+                }
+                else
+                {
+                    Console.WriteLine("oh no2!");
+                }
+
+                //reader.ReadEndElement();
+            }
+
+            reader.Close();
         }
 
         public int writeStatistics(int blocksDestoryed, int score, int level)
