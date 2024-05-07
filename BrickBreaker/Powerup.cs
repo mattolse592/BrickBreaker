@@ -44,7 +44,7 @@ namespace BrickBreaker
         public List<Ball> PermCheck(List<Ball> balls)
         {
             foreach (Ball b in balls) {
-                if (CheckFor("PERM"))
+                if (b.CheckFor("PERM"))
                 {
                     return new List<Ball> { b };
                 }
