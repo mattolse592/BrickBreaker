@@ -31,6 +31,39 @@ namespace BrickBreaker
 
         }
 
+        public int writeStatistics(int blocksDestoryed, int score, int level)
+        {
+            XmlWriter writer = XmlWriter.Create("../../statistics.xml");
+            XmlReader reader = XmlReader.Create("../../statistics.xml");
+
+            int totalBlocksDestoryed = 0;
+            int totalScore = 0;
+            int highScore = 0;
+
+            while (reader.Read())
+            {
+                reader.ReadToNextSibling("totalBlocksDestroyed");
+                totalBlocksDestoryed = Convert.ToInt32(reader.ReadString());
+
+                reader.ReadToNextSibling("totalScore");
+                totalScore = Convert.ToInt32(reader.ReadString());
+
+                reader.ReadToNextSibling("highScore");
+                highScore = Convert.ToInt32(reader.ReadString());
+            }
+
+            totalBlocksDestoryed += blocksDestoryed + totalBlocksDestoryed;
+            totalScore += score;
+            /*if (score > highScore)
+            {
+
+            }*/
+
+            writer.WriteElementString("blocks_destroyed", blocksDestoryed.ToString());
+
+            return SUCCESS;
+        }
+
         public List<Block> allBlocks()
         {
             return blocks;
@@ -196,12 +229,11 @@ namespace BrickBreaker
 
             if (upright)
             {
-                blocks.Add(new Block(x, y, 1, Color.Red));
                 for (int py = 0; py < width; py++)
                 {
                     for (int px = minX; px < maxX; px++)
                     {
-                        blocks.Add(new Block(px, py, 1, Color.Red));
+                        blocks.Add(new Block(px, py, 3, Color.Red));
                     }
 
                     minX -= 1;
@@ -212,12 +244,11 @@ namespace BrickBreaker
 
         public void bigBlock(int width, int x, int y)
         {
-            blocks.Add(new Block(x, y, 1, Color.Red));
             for (int py = y; py < y + width; py++)
             {
                 for (int px = x; px < x + width; px++)
                 {
-                    blocks.Add(new Block(px, py, 1, Color.Red));
+                    blocks.Add(new Block(px, py, 5, Color.Red));
                 }
             }
         }

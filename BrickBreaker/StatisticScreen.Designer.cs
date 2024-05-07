@@ -47,7 +47,7 @@
             this.backButton.Text = "Back to Game";
             this.backButton.UseVisualStyleBackColor = false;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
-            this.backButton.Paint += new System.Windows.Forms.PaintEventHandler(this.backButton_Paint);
+//            this.backButton.Paint += new System.Windows.Forms.PaintEventHandler(this.backButton_Paint);
             // 
             // StatisticScreen
             // 
@@ -57,6 +57,7 @@
             this.Controls.Add(this.backButton);
             this.Name = "StatisticScreen";
             this.Size = new System.Drawing.Size(1250, 700);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.StatisticScreen_Paint);
             this.ResumeLayout(false);
 
         }
