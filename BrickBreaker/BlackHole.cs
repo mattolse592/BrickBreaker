@@ -37,9 +37,23 @@ namespace BrickBreaker
                 {
                     double diffX = x - (b.x + (b.size / 2));
                     double diffY = y - (b.y + (b.size / 2));
+                    if (diffX > 0)
+                    {
+                        b.x += Convert.ToInt16(Math.Max(1, intensity / (Math.Max(0, Math.Abs(diffX) - schwartzchildRadius) + 1)));
+                    }
+                    else
+                    {
+                        b.x -= Convert.ToInt16(intensity / (Math.Max(0,Math.Abs(diffX) - schwartzchildRadius) + 1));
+                    }
+                    if (diffY > 0)
+                    {
+                        b.y += Convert.ToInt16(intensity / (Math.Max(0, Math.Abs(diffY) - schwartzchildRadius) + 1));
+                    }
+                    else
+                    {
+                        b.y -= Convert.ToInt16(intensity / (Math.Max(0, Math.Abs(diffY) - schwartzchildRadius) + 1));
 
-                    b.x += Convert.ToInt16(intensity / (diffX - schwartzchildRadius) + 1);
-                    b.y += Convert.ToInt16(intensity / (diffY - schwartzchildRadius) + 1);
+                    }
                 }
                 newBall.Add(b);
             }
