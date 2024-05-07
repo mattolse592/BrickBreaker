@@ -62,6 +62,9 @@ namespace BrickBreaker
         int sandwiches;
         Rectangle rec1 = new Rectangle(950, 200, 300, 100);
 
+        int score = 0;
+        int blocksDestroyed = 0;
+
         public static int width;
         #endregion
 
@@ -300,12 +303,14 @@ namespace BrickBreaker
                     //stinky bum
                     if (balls[i].BlockCollision(blocks[j]))
                     {
+                        score += 1;
                         balls[i] = blocks[j].PassCondition(balls[i]);
 
                         if (blocks[j].hp <= 0)
                         {
                             blocks.RemoveAt(j);
                             j--;
+                            blocksDestroyed += 1;
                         }
 
                         if (blocks.Count == 0)

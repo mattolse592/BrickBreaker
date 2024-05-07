@@ -165,6 +165,7 @@
     <Content Include="levels\level6.xml" />
     <Content Include="levels\level_save1.xml" />
     <Content Include="levels\level_save2.xml" />
+    <Content Include="statistics.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

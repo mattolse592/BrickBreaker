@@ -31,6 +31,39 @@ namespace BrickBreaker
 
         }
 
+        public int writeStatistics(int blocksDestoryed, int score, int level)
+        {
+            XmlWriter writer = XmlWriter.Create("../../statistics.xml");
+            XmlReader reader = XmlReader.Create("../../statistics.xml");
+
+            int totalBlocksDestoryed = 0;
+            int totalScore = 0;
+            int highScore = 0;
+
+            while (reader.Read())
+            {
+                reader.ReadToNextSibling("totalBlocksDestroyed");
+                totalBlocksDestoryed = Convert.ToInt32(reader.ReadString());
+
+                reader.ReadToNextSibling("totalScore");
+                totalScore = Convert.ToInt32(reader.ReadString());
+
+                reader.ReadToNextSibling("highScore");
+                highScore = Convert.ToInt32(reader.ReadString());
+            }
+
+            totalBlocksDestoryed += blocksDestoryed + totalBlocksDestoryed;
+            totalScore += score;
+            /*if (score > highScore)
+            {
+
+            }*/
+
+            writer.WriteElementString("blocks_destroyed", blocksDestoryed.ToString());
+
+            return SUCCESS;
+        }
+
         public List<Block> allBlocks()
         {
             return blocks;
