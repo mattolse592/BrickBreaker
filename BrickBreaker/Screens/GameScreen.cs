@@ -494,6 +494,8 @@ namespace BrickBreaker
         {
             // Goes to the game over screen
             Form1.ChangeScreen(this, new MenuScreen());
+
+            //TODO: save the file to xml
         }
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
