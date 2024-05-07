@@ -148,28 +148,29 @@ namespace BrickBreaker
                     if (stick)
                     {
                         stick = false;
-                        if (ball.ySpeed > 0)
+                        if (balls[0].ySpeed > 0)
                         {
-                            ball.ySpeed *= -1;
+                            balls[0].ySpeed *= -1;
                         }
 
                         int mag = (int)Math.Sqrt(Math.Pow(ball.y + 2, 2) + Math.Pow(ball.x - ball.throwX, 2));
-                        float yScale = (((float)ball.y + 2) / mag);
-                        float xScale = (((float)ball.x - ball.throwX) / mag);
+                        float yScale = (((float)balls[0].y + 2) / mag);
+                        float xScale = (((float)balls[0].x - balls[0].throwX) / mag);
 
                         if (xScale < 0)
                         {
                             xScale *= -1;
                         }
 
-                        ball.xSpeed = Math.Abs(ball.xSpeed); ;
 
-                        ball.defaultSpeedX = (int)(6 * xScale);
-                        ball.defaultSpeedY = (int)(6 * yScale);
+                        balls[0].xSpeed = Math.Abs(ball.xSpeed); 
 
-                        if (ball.x + (ball.size / 2) > ball.throwX)
+                        balls[0].defaultSpeedX = (int)(6 * xScale);
+                        balls[0].defaultSpeedY = (int)(6 * yScale);
+
+                        if (balls[0].x + (balls[0].size / 2) > balls[0].throwX)
                         {
-                            ball.xSpeed *= -1;
+                            balls[0].xSpeed *= -1;
                         }
                     }
                     break;
@@ -216,52 +217,6 @@ namespace BrickBreaker
             if (rightArrowDown == true && paddle.x + paddle.width < 950)
             {
                 paddle.Move("right");
-            }
-
-            // Move ball
-            ball.Move();
-
-            // Check for collision with top and side walls
-
-            ball.WallCollision(this);
-
-            // Check for ball hitting bottom of screen
-            if (ball.BottomCollision(this))
-            {
-
-                stick = true;
-
-
-                // Moves the ball back to origin
-
-            }
-
-            // Check for collision of ball with paddle, (incl. paddle movement)
-            ball.PaddleCollision(paddle);
-
-
-            // Check if ball has collided with any blocks
-            foreach (Block b in blocks)
-            {
-                if (ball.BlockCollision(b))
-                {
-
-
-
-                    if (b.hp <= 0)
-                    {
-                        blocks.Remove(b);
-                    }
-                    b.PassCondition(ball);
-
-                    if (blocks.Count == 0)
-                    {
-                        gameTimer.Enabled = false;
-                        OnEnd();
-                    }
-
-                    break;
-                }
             }
 
             Grady();
@@ -530,7 +485,7 @@ namespace BrickBreaker
             //Derick 
             if (stick)
             {
-                e.Graphics.DrawLine(sidebarPen, new Point(ball.throwX, 0), new Point(ball.x + (ball.size / 2), ball.y + 2));
+                e.Graphics.DrawLine(sidebarPen, new Point(balls[0].throwX, 0), new Point(balls[0].x + (balls[0].size / 2), balls[0].y + 2));
             }
 
             //Valentina

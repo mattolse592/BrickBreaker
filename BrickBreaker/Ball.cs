@@ -253,6 +253,7 @@ namespace BrickBreaker
             if (y >= UC.Height)
             {
                 didCollide = true;
+              
             }
 
             return didCollide;
