@@ -253,6 +253,7 @@ namespace BrickBreaker
             if (y >= UC.Height)
             {
                 didCollide = true;
+              
             }
 
             return didCollide;
@@ -286,6 +287,10 @@ namespace BrickBreaker
                     {
                         hold.Add(new Modifier("remove"));
                     }
+                }
+                else
+                {
+                    hold.Add(m);
                 }
             }
             modifiers = hold;
