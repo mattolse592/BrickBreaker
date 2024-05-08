@@ -30,6 +30,10 @@ namespace BrickBreaker
         bool isSavedLevel = false;
         public static bool stick = false;
 
+        // Level 10
+        int maxN = 10;
+        int minN = 4;
+
         // Paddle and Ball objects
         public static Paddle paddle;
         Ball ball;
@@ -103,23 +107,72 @@ namespace BrickBreaker
 
         }
 
+        void generateRandomStuff()
+        {
+            if (minN == 0)
+            {
+                return;
+            }
+
+            Random rand = new Random();
+            XmlRw w = new XmlRw();
+            for (int i = 0; i < rand.Next(minN, maxN); i++)
+            {
+                int shape = rand.Next(0, 4);
+
+                switch (shape)
+                {
+                    case 0:
+                        w.bigBlock(rand.Next(2, 5), rand.Next(1, 14), rand.Next(14));
+                        break;
+                    case 1:
+                        w.line(rand.Next(0, 2) == 0, rand.Next(2, 7), rand.Next(1, 14), rand.Next(14));
+                        break;
+                    case 2:
+                        w.triangleBlocks(true, rand.Next(1, 6), rand.Next(1, 14), rand.Next(1, 14));
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            for (int i = 0; i < w.blocks.Count; i++)
+            {
+                w.blocks[i].hp = rand.Next(11, 999);
+                w.blocks[i].x += 57;
+                w.blocks[i].y += 32;
+                blocks.Add(w.blocks[i]);
+            }
+
+            minN -= 1;
+            maxN -= 3;
+        }
 
         public void nextLevel()
         {
-            if (currentLevel == 10)
+            /*if (currentLevel == 10)
             {
                 currentLevel = 1;
+            } else*/ if (currentLevel == 10)
+            {
+                generateRandomStuff();
             }
             else
             {
                 currentLevel++;
             }
 
-            Nathan_loadLevel();
+            if (currentLevel != 10)
+            {
+                Nathan_loadLevel();
+            }
         }
 
         public void OnStart()
         {
+            // ----
+            currentLevel = 8;
+            // ----
             sandwiches = 0;
             //sandwichLabel.Text = $"{sandwiches}";
 
@@ -457,6 +510,11 @@ namespace BrickBreaker
                         // Add spacing between blocks
                         block.x += 57 * block.x;
                         block.y += 32 * block.y;
+                        if (currentLevel == 9)
+                        {
+                            block.width = 200;
+                            block.height = 150;
+                        }
                         blocks.Add(block);
                     }
                     break;
