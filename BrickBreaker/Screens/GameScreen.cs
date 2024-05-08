@@ -55,6 +55,19 @@ namespace BrickBreaker
         SolidBrush bombBrush = new SolidBrush(Color.Black);
         SolidBrush fireBallOuter = new SolidBrush(Color.OrangeRed);
         SolidBrush permBrush = new SolidBrush(Color.Purple);
+        Pen blackHoleAcc = new Pen(Color.RoyalBlue);
+        SolidBrush[] fadeBrush = {
+            new SolidBrush(Color.FromArgb(25,0,0,0)),
+            new SolidBrush(Color.FromArgb(50,0,0,0)),
+            new SolidBrush(Color.FromArgb(75,0,0,0)),
+            new SolidBrush(Color.FromArgb(100,0,0,0)),
+            new SolidBrush(Color.FromArgb(125,0,0,0)),
+            new SolidBrush(Color.FromArgb(150,0,0,0)),
+            new SolidBrush(Color.FromArgb(175,0,0,0)),
+            new SolidBrush(Color.FromArgb(200,0,0,0)),
+            new SolidBrush(Color.FromArgb(225,0,0,0)),
+            new SolidBrush(Color.FromArgb(250,0,0,0)),
+        };
 
 
         public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -74,7 +87,11 @@ namespace BrickBreaker
             InitializeComponent();
             OnStart();
 
-            // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 1, 200, true));
+
+            //holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.5, 200, true, true, true, false, false));
+
+
+
         }
 
 
@@ -182,7 +199,7 @@ namespace BrickBreaker
                     break;
                 case Keys.F:
                     powerups.Add(new Powerup("PW"));
-                    //powerups.Add(new Powerup("BE", new List<Modifier> { new Modifier("explode") }));
+                    powerups.Add(new Powerup("BE", new List<Modifier> { new Modifier("explode") }));
                     //powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
                     break;
                 case Keys.G:
@@ -360,7 +377,26 @@ namespace BrickBreaker
                 foreach (BlackHole hole in holes)
                 {
                     balls = hole.Pull(balls);
-                    blocks = hole.Pull(blocks);
+                    if (hole.interWBlocks)
+                    {
+                        blocks = hole.Pull(blocks);
+                    }
+
+                    if (hole.consumeBall)
+                    {
+                        balls = hole.BeyondHorizon(balls);
+                    }
+
+                    if (hole.consumeBlock)
+                    {
+                        if (hole.interWBlocks)
+                        {
+                            blocks = hole.BeyondHorizon(blocks);
+                        }
+                    }
+                    
+
+                    hole.DrawPoints();
                 }
             }
         }
@@ -461,6 +497,19 @@ namespace BrickBreaker
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            foreach (BlackHole hole in holes)
+            {
+                e.Graphics.FillEllipse(bombBrush, hole.schwartzchild);
+                for (int i = 9; i >= 0; i--)
+                {
+                    e.Graphics.FillEllipse(fadeBrush[9 - i], new Rectangle(hole.x - ((i + 1) * (hole.pullField / 10)), hole.y - ((i + 1) * (hole.pullField / 10)), 2 * (i + 1) * (hole.pullField / 10), 2 * (i + 1) * (hole.pullField / 10)));
+                }
+
+                foreach (PointF point in hole.points)
+                {
+                    e.Graphics.DrawEllipse(blackHoleAcc, new RectangleF(hole.x, hole.y, point.X - hole.x, point.Y - hole.y));
+                }
+            }
 
             // Draws paddle
             paddleBrush.Color = paddle.colour;
@@ -511,12 +560,6 @@ namespace BrickBreaker
                         e.Graphics.FillEllipse(ballBrush, b.x, b.y, b.size, b.size);
                     }
                 }
-            }
-
-            foreach (BlackHole hole in holes)
-            {
-                e.Graphics.FillEllipse(bombBrush, hole.schwartzchild);
-                e.Graphics.DrawEllipse(sidebarPen, new Rectangle(hole.x - hole.pullField, hole.y - hole.pullField, hole.pullField * 2, hole.pullField * 2));
             }
 
             //draw blocks
