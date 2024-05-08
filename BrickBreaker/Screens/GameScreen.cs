@@ -33,6 +33,8 @@ namespace BrickBreaker
         public static Paddle paddle;
         Ball ball;
 
+        //upgrade varuables
+        int widthCounter, paddleSpeedCounter, swMultiplierCounter = 0;
         // list of all blocks for current level
         List<Block> blocks = new List<Block>();
 
@@ -74,7 +76,13 @@ namespace BrickBreaker
 
         //currency
         int sandwiches;
-        Rectangle rec1 = new Rectangle(950, 200, 300, 100);
+        Rectangle rec1 = new Rectangle(950, 100, 200, 100);
+        Rectangle rec2 = new Rectangle(950, 200, 200, 100);
+        Rectangle rec3 = new Rectangle(950, 300, 200, 100);
+        Rectangle rec4 = new Rectangle(950, 400, 200, 100);
+        Rectangle rec5 = new Rectangle(950, 500, 200, 100);
+        Rectangle rec6 = new Rectangle(950, 600, 200, 100);
+
 
         int score = 0;
         int blocksDestroyed = 0;
@@ -241,6 +249,9 @@ namespace BrickBreaker
             {
                 paddle.Move("right");
             }
+
+            //temp
+            sandwichQuantity.Text = $"{sandwiches}";
 
             Grady();
 
@@ -451,6 +462,12 @@ namespace BrickBreaker
             }
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+            sandwiches += 100;
+        }
+
+
 
 
         //Shop Controls
@@ -458,12 +475,53 @@ namespace BrickBreaker
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (rec1.Contains(new Point(e.X, e.Y)) && sandwiches == 30)
+                if (rec1.Contains(new Point(e.X, e.Y)) && sandwiches >= 20 && widthCounter <= 39) //paddle width
                 {
-                    sandwiches = sandwiches - 30;
-                    //sandwichLabel.Text = $"{sandwiches}";
+                    sandwiches = sandwiches - 20;
+                    sandwichQuantity.Text = $"{sandwiches}";
+                    powerups.Add(new Powerup("PW"));
+                    widthCounter++;
+                    upgrade1Quantity.Text = $"{widthCounter}";
+                }
+                else if (rec2.Contains(new Point(e.X, e.Y)) && sandwiches >= 20 && paddleSpeedCounter <= 29) //paddle speed
+                {
+                    sandwiches = sandwiches - 20;
+                    sandwichQuantity.Text = $"{sandwiches}";
+                    paddle.speed = paddle.speed + 1 % 4;
+                    paddleSpeedCounter++;
+                    upgrade2Quantity.Text = $"{paddleSpeedCounter}";
+
+                }
+                else if (rec3.Contains(new Point(e.X, e.Y)) && sandwiches >= 50 && swMultiplierCounter <= 19) // sandwich multiplier
+                {
+                    sandwiches = sandwiches - 50;
+
+                    swMultiplierCounter++;
+                    upgrade3Quantity.Text = $"{swMultiplierCounter}";
+
+                }
+                else if (rec4.Contains(new Point(e.X, e.Y)) && sandwiches >= 300) //fireball explosion
+                {
+                    sandwiches = sandwiches - 300;
+                    sandwichQuantity.Text = $"{sandwiches}";
+                    powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
+                }
+                else if (rec5.Contains(new Point(e.X, e.Y)) && sandwiches >= 1000) // black hole
+                {
+                    sandwiches = sandwiches - 1000;
+                    sandwichQuantity.Text = $"{sandwiches}";
+
+
+                }
+                else if (rec6.Contains(new Point(e.X, e.Y)) && sandwiches >= 500) //remote
+                {
+                    sandwiches = sandwiches - 500;
+                    sandwichQuantity.Text = $"{sandwiches}";
+
+
                 }
             }
+
         }
         private void exitLabel_Click(object sender, EventArgs e)
         {
