@@ -16,6 +16,11 @@ namespace BrickBreaker
         public const int INVALID_FILE = 2;
         public const int XML_WRITE_ERR = 3;
 
+        // Statistics
+        public int totalBlocksDestoryed = 0;
+        public int totalScore = 0;
+        public int highScore = 0;
+
         // Blocks from level
         public List<Block> blocks = new List<Block>();
         // Power-ups when they are added
@@ -29,6 +34,54 @@ namespace BrickBreaker
         public XmlRw()
         {
 
+        }
+
+        public void getStatistics()
+        {
+            XmlReader reader = XmlReader.Create("../../statistics.xml");
+
+            reader.ReadStartElement("statistics");
+
+            while (reader.Read())
+            {
+                reader.ReadToFollowing("total_score");
+                string totalScoreStr = reader.ReadString();
+                if (totalScoreStr != null && totalScoreStr != "")
+                {
+                    totalScore = Convert.ToInt32(totalScoreStr);
+                }
+                else
+                {
+                    Console.WriteLine("oh no0!");
+                }
+                //totalScore = Convert.ToInt32(reader.ReadString());
+
+                reader.ReadToFollowing("high_score");
+                string highScoreStr = reader.ReadString();
+                if (highScoreStr != null && highScoreStr != "")
+                {
+                    highScore = Convert.ToInt32(highScoreStr);
+                }
+                else
+                {
+                    Console.WriteLine("oh no1!");
+                }
+
+                reader.ReadToFollowing("blocks_destroyed");
+                string blocksDestoryedStr = reader.ReadString();
+                if (highScoreStr != null && highScoreStr != "")
+                {
+                    totalBlocksDestoryed = Convert.ToInt32(blocksDestoryedStr);
+                }
+                else
+                {
+                    Console.WriteLine("oh no2!");
+                }
+
+                //reader.ReadEndElement();
+            }
+
+            reader.Close();
         }
 
         public int writeStatistics(int blocksDestoryed, int score, int level)
@@ -274,7 +327,7 @@ namespace BrickBreaker
                 {
                     for (int px = minX; px < maxX; px++)
                     {
-                        blocks.Add(new Block(px, py, 3, Color.Red));
+                        blocks.Add(new Block(px, py, 199, Color.Red));
                     }
 
                     minX -= 1;
@@ -289,7 +342,7 @@ namespace BrickBreaker
             {
                 for (int px = x; px < x + width; px++)
                 {
-                    blocks.Add(new Block(px, py, 5, Color.Red));
+                    blocks.Add(new Block(px, py, 99, Color.Red));
                 }
             }
         }
@@ -300,14 +353,14 @@ namespace BrickBreaker
             {
                 for (int p = 0; p < length; p++)
                 {
-                    blocks.Add(new Block(x + p, y, 1, Color.Red));
+                    blocks.Add(new Block(x + p, y, 11, Color.Red));
                 }
             }
             else
             {
                 for (int p = 0; p < length; p++)
                 {
-                    blocks.Add(new Block(x, y + p, 1, Color.Red));
+                    blocks.Add(new Block(x, y + p, 11, Color.Red));
                 }
             }
         }

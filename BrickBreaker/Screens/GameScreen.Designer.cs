@@ -63,6 +63,8 @@
             this.statisticsButton = new System.Windows.Forms.Label();
             this.htpButton = new System.Windows.Forms.Label();
             this.exitLabel = new System.Windows.Forms.Label();
+            this.sandwichQuantity = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // gameTimer
@@ -82,6 +84,8 @@
             this.upgrade1Title.TabIndex = 3;
             this.upgrade1Title.Text = "Paddle Width Upgrade";
             this.upgrade1Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+//            this.upgrade1Title.Click += new System.EventHandler(this.upgrade1Title_Click);
+            this.upgrade1Title.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameScreen_MouseDown);
             // 
             // upgrade1Description
             // 
@@ -93,6 +97,7 @@
             this.upgrade1Description.TabIndex = 4;
             this.upgrade1Description.Text = "Permanently increase paddle width";
             this.upgrade1Description.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.upgrade1Description.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameScreen_MouseDown);
             // 
             // upgrade1Icon
             // 
@@ -104,6 +109,7 @@
             this.upgrade1Icon.TabIndex = 5;
             this.upgrade1Icon.Text = "N/A";
             this.upgrade1Icon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.upgrade1Icon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameScreen_MouseDown);
             // 
             // upgrade1Price
             // 
@@ -115,6 +121,7 @@
             this.upgrade1Price.TabIndex = 6;
             this.upgrade1Price.Text = "20";
             this.upgrade1Price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.upgrade1Price.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameScreen_MouseDown);
             // 
             // upgrade1Quantity
             // 
@@ -126,6 +133,7 @@
             this.upgrade1Quantity.TabIndex = 7;
             this.upgrade1Quantity.Text = "4";
             this.upgrade1Quantity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.upgrade1Quantity.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameScreen_MouseDown);
             // 
             // upgrade2Quantity
             // 
@@ -448,11 +456,37 @@
             this.exitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.exitLabel.Click += new System.EventHandler(this.exitLabel_Click);
             // 
+            // sandwichQuantity
+            // 
+            this.sandwichQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sandwichQuantity.ForeColor = System.Drawing.Color.White;
+            this.sandwichQuantity.Location = new System.Drawing.Point(3, 661);
+            this.sandwichQuantity.Name = "sandwichQuantity";
+            this.sandwichQuantity.Size = new System.Drawing.Size(60, 30);
+            this.sandwichQuantity.TabIndex = 36;
+            this.sandwichQuantity.Text = "20";
+            this.sandwichQuantity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(550, 340);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(150, 20);
+            this.label1.TabIndex = 37;
+            this.label1.Text = "Fireball Explosion";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.sandwichQuantity);
             this.Controls.Add(this.exitLabel);
             this.Controls.Add(this.htpButton);
             this.Controls.Add(this.statisticsButton);
@@ -538,6 +572,7 @@
         private System.Windows.Forms.Label statisticsButton;
         private System.Windows.Forms.Label htpButton;
         private System.Windows.Forms.Label exitLabel;
-
+        private System.Windows.Forms.Label sandwichQuantity;
+        private System.Windows.Forms.Label label1;
     }
 }
