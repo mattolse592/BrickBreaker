@@ -84,6 +84,7 @@
             this.upgrade1Title.TabIndex = 3;
             this.upgrade1Title.Text = "Paddle Width Upgrade";
             this.upgrade1Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+//            this.upgrade1Title.Click += new System.EventHandler(this.upgrade1Title_Click);
             this.upgrade1Title.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameScreen_MouseDown);
             // 
             // upgrade1Description
