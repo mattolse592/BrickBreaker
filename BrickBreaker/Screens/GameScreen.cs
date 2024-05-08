@@ -74,8 +74,7 @@ namespace BrickBreaker
             InitializeComponent();
             OnStart();
 
-           // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 1, 200, true));
-
+            // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 1, 200, true));
         }
 
 
