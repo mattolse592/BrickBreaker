@@ -87,14 +87,16 @@ namespace BrickBreaker
             InitializeComponent();
             OnStart();
 
+
             //holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.5, 200, true, true, true, false, false));
+
+
 
         }
 
 
-        public void OnStart()
+        public void nextLevel()
         {
-            // For now
             if (currentLevel == 10)
             {
                 currentLevel = 1;
@@ -104,7 +106,11 @@ namespace BrickBreaker
                 currentLevel++;
             }
 
+            Nathan_loadLevel();
+        }
 
+        public void OnStart()
+        {
             sandwiches = 0;
             //sandwichLabel.Text = $"{sandwiches}";
 
@@ -141,8 +147,8 @@ namespace BrickBreaker
             blocks.Clear();
 
 
-            Nathan_loadLevel();
-
+            //Nathan_loadLevel();
+            nextLevel();
 
             #endregion
 
@@ -165,28 +171,29 @@ namespace BrickBreaker
                     if (stick)
                     {
                         stick = false;
-                        if (ball.ySpeed > 0)
+                        if (balls[0].ySpeed > 0)
                         {
-                            ball.ySpeed *= -1;
+                            balls[0].ySpeed *= -1;
                         }
 
                         int mag = (int)Math.Sqrt(Math.Pow(ball.y + 2, 2) + Math.Pow(ball.x - ball.throwX, 2));
-                        float yScale = (((float)ball.y + 2) / mag);
-                        float xScale = (((float)ball.x - ball.throwX) / mag);
+                        float yScale = (((float)balls[0].y + 2) / mag);
+                        float xScale = (((float)balls[0].x - balls[0].throwX) / mag);
 
                         if (xScale < 0)
                         {
                             xScale *= -1;
                         }
 
-                        ball.xSpeed = Math.Abs(ball.xSpeed); ;
 
-                        ball.defaultSpeedX = (int)(6 * xScale);
-                        ball.defaultSpeedY = (int)(6 * yScale);
+                        balls[0].xSpeed = Math.Abs(ball.xSpeed); 
 
-                        if (ball.x + (ball.size / 2) > ball.throwX)
+                        balls[0].defaultSpeedX = (int)(6 * xScale);
+                        balls[0].defaultSpeedY = (int)(6 * yScale);
+
+                        if (balls[0].x + (balls[0].size / 2) > balls[0].throwX)
                         {
-                            ball.xSpeed *= -1;
+                            balls[0].xSpeed *= -1;
                         }
                     }
                     break;
@@ -261,7 +268,7 @@ namespace BrickBreaker
                 if (blocks.Count == 0)
                 {
                     gameTimer.Enabled = false;
-                    OnStart(); // Restart game
+                    nextLevel();
                     return;
                 }
 
@@ -460,6 +467,9 @@ namespace BrickBreaker
         }
         private void exitLabel_Click(object sender, EventArgs e)
         {
+            XmlRw w = new XmlRw();
+            w.writeStatistics(blocksDestroyed, score, currentLevel);
+
             gameTimer.Enabled = false;
             Form1.ChangeScreen(this, new MenuScreen());
 
@@ -563,7 +573,7 @@ namespace BrickBreaker
             //Derick 
             if (stick)
             {
-                e.Graphics.DrawLine(sidebarPen, new Point(ball.throwX, 0), new Point(ball.x + (ball.size / 2), ball.y + 2));
+                e.Graphics.DrawLine(sidebarPen, new Point(balls[0].throwX, 0), new Point(balls[0].x + (balls[0].size / 2), balls[0].y + 2));
             }
 
             //Valentina
