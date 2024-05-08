@@ -25,7 +25,8 @@ namespace BrickBreaker
         Boolean leftArrowDown, rightArrowDown;
 
         // Game values
-        int currentLevel = 0;
+        public int currentLevel = 0;
+        public bool loadGame = true;
         bool isSavedLevel = false;
         public static bool stick = false;
 
@@ -34,7 +35,7 @@ namespace BrickBreaker
         Ball ball;
 
         // list of all blocks for current level
-        List<Block> blocks = new List<Block>();
+        public List<Block> blocks = new List<Block>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
@@ -131,7 +132,10 @@ namespace BrickBreaker
 
 
             //Nathan_loadLevel();
-            nextLevel();
+            if (loadGame == true)
+            {
+                nextLevel();
+            }
 
             #endregion
 
@@ -441,7 +445,7 @@ namespace BrickBreaker
 
         private void statisticsButton_Click(object sender, EventArgs e)
         {
-            Form1.ChangeScreen(this, new StatisticScreen());
+            Form1.ChangeScreen(this, new StatisticScreen(currentLevel, blocks));
         }
 
         // Save level
