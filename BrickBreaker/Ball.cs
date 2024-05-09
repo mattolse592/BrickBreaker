@@ -8,7 +8,7 @@ namespace BrickBreaker
 {
     public class Ball
     {
-        public int x, y, xSpeed, ySpeed, size, defaultSpeedX, defaultSpeedY;
+        public int x, y, xSpeed, ySpeed, size, defaultSpeedX, defaultSpeedY, defaultSize;
         public int lineSpeed = 25;
         public int throwX = 0;
         public Color colour;
@@ -27,7 +27,7 @@ namespace BrickBreaker
             defaultSpeedX = Math.Abs(_xSpeed);
             defaultSpeedY = Math.Abs(_ySpeed);
 
-
+            defaultSize = size;
 
             size = _ballSize;
 
