@@ -12,6 +12,8 @@ namespace BrickBreaker
 {
     public partial class MenuScreen : UserControl
     {
+        int speedX = 20;
+        int speedY = 20;
         public MenuScreen()
         {
             InitializeComponent();
@@ -47,6 +49,35 @@ namespace BrickBreaker
         {
             //reset the xml file
             //don't totatlly delete it, just create another one and then put that in place if possible
+        }
+
+        private void instructionButton_Click(object sender, EventArgs e)
+        {
+            if (ricktimer.Enabled == false)
+            {
+                ricktimer.Enabled = true;
+                mrRoll.Visible = true;
+            }
+            else
+            {
+                ricktimer.Enabled = false;
+                mrRoll.Visible = false;
+            }
+        }
+
+        private void ricktimer_Tick(object sender, EventArgs e)
+        {
+            mrRoll.Location = new Point(mrRoll.Location.X + speedX, mrRoll.Location.Y + speedY);
+
+            if (mrRoll.Location.X + mrRoll.Width > this.Width || mrRoll.Location.X < 0)
+            {
+                speedX *= -1;
+            }
+
+            if (mrRoll.Location.Y + mrRoll.Height > this.Height || mrRoll.Location.Y < 0)
+            {
+                speedY *= -1;
+            }
         }
     }
 }

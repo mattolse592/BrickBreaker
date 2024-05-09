@@ -61,11 +61,20 @@ namespace BrickBreaker.Properties {
         }
         
         /// <summary>
+
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap rick_roll_night {
+            get {
+                object obj = ResourceManager.GetObject("rick_roll_night", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream Rick_Astley___Never_Gonna_Give_You_Up__Official_Music_Video_ {
             get {
                 return ResourceManager.GetStream("Rick_Astley___Never_Gonna_Give_You_Up__Official_Music_Video_", resourceCulture);
+
             }
         }
     }

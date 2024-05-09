@@ -168,7 +168,11 @@
     <Content Include="levels\level9.xml" />
     <Content Include="levels\level_save1.xml" />
     <Content Include="levels\level_save2.xml" />
+
+    <None Include="Resources\rick roll night.gif" />
+
     <None Include="Resources\Rick Astley - Never Gonna Give You Up %28Official Music Video%29.wav" />
+
     <Content Include="statistics.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
