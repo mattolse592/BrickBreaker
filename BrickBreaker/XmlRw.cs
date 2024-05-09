@@ -327,7 +327,7 @@ namespace BrickBreaker
                 {
                     for (int px = minX; px < maxX; px++)
                     {
-                        blocks.Add(new Block(px, py, 3, Color.Red));
+                        blocks.Add(new Block(px, py, 199, Color.Red));
                     }
 
                     minX -= 1;
@@ -342,7 +342,7 @@ namespace BrickBreaker
             {
                 for (int px = x; px < x + width; px++)
                 {
-                    blocks.Add(new Block(px, py, 5, Color.Red));
+                    blocks.Add(new Block(px, py, 99, Color.Red));
                 }
             }
         }
@@ -353,14 +353,14 @@ namespace BrickBreaker
             {
                 for (int p = 0; p < length; p++)
                 {
-                    blocks.Add(new Block(x + p, y, 1, Color.Red));
+                    blocks.Add(new Block(x + p, y, 11, Color.Red));
                 }
             }
             else
             {
                 for (int p = 0; p < length; p++)
                 {
-                    blocks.Add(new Block(x, y + p, 1, Color.Red));
+                    blocks.Add(new Block(x, y + p, 11, Color.Red));
                 }
             }
         }

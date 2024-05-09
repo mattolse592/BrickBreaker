@@ -1,5 +1,5 @@
-﻿/*  Created by: 
- *  Project: Brick Breaker
+﻿/*  Created by: Matthew, Nathan, Grady, Valentina, and Duhrick
+ *  Project: Brick Breaker Team Porject
  *  Date: 
  */
 using System;
@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.Media;
 using System.Drawing.Drawing2D;
 using System.Security.Cryptography.X509Certificates;
+using System.IO;
 
 namespace BrickBreaker
 {
@@ -25,9 +26,14 @@ namespace BrickBreaker
         Boolean leftArrowDown, rightArrowDown;
 
         // Game values
-        int currentLevel = 0;
+        public int currentLevel = 0;
+        public bool loadGame = true;
         bool isSavedLevel = false;
-        public static bool stick = false;
+        public static bool stick = true;
+
+        // Level 10
+        int maxN = 10;
+        int minN = 4;
 
         // Paddle and Ball objects
         public static Paddle paddle;
@@ -36,7 +42,7 @@ namespace BrickBreaker
         //upgrade varuables
         int widthCounter, paddleSpeedCounter, swMultiplierCounter = 0;
         // list of all blocks for current level
-        List<Block> blocks = new List<Block>();
+        public List<Block> blocks = new List<Block>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
@@ -49,7 +55,7 @@ namespace BrickBreaker
         //Grady Stuff
         public static int speedModBX = 0, speedModBY = 0, speedModPX = 0, widthModP;
 
-        public List<BlackHole> holes = new List<BlackHole>();
+        public static List<BlackHole> holes = new List<BlackHole>();
 
         List<Powerup> powerups = new List<Powerup>();
         List<Ball> balls = new List<Ball>();
@@ -98,25 +104,79 @@ namespace BrickBreaker
             OnStart();
 
 
-            //holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.5, 200, true, true, true, false, false));
+           // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.55, 200, true, true, true, false, false));
 
 
 
         }
 
+        void generateRandomStuff()
+        {
+            if (minN == 0 || currentLevel != 10)
+            {
+                return;
+            }
+
+            Random rand = new Random();
+
+            if (minN != 4 && maxN != 10 && rand.Next(0, 1000) > 5) {
+                return;
+            }
+
+            XmlRw w = new XmlRw();
+            for (int i = 0; i < rand.Next(minN, maxN); i++)
+            {
+                int shape = rand.Next(0, 4);
+
+                switch (shape)
+                {
+                    case 0:
+                        w.bigBlock(rand.Next(2, 5), rand.Next(1, 14), rand.Next(14));
+                        break;
+                    case 1:
+                        w.line(rand.Next(0, 2) == 0, rand.Next(2, 7), rand.Next(1, 14), rand.Next(14));
+                        break;
+                    case 2:
+                        w.triangleBlocks(true, rand.Next(1, 6), rand.Next(1, 14), rand.Next(1, 14));
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            for (int i = 0; i < w.blocks.Count; i++)
+            {
+                w.blocks[i].hp = rand.Next(11, 999);
+                w.blocks[i].x += w.blocks[i].x * 57;
+                w.blocks[i].y += w.blocks[i].y * 32;
+                blocks.Add(w.blocks[i]);
+            }
+
+            minN -= 1;
+            maxN -= 3;
+        }
 
         public void nextLevel()
         {
-            if (currentLevel == 10)
+            if (currentLevel >= 10)
             {
                 currentLevel = 1;
+            } else if (currentLevel == 9)
+            {
+                generateRandomStuff();
+                currentLevel += 1;
+                return;
             }
             else
             {
                 currentLevel++;
             }
 
+
+            stick = true;
+
             Nathan_loadLevel();
+
         }
 
         public void OnStart()
@@ -157,7 +217,10 @@ namespace BrickBreaker
 
 
             //Nathan_loadLevel();
-            nextLevel();
+            if (loadGame == true)
+            {
+                nextLevel();
+            }
 
             #endregion
 
@@ -208,12 +271,15 @@ namespace BrickBreaker
                     }
                     break;
                 case Keys.F:
-                    powerups.Add(new Powerup("PW"));
+                    powerups.Add(new Powerup("PW", 5));
                     powerups.Add(new Powerup("BE", new List<Modifier> { new Modifier("explode") }));
                     //powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
                     break;
                 case Keys.G:
                     powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
+                    break;
+                case Keys.H:
+                    powerups.Add(new Powerup("BH"));
                     break;
                 case Keys.Right:
                     rightArrowDown = true;
@@ -259,6 +325,7 @@ namespace BrickBreaker
             ShopBackColor();
 
             Grady();
+            generateRandomStuff();
 
             //redraw the screen
             Refresh();
@@ -284,7 +351,7 @@ namespace BrickBreaker
                 if (blocks.Count == 0)
                 {
                     gameTimer.Enabled = false;
-                    nextLevel();
+                    OnStart();
                     return;
                 }
 
@@ -304,13 +371,6 @@ namespace BrickBreaker
                             blocksDestroyed += 1;
                             sandwiches = sandwiches + (1 * multiplier);
                             sandwichQuantity.Text = $"{sandwiches}";
-                        }
-
-                        if (blocks.Count == 0)
-                        {
-                            gameTimer.Enabled = false;
-                            OnStart(); // Restart game
-                            return;
                         }
                     }
 
@@ -460,6 +520,11 @@ namespace BrickBreaker
                         // Add spacing between blocks
                         block.x += 57 * block.x;
                         block.y += 32 * block.y;
+                        if (currentLevel == 9)
+                        {
+                            block.width = 200;
+                            block.height = 150;
+                        }
                         blocks.Add(block);
                     }
                     break;
@@ -608,7 +673,7 @@ namespace BrickBreaker
 
         private void statisticsButton_Click(object sender, EventArgs e)
         {
-            Form1.ChangeScreen(this, new StatisticScreen());
+            Form1.ChangeScreen(this, new StatisticScreen(currentLevel, blocks));
         }
 
         // Save level

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<level>
+	<block>
+		<x>null</x>
+		<y>null</y>
+		<hp>null</hp>
+		<colour>null</colour>
+	</block>
+	<block>
+		<x>6</x>
+		<y>6</y>
+		<hp>999</hp>
+		<colour>Red</colour>
+	</block>
+</level>

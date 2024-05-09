@@ -12,6 +12,7 @@ namespace BrickBreaker
         public String Type;
         public List<Modifier> Modifiers = new List<Modifier>();
         Random random = new Random();
+        int time = 0;
 
         public Powerup(String Type)
         {
@@ -30,6 +31,7 @@ namespace BrickBreaker
         public Powerup(String Type, int time)
         {
             this.Type = Type.ToUpper();
+            this.time = time;
         }
 
         public Powerup(String Type, List<Modifier> modifiers, int time)
@@ -43,7 +45,8 @@ namespace BrickBreaker
 
         public List<Ball> PermCheck(List<Ball> balls)
         {
-            foreach (Ball b in balls) {
+            foreach (Ball b in balls)
+            {
                 if (b.CheckFor("PERM"))
                 {
                     return new List<Ball> { b };
@@ -55,9 +58,17 @@ namespace BrickBreaker
         public List<Ball> Effect(List<Ball> balls)
         {
             List<Ball> result = PermCheck(balls);
-            if (Type.Substring(0, 1) == "P" && !Type.Contains("PW")) 
+            if (Type.Substring(0, 1) == "P" && !Type.Contains("PW"))
             {
                 return setSimple(balls);
+            }
+            else if (Type.Contains("BH"))
+            {
+                List<Modifier> modifiers = new List<Modifier> { new Modifier("PERM"), new Modifier("IMMINENT") };
+                result.Add(new Ball(balls[0].x, balls[0].y, balls[0].xSpeed, balls[0].ySpeed, balls[0].size, modifiers));
+                Modifiers.Add(new Modifier("remove"));
+                GameScreen.stick = true;
+                return result;
             }
             else if (Type.Contains("BE") || Type.Contains("BF"))
             {
@@ -94,13 +105,29 @@ namespace BrickBreaker
                         SpeedDown(balls, 2);
                         break;
                     case "PW":
-                        GameScreen.widthModP++;
+                        if (time != 0)
+                        {
+                            GameScreen.widthModP += time;
+                        }
+                        else
+                        {
+                            GameScreen.widthModP++;
+                        }
                         Modifiers.Add(new Modifier("remove"));
                         break;
 
                 }
             }
             return balls;
+        }
+
+        int returnSize(Ball b)
+        {
+            if (b.CheckFor("fade"))
+            {
+                return b.defaultSize;
+            }
+            return b.size;
         }
 
         List<Modifier> setModifiers(Ball b)
@@ -169,7 +196,7 @@ namespace BrickBreaker
             List<Ball> newBall = PermCheck(balls);
             foreach (Ball b in balls)
             {
-                newBall.Add(new Ball(b.x, b.y, b.xSpeed, b.ySpeed, b.size, setModifiers(b)));
+                newBall.Add(new Ball(b.x, b.y, b.xSpeed, b.ySpeed, returnSize(b), setModifiers(b)));
             }
             return newBall;
         }
@@ -183,9 +210,9 @@ namespace BrickBreaker
             }
             else
             {
-                foreach(Ball b in balls)
+                foreach (Ball b in balls)
                 {
-                    newBall.Add(new Ball(b.x,b.y, b.xSpeed,b.ySpeed, b.size, setModifiers(b)));
+                    newBall.Add(new Ball(b.x, b.y, b.xSpeed, b.ySpeed, returnSize(b), setModifiers(b)));
                 }
             }
             return newBall;
@@ -213,19 +240,19 @@ namespace BrickBreaker
                             double compAng = ((ang + (angleInc * i)) % (Math.PI / 2));
                             if ((ang + (angleInc * i)) % (Math.PI * 2) < (Math.PI / 2) && (ang + (angleInc * i)) % (Math.PI * 2) > 0)
                             {
-                                newBall.Add(new Ball(b.x, b.y, Convert.ToInt16(Math.Sin(compAng) * hyp), Convert.ToInt16(Math.Cos(compAng) * hyp), b.size, setWithoutTemp(b)));
+                                newBall.Add(new Ball(b.x, b.y, Convert.ToInt16(Math.Sin(compAng) * hyp), Convert.ToInt16(Math.Cos(compAng) * hyp), returnSize(b), setWithoutTemp(b)));
                             }
                             else if ((ang + (angleInc * i)) % (Math.PI * 2) < (Math.PI) && (ang + (angleInc * i)) % (Math.PI * 2) > (Math.PI / 2))
                             {
-                                newBall.Add(new Ball(b.x, b.y, -Convert.ToInt16(Math.Sin(compAng) * hyp), Convert.ToInt16(Math.Cos(compAng) * hyp), b.size, setWithoutTemp(b)));
+                                newBall.Add(new Ball(b.x, b.y, -Convert.ToInt16(Math.Sin(compAng) * hyp), Convert.ToInt16(Math.Cos(compAng) * hyp), returnSize(b), setWithoutTemp(b)));
                             }
                             else if ((ang + (angleInc * i)) % (Math.PI * 2) < ((3 * Math.PI) / 2) && (ang + (angleInc * i)) % (Math.PI * 2) > Math.PI)
                             {
-                                newBall.Add(new Ball(b.x, b.y, -Convert.ToInt16(Math.Sin(compAng) * hyp), -Convert.ToInt16(Math.Cos(compAng) * hyp), b.size, setWithoutTemp(b)));
+                                newBall.Add(new Ball(b.x, b.y, -Convert.ToInt16(Math.Sin(compAng) * hyp), -Convert.ToInt16(Math.Cos(compAng) * hyp), returnSize(b), setWithoutTemp(b)));
                             }
                             else if ((ang + (angleInc * i)) % (Math.PI * 2) < (2 * Math.PI) && (ang + (angleInc * i)) % (Math.PI * 2) > ((3 * Math.PI) / 2))
                             {
-                                newBall.Add(new Ball(b.x, b.y, Convert.ToInt16(Math.Sin(compAng) * hyp), -Convert.ToInt16(Math.Cos(compAng) * hyp), b.size, setWithoutTemp(b)));
+                                newBall.Add(new Ball(b.x, b.y, Convert.ToInt16(Math.Sin(compAng) * hyp), -Convert.ToInt16(Math.Cos(compAng) * hyp), returnSize(b), setWithoutTemp(b)));
                             }
                         }
                         else
@@ -233,19 +260,19 @@ namespace BrickBreaker
                             double compAng = ((ang + (angleInc * i)) % (Math.PI / 2));
                             if ((ang + (angleInc * i)) % (Math.PI * 2) < (Math.PI / 2) && (ang + (angleInc * i)) % (Math.PI * 2) > 0)
                             {
-                                newBall.Add(new Ball(b.x, b.y, Convert.ToInt16(Math.Sin(compAng) * hyp), Convert.ToInt16(Math.Cos(compAng) * hyp), b.size, setModifiers(b)));
+                                newBall.Add(new Ball(b.x, b.y, Convert.ToInt16(Math.Sin(compAng) * hyp), Convert.ToInt16(Math.Cos(compAng) * hyp), returnSize(b), setModifiers(b)));
                             }
                             else if ((ang + (angleInc * i)) % (Math.PI * 2) < (Math.PI) && (ang + (angleInc * i)) % (Math.PI * 2) > (Math.PI / 2))
                             {
-                                newBall.Add(new Ball(b.x, b.y, -Convert.ToInt16(Math.Sin(compAng) * hyp), Convert.ToInt16(Math.Cos(compAng) * hyp), b.size, setModifiers(b)));
+                                newBall.Add(new Ball(b.x, b.y, -Convert.ToInt16(Math.Sin(compAng) * hyp), Convert.ToInt16(Math.Cos(compAng) * hyp), returnSize(b), setModifiers(b)));
                             }
                             else if ((ang + (angleInc * i)) % (Math.PI * 2) < ((3 * Math.PI) / 2) && (ang + (angleInc * i)) % (Math.PI * 2) > Math.PI)
                             {
-                                newBall.Add(new Ball(b.x, b.y, -Convert.ToInt16(Math.Sin(compAng) * hyp), -Convert.ToInt16(Math.Cos(compAng) * hyp), b.size, setModifiers(b)));
+                                newBall.Add(new Ball(b.x, b.y, -Convert.ToInt16(Math.Sin(compAng) * hyp), -Convert.ToInt16(Math.Cos(compAng) * hyp), returnSize(b), setModifiers(b)));
                             }
                             else if ((ang + (angleInc * i)) % (Math.PI * 2) < (2 * Math.PI) && (ang + (angleInc * i)) % (Math.PI * 2) > ((3 * Math.PI) / 2))
                             {
-                                newBall.Add(new Ball(b.x, b.y, Convert.ToInt16(Math.Sin(compAng) * hyp), -Convert.ToInt16(Math.Cos(compAng) * hyp), b.size, setModifiers(b)));
+                                newBall.Add(new Ball(b.x, b.y, Convert.ToInt16(Math.Sin(compAng) * hyp), -Convert.ToInt16(Math.Cos(compAng) * hyp), returnSize(b), setModifiers(b)));
                             }
                         }
                     }
@@ -263,11 +290,11 @@ namespace BrickBreaker
                     {
                         if (CheckFor("temp"))
                         {
-                            newBall.Add(new Ball(b.x, b.y, b.xSpeed, b.ySpeed, b.size, setWithoutTemp(b)));
+                            newBall.Add(new Ball(b.x, b.y, b.xSpeed, b.ySpeed, returnSize(b), setWithoutTemp(b)));
                         }
                         else
                         {
-                            newBall.Add(new Ball(b.x, b.y, b.xSpeed, b.ySpeed, b.size, setModifiers(b)));
+                            newBall.Add(new Ball(b.x, b.y, b.xSpeed, b.ySpeed, returnSize(b), setModifiers(b)));
                         }
                     }
                     else
@@ -282,26 +309,26 @@ namespace BrickBreaker
                                 {
                                     if (random.Next(0, 2) == 0)
                                     {
-                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX - 1, b.defaultSpeedY + 1, b.size, setWithoutTemp(b)));
-                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX + 1, b.defaultSpeedY - 1, b.size, setModifiers(b)));
+                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX - 1, b.defaultSpeedY + 1, returnSize(b), setWithoutTemp(b)));
+                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX + 1, b.defaultSpeedY - 1, returnSize(b), setModifiers(b)));
                                     }
                                     else
                                     {
-                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX - 1, b.defaultSpeedY + 1, b.size, setModifiers(b)));
-                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX + 1, b.defaultSpeedY - 1, b.size, setWithoutTemp(b)));
+                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX - 1, b.defaultSpeedY + 1, returnSize(b), setModifiers(b)));
+                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX + 1, b.defaultSpeedY - 1, returnSize(b), setWithoutTemp(b)));
                                     }
                                 }
                                 else
                                 {
                                     if (random.Next(0, 2) == 0)
                                     {
-                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX + 1, b.defaultSpeedY + 1, b.size, setWithoutTemp(b)));
-                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX - 1, b.defaultSpeedY - 1, b.size, setModifiers(b)));
+                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX + 1, b.defaultSpeedY + 1, returnSize(b), setWithoutTemp(b)));
+                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX - 1, b.defaultSpeedY - 1, returnSize(b), setModifiers(b)));
                                     }
                                     else
                                     {
-                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX + 1, b.defaultSpeedY + 1, b.size, setModifiers(b)));
-                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX - 1, b.defaultSpeedY - 1, b.size, setWithoutTemp(b)));
+                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX + 1, b.defaultSpeedY + 1, returnSize(b), setModifiers(b)));
+                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX - 1, b.defaultSpeedY - 1, returnSize(b), setWithoutTemp(b)));
                                     }
                                 }
                             }
@@ -311,26 +338,26 @@ namespace BrickBreaker
                                 {
                                     if (random.Next(0, 2) == 0)
                                     {
-                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX - 1, -b.defaultSpeedY - 1, b.size, setWithoutTemp(b)));
-                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX + 1, -b.defaultSpeedY + 1, b.size, setModifiers(b)));
+                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX - 1, -b.defaultSpeedY - 1, returnSize(b), setWithoutTemp(b)));
+                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX + 1, -b.defaultSpeedY + 1, returnSize(b), setModifiers(b)));
                                     }
                                     else
                                     {
-                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX - 1, -b.defaultSpeedY - 1, b.size, setModifiers(b)));
-                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX + 1, -b.defaultSpeedY + 1, b.size, setWithoutTemp(b)));
+                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX - 1, -b.defaultSpeedY - 1, returnSize(b), setModifiers(b)));
+                                        newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX + 1, -b.defaultSpeedY + 1, returnSize(b), setWithoutTemp(b)));
                                     }
                                 }
                                 else
                                 {
                                     if (random.Next(0, 2) == 0)
                                     {
-                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX + 1, -b.defaultSpeedY - 1, b.size, setWithoutTemp(b)));
-                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX - 1, -b.defaultSpeedY + 1, b.size, setModifiers(b)));
+                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX + 1, -b.defaultSpeedY - 1, returnSize(b), setWithoutTemp(b)));
+                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX - 1, -b.defaultSpeedY + 1, returnSize(b), setModifiers(b)));
                                     }
                                     else
                                     {
-                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX + 1, -b.defaultSpeedY - 1, b.size, setModifiers(b)));
-                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX - 1, -b.defaultSpeedY + 1, b.size, setWithoutTemp(b)));
+                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX + 1, -b.defaultSpeedY - 1, returnSize(b), setModifiers(b)));
+                                        newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX - 1, -b.defaultSpeedY + 1, returnSize(b), setWithoutTemp(b)));
                                     }
                                 }
                             }
@@ -344,16 +371,16 @@ namespace BrickBreaker
                         {
                             for (int i = 1 + evenOp; i < 1 + Math.Floor(numBurst / 2); i++)
                             {
-                                newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX - i, b.defaultSpeedY + i, b.size, setModifiers(b)));
-                                newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX + i, b.defaultSpeedY - i, b.size, setModifiers(b)));
+                                newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX - i, b.defaultSpeedY + i, returnSize(b), setModifiers(b)));
+                                newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX + i, b.defaultSpeedY - i, returnSize(b), setModifiers(b)));
                             }
                         }
                         else
                         {
                             for (int i = 1 + evenOp; i < 1 + Math.Floor(numBurst / 2); i++)
                             {
-                                newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX + i, b.defaultSpeedY + i, b.size, setModifiers(b)));
-                                newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX - i, b.defaultSpeedY - i, b.size, setModifiers(b)));
+                                newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX + i, b.defaultSpeedY + i, returnSize(b), setModifiers(b)));
+                                newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX - i, b.defaultSpeedY - i, returnSize(b), setModifiers(b)));
                             }
                         }
                     }
@@ -363,16 +390,16 @@ namespace BrickBreaker
                         {
                             for (int i = 1 + evenOp; i < 1 + Math.Floor(numBurst / 2); i++)
                             {
-                                newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX - i, -b.defaultSpeedY - i, b.size, setModifiers(b)));
-                                newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX + i, -b.defaultSpeedY + i, b.size, setModifiers(b)));
+                                newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX - i, -b.defaultSpeedY - i, returnSize(b), setModifiers(b)));
+                                newBall.Add(new Ball(b.x, b.y, b.defaultSpeedX + i, -b.defaultSpeedY + i, returnSize(b), setModifiers(b)));
                             }
                         }
                         else
                         {
                             for (int i = 1 + evenOp; i < 1 + Math.Floor(numBurst / 2); i++)
                             {
-                                newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX + i, -b.defaultSpeedY - i, b.size, setModifiers(b)));
-                                newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX - i, -b.defaultSpeedY + i, b.size, setModifiers(b)));
+                                newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX + i, -b.defaultSpeedY - i, returnSize(b), setModifiers(b)));
+                                newBall.Add(new Ball(b.x, b.y, -b.defaultSpeedX - i, -b.defaultSpeedY + i, returnSize(b), setModifiers(b)));
                             }
                         }
                     }
@@ -389,13 +416,34 @@ namespace BrickBreaker
             switch (type)
             {
                 case 0:
-                    GameScreen.speedModBX++;
+                    if (time != 0)
+                    {
+                        GameScreen.speedModBX += time;
+                    }
+                    else
+                    {
+                        GameScreen.speedModBX++;
+                    }
                     break;
                 case 1:
-                    GameScreen.speedModBY++;
+                    if (time != 0)
+                    {
+                        GameScreen.speedModBY += time;
+                    }
+                    else
+                    {
+                        GameScreen.speedModBY++;
+                    }
                     break;
                 case 2:
-                    GameScreen.speedModPX++;
+                    if (time != 0)
+                    {
+                        GameScreen.speedModPX += time;
+                    }
+                    else
+                    {
+                        GameScreen.speedModPX++;
+                    }
                     break;
             }
         }
@@ -406,13 +454,34 @@ namespace BrickBreaker
             switch (type)
             {
                 case 0:
-                    GameScreen.speedModBX--;
+                    if (time != 0)
+                    {
+                        GameScreen.speedModBX -= time;
+                    }
+                    else
+                    {
+                        GameScreen.speedModBX--;
+                    }
                     break;
                 case 1:
-                    GameScreen.speedModBY--;
+                    if (time != 0)
+                    {
+                        GameScreen.speedModBY -= time;
+                    }
+                    else
+                    {
+                        GameScreen.speedModBY--;
+                    }
                     break;
                 case 2:
-                    GameScreen.speedModPX--;
+                    if (time != 0)
+                    {
+                        GameScreen.speedModPX -= time;
+                    }
+                    else
+                    {
+                        GameScreen.speedModPX--;
+                    }
                     break;
             }
         }
