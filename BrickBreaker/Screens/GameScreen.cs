@@ -109,7 +109,7 @@ namespace BrickBreaker
 
         void generateRandomStuff()
         {
-            if (minN == 0)
+            if (minN == 0 || currentLevel != 10)
             {
                 return;
             }
@@ -177,6 +177,7 @@ namespace BrickBreaker
 
         public void OnStart()
         {
+            currentLevel = 2;
             sandwiches = 0;
             //sandwichLabel.Text = $"{sandwiches}";
 
