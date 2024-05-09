@@ -83,6 +83,8 @@ namespace BrickBreaker
         Rectangle rec5 = new Rectangle(950, 500, 200, 100);
         Rectangle rec6 = new Rectangle(950, 600, 200, 100);
 
+        int multiplier = 1;
+
 
         int score = 0;
         int blocksDestroyed = 0;
@@ -119,8 +121,7 @@ namespace BrickBreaker
 
         public void OnStart()
         {
-            sandwiches = 0;
-            //sandwichLabel.Text = $"{sandwiches}";
+            sandwichQuantity.Text = $"{sandwiches}";
 
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
@@ -162,6 +163,7 @@ namespace BrickBreaker
 
             //derick 
             width = this.Width;
+
 
             // start the game engine loop
             gameTimer.Enabled = true;
@@ -253,6 +255,9 @@ namespace BrickBreaker
             //temp
             sandwichQuantity.Text = $"{sandwiches}";
 
+            //shop feature
+            ShopBackColor();
+
             Grady();
 
             //redraw the screen
@@ -297,6 +302,8 @@ namespace BrickBreaker
                             blocks.RemoveAt(j);
                             j--;
                             blocksDestroyed += 1;
+                            sandwiches = sandwiches + (1 * multiplier);
+                            sandwichQuantity.Text = $"{sandwiches}";
                         }
 
                         if (blocks.Count == 0)
@@ -462,68 +469,133 @@ namespace BrickBreaker
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        //private void label1_Click(object sender, EventArgs e)
+        //{
+        //    sandwiches += 100;
+        //}
+
+
+        //shop
+        private void upgrade1Panel_Click(object sender, EventArgs e)
         {
-            sandwiches += 100;
-        }
-
-       
-
-
-
-        //Shop Controls
-        private void GameScreen_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
+            if (sandwiches >= 20)
             {
-                if (rec1.Contains(new Point(e.X, e.Y)) && sandwiches >= 20 && widthCounter <= 39) //paddle width
-                {
-                    sandwiches = sandwiches - 20;
-                    sandwichQuantity.Text = $"{sandwiches}";
-                    powerups.Add(new Powerup("PW"));
-                    widthCounter++;
-                    upgrade1Quantity.Text = $"{widthCounter}";
-                }
-                else if (rec2.Contains(new Point(e.X, e.Y)) && sandwiches >= 20 && paddleSpeedCounter <= 29) //paddle speed
-                {
-                    sandwiches = sandwiches - 20;
-                    sandwichQuantity.Text = $"{sandwiches}";
-                    paddle.speed = paddle.speed + 1 % 4;
-                    paddleSpeedCounter++;
-                    upgrade2Quantity.Text = $"{paddleSpeedCounter}";
-
-                }
-                else if (rec3.Contains(new Point(e.X, e.Y)) && sandwiches >= 50 && swMultiplierCounter <= 19) // sandwich multiplier
-                {
-                    sandwiches = sandwiches - 50;
-
-                    swMultiplierCounter++;
-                    upgrade3Quantity.Text = $"{swMultiplierCounter}";
-
-                }
-                else if (rec4.Contains(new Point(e.X, e.Y)) && sandwiches >= 300) //fireball explosion
-                {
-                    sandwiches = sandwiches - 300;
-                    sandwichQuantity.Text = $"{sandwiches}";
-                    powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
-                }
-                else if (rec5.Contains(new Point(e.X, e.Y)) && sandwiches >= 1000) // black hole
-                {
-                    sandwiches = sandwiches - 1000;
-                    sandwichQuantity.Text = $"{sandwiches}";
-
-
-                }
-                else if (rec6.Contains(new Point(e.X, e.Y)) && sandwiches >= 500) //remote
-                {
-                    sandwiches = sandwiches - 500;
-                    sandwichQuantity.Text = $"{sandwiches}";
-
-
-                }
+                sandwiches = sandwiches - 20;
+                sandwichQuantity.Text = $"{sandwiches}";
+                powerups.Add(new Powerup("PW"));
+                widthCounter++;
             }
-
         }
+
+        private void upgrade2Panel_Click(object sender, EventArgs e)
+        {
+            if (sandwiches >= 20)
+            {
+                sandwiches = sandwiches - 20;
+                sandwichQuantity.Text = $"{sandwiches}";
+                paddle.speed = paddle.speed + 1 % 4;
+                paddleSpeedCounter++;
+                upgrade2Quantity.Text = $"{paddleSpeedCounter}";
+            }
+        }
+
+        private void upgrade3Panel_Click(object sender, EventArgs e)
+        {
+            if (sandwiches >= 50)
+            {
+                sandwiches = sandwiches - 50;
+                multiplier = multiplier + 1;
+                upgrade3Quantity.Text = multiplier + "x";
+            }
+        }
+
+        private void upgrade4Quantity_Click(object sender, EventArgs e)
+        {
+            if (sandwiches >= 300)
+            {
+                sandwiches = sandwiches - 300;
+                sandwichQuantity.Text = $"{sandwiches}";
+                powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
+            }
+        }
+
+        private void upgrade5Panel_Click(object sender, EventArgs e)
+        {
+            if (sandwiches >= 1000)
+            {
+                sandwiches = sandwiches - 1000;
+                sandwichQuantity.Text = $"{sandwiches}";
+            }
+        }
+
+        private void upgrade6Panel_Click(object sender, EventArgs e)
+        {
+            if (sandwiches >= 500)
+            {
+                sandwiches = sandwiches - 1000;
+                sandwichQuantity.Text = $"{sandwiches}";
+            }
+        }
+
+        void ShopBackColor()
+        {
+            if(sandwiches < 20)
+            {
+                upgrade1Panel.BackColor = Color.DarkCyan;
+                upgrade2Panel.BackColor = Color.DarkCyan;
+                upgrade3Panel.BackColor = Color.DarkCyan;
+                upgrade4Panel.BackColor = Color.DarkCyan;
+                upgrade5Panel.BackColor = Color.DarkCyan;
+                upgrade6Panel.BackColor = Color.DarkCyan;
+            }
+            else if (sandwiches < 50 && sandwiches >= 20)
+            {
+                upgrade1Panel.BackColor = Color.DeepSkyBlue;
+                upgrade2Panel.BackColor = Color.DeepSkyBlue;
+                upgrade3Panel.BackColor = Color.DarkCyan;
+                upgrade4Panel.BackColor = Color.DarkCyan;
+                upgrade5Panel.BackColor = Color.DarkCyan;
+                upgrade6Panel.BackColor = Color.DarkCyan;
+            }
+            else if(sandwiches < 300 && sandwiches >= 50)
+            {
+                upgrade1Panel.BackColor = Color.DeepSkyBlue;
+                upgrade2Panel.BackColor = Color.DeepSkyBlue;
+                upgrade3Panel.BackColor = Color.DeepSkyBlue;
+                upgrade4Panel.BackColor = Color.DarkCyan;
+                upgrade5Panel.BackColor = Color.DarkCyan;
+                upgrade6Panel.BackColor = Color.DarkCyan;
+            }
+            else if(sandwiches < 500 && sandwiches >= 300)
+            {
+                upgrade1Panel.BackColor = Color.DeepSkyBlue;
+                upgrade2Panel.BackColor = Color.DeepSkyBlue;
+                upgrade3Panel.BackColor = Color.DeepSkyBlue;
+                upgrade4Panel.BackColor = Color.DeepSkyBlue;
+                upgrade5Panel.BackColor = Color.DarkCyan;
+                upgrade6Panel.BackColor = Color.DarkCyan;
+            }
+            else if(sandwiches < 1000 && sandwiches >= 500)
+            {
+                upgrade1Panel.BackColor = Color.DeepSkyBlue;
+                upgrade2Panel.BackColor = Color.DeepSkyBlue;
+                upgrade3Panel.BackColor = Color.DeepSkyBlue;
+                upgrade4Panel.BackColor = Color.DeepSkyBlue;
+                upgrade5Panel.BackColor = Color.DarkCyan;
+                upgrade6Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else if (sandwiches >= 1000)
+            {
+                upgrade1Panel.BackColor = Color.DeepSkyBlue;
+                upgrade2Panel.BackColor = Color.DeepSkyBlue;
+                upgrade3Panel.BackColor = Color.DeepSkyBlue;
+                upgrade4Panel.BackColor = Color.DeepSkyBlue;
+                upgrade5Panel.BackColor = Color.DeepSkyBlue;
+                upgrade6Panel.BackColor = Color.DeepSkyBlue;
+            }
+        }
+
+
         private void exitLabel_Click(object sender, EventArgs e)
         {
             XmlRw w = new XmlRw();
