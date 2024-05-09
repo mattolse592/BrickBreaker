@@ -121,4 +121,28 @@
   <data name="Rick_Astley___Never_Gonna_Give_You_Up__Official_Music_Video_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Rick Astley - Never Gonna Give You Up (Official Music Video).wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="_2019_01_10___Land_of_8_Bits___Stephen_Bennett___FesliyanStudios_com" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2019-01-10_-_Land_of_8_Bits_-_Stephen_Bennett_-_FesliyanStudios.com.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_2019_12_11___Retro_Platforming___David_Fesliyan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2019-12-11_-_Retro_Platforming_-_David_Fesliyan.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_2020_03_22___8_Bit_Surf___FesliyanStudios_com___David_Renda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2020-03-22_-_8_Bit_Surf_-_FesliyanStudios.com_-_David_Renda.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_2020_04_24___Arcade_Kid___FesliyanStudios_com___David_Renda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2020-04-24_-_Arcade_Kid_-_FesliyanStudios.com_-_David_Renda.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_2021_08_16___8_Bit_Adventure___www_FesliyanStudios_com" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2021-08-16_-_8_Bit_Adventure_-_www.FesliyanStudios.com.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_2021_08_17___8_Bit_Nostalgia___www_FesliyanStudios_com" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_2021_08_30___Boss_Time___www_FesliyanStudios_com" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2021-08-30_-_Boss_Time_-_www.FesliyanStudios.com.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_2021_10_19___Funny_Bit___www_FesliyanStudios_com__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2021-10-19_-_Funny_Bit_-_www.FesliyanStudios.com (1).wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
