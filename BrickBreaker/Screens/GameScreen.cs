@@ -1,5 +1,5 @@
-﻿/*  Created by: 
- *  Project: Brick Breaker
+﻿/*  Created by: Matthew, Nathan, Grady, Valentina, and Duhrick
+ *  Project: Brick Breaker Team Porject
  *  Date: 
  */
 using System;
@@ -26,16 +26,23 @@ namespace BrickBreaker
         Boolean leftArrowDown, rightArrowDown;
 
         // Game values
-        int currentLevel = 0;
+        public int currentLevel = 0;
+        public bool loadGame = true;
         bool isSavedLevel = false;
         public static bool stick = true;
+
+        // Level 10
+        int maxN = 10;
+        int minN = 4;
 
         // Paddle and Ball objects
         public static Paddle paddle;
         Ball ball;
 
+        //upgrade varuables
+        int widthCounter, paddleSpeedCounter, swMultiplierCounter = 0;
         // list of all blocks for current level
-        List<Block> blocks = new List<Block>();
+        public List<Block> blocks = new List<Block>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
@@ -75,7 +82,13 @@ namespace BrickBreaker
 
         //currency
         int sandwiches;
-        Rectangle rec1 = new Rectangle(950, 200, 300, 100);
+        Rectangle rec1 = new Rectangle(950, 100, 200, 100);
+        Rectangle rec2 = new Rectangle(950, 200, 200, 100);
+        Rectangle rec3 = new Rectangle(950, 300, 200, 100);
+        Rectangle rec4 = new Rectangle(950, 400, 200, 100);
+        Rectangle rec5 = new Rectangle(950, 500, 200, 100);
+        Rectangle rec6 = new Rectangle(950, 600, 200, 100);
+
 
         int score = 0;
         int blocksDestroyed = 0;
@@ -89,31 +102,84 @@ namespace BrickBreaker
             OnStart();
 
 
-            //holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.5, 200, true, true, true, false, false));
+           // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.55, 200, true, true, true, false, false));
 
 
 
         }
 
+        void generateRandomStuff()
+        {
+            if (minN == 0 || currentLevel != 10)
+            {
+                return;
+            }
+
+            Random rand = new Random();
+
+            if (minN != 4 && maxN != 10 && rand.Next(0, 1000) > 5) {
+                return;
+            }
+
+            XmlRw w = new XmlRw();
+            for (int i = 0; i < rand.Next(minN, maxN); i++)
+            {
+                int shape = rand.Next(0, 4);
+
+                switch (shape)
+                {
+                    case 0:
+                        w.bigBlock(rand.Next(2, 5), rand.Next(1, 14), rand.Next(14));
+                        break;
+                    case 1:
+                        w.line(rand.Next(0, 2) == 0, rand.Next(2, 7), rand.Next(1, 14), rand.Next(14));
+                        break;
+                    case 2:
+                        w.triangleBlocks(true, rand.Next(1, 6), rand.Next(1, 14), rand.Next(1, 14));
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            for (int i = 0; i < w.blocks.Count; i++)
+            {
+                w.blocks[i].hp = rand.Next(11, 999);
+                w.blocks[i].x += w.blocks[i].x * 57;
+                w.blocks[i].y += w.blocks[i].y * 32;
+                blocks.Add(w.blocks[i]);
+            }
+
+            minN -= 1;
+            maxN -= 3;
+        }
 
         public void nextLevel()
         {
             if (currentLevel == 10)
             {
                 currentLevel = 1;
+            } else if (currentLevel == 9)
+            {
+                generateRandomStuff();
+                currentLevel += 1;
+                return;
             }
             else
             {
                 currentLevel++;
             }
 
+
             stick = true;
 
             Nathan_loadLevel();
+
         }
 
         public void OnStart()
         {
+            currentLevel = 2;
             sandwiches = 0;
             //sandwichLabel.Text = $"{sandwiches}";
 
@@ -151,7 +217,10 @@ namespace BrickBreaker
 
 
             //Nathan_loadLevel();
-            nextLevel();
+            if (loadGame == true)
+            {
+                nextLevel();
+            }
 
             #endregion
 
@@ -248,7 +317,11 @@ namespace BrickBreaker
                 paddle.Move("right");
             }
 
+            //temp
+            sandwichQuantity.Text = $"{sandwiches}";
+
             Grady();
+            generateRandomStuff();
 
             //redraw the screen
             Refresh();
@@ -441,6 +514,11 @@ namespace BrickBreaker
                         // Add spacing between blocks
                         block.x += 57 * block.x;
                         block.y += 32 * block.y;
+                        if (currentLevel == 9)
+                        {
+                            block.width = 200;
+                            block.height = 150;
+                        }
                         blocks.Add(block);
                     }
                     break;
@@ -450,6 +528,13 @@ namespace BrickBreaker
             }
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+            sandwiches += 100;
+        }
+
+       
+
 
 
         //Shop Controls
@@ -457,12 +542,53 @@ namespace BrickBreaker
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (rec1.Contains(new Point(e.X, e.Y)) && sandwiches == 30)
+                if (rec1.Contains(new Point(e.X, e.Y)) && sandwiches >= 20 && widthCounter <= 39) //paddle width
                 {
-                    sandwiches = sandwiches - 30;
-                    //sandwichLabel.Text = $"{sandwiches}";
+                    sandwiches = sandwiches - 20;
+                    sandwichQuantity.Text = $"{sandwiches}";
+                    powerups.Add(new Powerup("PW"));
+                    widthCounter++;
+                    upgrade1Quantity.Text = $"{widthCounter}";
+                }
+                else if (rec2.Contains(new Point(e.X, e.Y)) && sandwiches >= 20 && paddleSpeedCounter <= 29) //paddle speed
+                {
+                    sandwiches = sandwiches - 20;
+                    sandwichQuantity.Text = $"{sandwiches}";
+                    paddle.speed = paddle.speed + 1 % 4;
+                    paddleSpeedCounter++;
+                    upgrade2Quantity.Text = $"{paddleSpeedCounter}";
+
+                }
+                else if (rec3.Contains(new Point(e.X, e.Y)) && sandwiches >= 50 && swMultiplierCounter <= 19) // sandwich multiplier
+                {
+                    sandwiches = sandwiches - 50;
+
+                    swMultiplierCounter++;
+                    upgrade3Quantity.Text = $"{swMultiplierCounter}";
+
+                }
+                else if (rec4.Contains(new Point(e.X, e.Y)) && sandwiches >= 300) //fireball explosion
+                {
+                    sandwiches = sandwiches - 300;
+                    sandwichQuantity.Text = $"{sandwiches}";
+                    powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
+                }
+                else if (rec5.Contains(new Point(e.X, e.Y)) && sandwiches >= 1000) // black hole
+                {
+                    sandwiches = sandwiches - 1000;
+                    sandwichQuantity.Text = $"{sandwiches}";
+
+
+                }
+                else if (rec6.Contains(new Point(e.X, e.Y)) && sandwiches >= 500) //remote
+                {
+                    sandwiches = sandwiches - 500;
+                    sandwichQuantity.Text = $"{sandwiches}";
+
+
                 }
             }
+
         }
         private void exitLabel_Click(object sender, EventArgs e)
         {
@@ -476,7 +602,7 @@ namespace BrickBreaker
 
         private void statisticsButton_Click(object sender, EventArgs e)
         {
-            Form1.ChangeScreen(this, new StatisticScreen());
+            Form1.ChangeScreen(this, new StatisticScreen(currentLevel, blocks));
         }
 
         // Save level
