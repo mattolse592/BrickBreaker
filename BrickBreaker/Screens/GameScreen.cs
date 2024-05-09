@@ -1,5 +1,5 @@
-﻿/*  Created by: 
- *  Project: Brick Breaker
+﻿/*  Created by: Matthew, Nathan, Grady, Valentina, and Duhrick
+ *  Project: Brick Breaker Team Porject
  *  Date: 
  */
 using System;
@@ -101,7 +101,7 @@ namespace BrickBreaker
             OnStart();
 
 
-            holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.55, 200, true, true, true, false, false));
+           // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.55, 200, true, true, true, false, false));
 
 
 
