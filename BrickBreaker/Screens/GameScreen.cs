@@ -115,6 +115,11 @@ namespace BrickBreaker
             }
 
             Random rand = new Random();
+
+            if (minN != 4 && maxN != 10 && rand.Next(0, 1000) > 5) {
+                return;
+            }
+
             XmlRw w = new XmlRw();
             for (int i = 0; i < rand.Next(minN, maxN); i++)
             {
@@ -139,8 +144,8 @@ namespace BrickBreaker
             for (int i = 0; i < w.blocks.Count; i++)
             {
                 w.blocks[i].hp = rand.Next(11, 999);
-                w.blocks[i].x += 57;
-                w.blocks[i].y += 32;
+                w.blocks[i].x += w.blocks[i].x * 57;
+                w.blocks[i].y += w.blocks[i].y * 32;
                 blocks.Add(w.blocks[i]);
             }
 
@@ -150,12 +155,14 @@ namespace BrickBreaker
 
         public void nextLevel()
         {
-            /*if (currentLevel == 10)
+            if (currentLevel == 10)
             {
                 currentLevel = 1;
-            } else*/ if (currentLevel == 10)
+            } else if (currentLevel == 9)
             {
                 generateRandomStuff();
+                currentLevel += 1;
+                return;
             }
             else
             {
@@ -171,7 +178,7 @@ namespace BrickBreaker
         public void OnStart()
         {
             // ----
-            currentLevel = 8;
+            currentLevel = 9;
             // ----
             sandwiches = 0;
             //sandwichLabel.Text = $"{sandwiches}";
@@ -311,6 +318,7 @@ namespace BrickBreaker
             sandwichQuantity.Text = $"{sandwiches}";
 
             Grady();
+            generateRandomStuff();
 
             //redraw the screen
             Refresh();
