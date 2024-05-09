@@ -177,9 +177,6 @@ namespace BrickBreaker
 
         public void OnStart()
         {
-            // ----
-            currentLevel = 9;
-            // ----
             sandwiches = 0;
             //sandwichLabel.Text = $"{sandwiches}";
 
