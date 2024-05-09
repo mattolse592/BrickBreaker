@@ -51,6 +51,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -62,6 +63,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ball.cs" />
@@ -166,7 +168,11 @@
     <Content Include="levels\level9.xml" />
     <Content Include="levels\level_save1.xml" />
     <Content Include="levels\level_save2.xml" />
+
     <None Include="Resources\rick roll night.gif" />
+
+    <None Include="Resources\Rick Astley - Never Gonna Give You Up %28Official Music Video%29.wav" />
+
     <Content Include="statistics.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
