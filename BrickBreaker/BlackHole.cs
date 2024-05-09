@@ -52,7 +52,7 @@ namespace BrickBreaker
                     double xScale = ((Math.Abs(diffX) / (total + 1)));
                     double yScale = ((Math.Abs(diffY) / (total + 1)));
 
-                    Int32 suggest = Convert.ToInt32(Math.Pow(Math.Max(1, intensity / (Math.Max(0, Math.Abs(rad) - schwartzchildRadius) + 1)), 2));
+                    Int32 suggest = Convert.ToInt32(Math.Pow(Math.Max(1, 2 * intensity / (Math.Max(0, Math.Abs(rad) - schwartzchildRadius) + 1)), 2));
 
                     if (diffX > 0)
                     {
@@ -193,9 +193,9 @@ namespace BrickBreaker
                             schwartzchildRadius++;
                             pullField += (int)scale;
 
-                            if (schwartzchildRadius > 1525)
+                            if (schwartzchildRadius > 755)
                             {
-                                schwartzchildRadius = 1525;
+                                schwartzchildRadius = 755;
                             }
 
                             if (pullField > 55555)
@@ -241,9 +241,9 @@ namespace BrickBreaker
                         schwartzchildRadius++;
                         pullField += (int)scale;
 
-                        if (schwartzchildRadius > 1525)
+                        if (schwartzchildRadius > 755)
                         {
-                            schwartzchildRadius = 1525;
+                            schwartzchildRadius = 755;
                         }
 
                         if (pullField > 55555)

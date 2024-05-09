@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.Media;
 using System.Drawing.Drawing2D;
 using System.Security.Cryptography.X509Certificates;
+using System.IO;
 
 namespace BrickBreaker
 {
@@ -28,7 +29,7 @@ namespace BrickBreaker
         public int currentLevel = 0;
         public bool loadGame = true;
         bool isSavedLevel = false;
-        public static bool stick = false;
+        public static bool stick = true;
 
         // Level 10
         int maxN = 10;
@@ -54,7 +55,7 @@ namespace BrickBreaker
         //Grady Stuff
         public static int speedModBX = 0, speedModBY = 0, speedModPX = 0, widthModP;
 
-        public List<BlackHole> holes = new List<BlackHole>();
+        public static List<BlackHole> holes = new List<BlackHole>();
 
         List<Powerup> powerups = new List<Powerup>();
         List<Ball> balls = new List<Ball>();
@@ -169,10 +170,11 @@ namespace BrickBreaker
                 currentLevel++;
             }
 
-            if (currentLevel != 10)
-            {
-                Nathan_loadLevel();
-            }
+
+            stick = true;
+
+            Nathan_loadLevel();
+
         }
 
         public void OnStart()
@@ -268,12 +270,15 @@ namespace BrickBreaker
                     }
                     break;
                 case Keys.F:
-                    powerups.Add(new Powerup("PW"));
+                    powerups.Add(new Powerup("PW", 5));
                     powerups.Add(new Powerup("BE", new List<Modifier> { new Modifier("explode") }));
                     //powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
                     break;
                 case Keys.G:
                     powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
+                    break;
+                case Keys.H:
+                    powerups.Add(new Powerup("BH"));
                     break;
                 case Keys.Right:
                     rightArrowDown = true;
@@ -342,7 +347,7 @@ namespace BrickBreaker
                 if (blocks.Count == 0)
                 {
                     gameTimer.Enabled = false;
-                    nextLevel();
+                    OnStart();
                     return;
                 }
 
@@ -360,13 +365,6 @@ namespace BrickBreaker
                             blocks.RemoveAt(j);
                             j--;
                             blocksDestroyed += 1;
-                        }
-
-                        if (blocks.Count == 0)
-                        {
-                            gameTimer.Enabled = false;
-                            OnStart(); // Restart game
-                            return;
                         }
                     }
 
