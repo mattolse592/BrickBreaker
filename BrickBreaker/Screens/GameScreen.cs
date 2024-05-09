@@ -156,7 +156,7 @@ namespace BrickBreaker
 
         public void nextLevel()
         {
-            if (currentLevel == 10)
+            if (currentLevel >= 10)
             {
                 currentLevel = 1;
             } else if (currentLevel == 9)
@@ -179,7 +179,6 @@ namespace BrickBreaker
 
         public void OnStart()
         {
-            currentLevel = 2;
             sandwiches = 0;
             //sandwichLabel.Text = $"{sandwiches}";
 
