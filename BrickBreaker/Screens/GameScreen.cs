@@ -146,7 +146,7 @@ namespace BrickBreaker
 
             for (int i = 0; i < w.blocks.Count; i++)
             {
-                w.blocks[i].hp = rand.Next(11, 999);
+                w.blocks[i].hp = rand.Next(11, 199);
                 w.blocks[i].x += w.blocks[i].x * 57;
                 w.blocks[i].y += w.blocks[i].y * 32;
                 blocks.Add(w.blocks[i]);
@@ -541,11 +541,12 @@ namespace BrickBreaker
 
 
         //shop
+        #region upgrade panel click events
         private void upgrade1Panel_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 20)
+            if (sandwiches >= 5)
             {
-                sandwiches = sandwiches - 20;
+                sandwiches = sandwiches - 5;
                 sandwichQuantity.Text = $"{sandwiches}";
                 powerups.Add(new Powerup("PW"));
                 widthCounter++;
@@ -576,23 +577,23 @@ namespace BrickBreaker
 
         private void upgrade4Quantity_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 300)
+            if (sandwiches >= 30)
             {
-                sandwiches = sandwiches - 300;
+                sandwiches = sandwiches - 30;
                 sandwichQuantity.Text = $"{sandwiches}";
                 powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
             }
         }
-
+        //black hole upgrade v GRADY needs to add a decay or at least disapear when the level renews
         private void upgrade5Panel_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 1000)
+            if (sandwiches >= 200)
             {
-                sandwiches = sandwiches - 1000;
+                sandwiches = sandwiches - 200;
                 sandwichQuantity.Text = $"{sandwiches}";
             }
         }
-
+        //purchase randomized level
         private void upgrade6Panel_Click(object sender, EventArgs e)
         {
             if (sandwiches >= 500)
@@ -659,7 +660,7 @@ namespace BrickBreaker
                 upgrade6Panel.BackColor = Color.DeepSkyBlue;
             }
         }
-
+        #endregion
 
         private void exitLabel_Click(object sender, EventArgs e)
         {

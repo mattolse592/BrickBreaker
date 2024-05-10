@@ -227,7 +227,7 @@
             this.upgrade4Price.Name = "upgrade4Price";
             this.upgrade4Price.Size = new System.Drawing.Size(60, 20);
             this.upgrade4Price.TabIndex = 21;
-            this.upgrade4Price.Text = "300";
+            this.upgrade4Price.Text = "30";
             this.upgrade4Price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.upgrade4Price.Click += new System.EventHandler(this.upgrade4Quantity_Click);
             // 
@@ -288,7 +288,7 @@
             this.upgrade5Price.Name = "upgrade5Price";
             this.upgrade5Price.Size = new System.Drawing.Size(60, 18);
             this.upgrade5Price.TabIndex = 26;
-            this.upgrade5Price.Text = "1000";
+            this.upgrade5Price.Text = "200";
             this.upgrade5Price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.upgrade5Price.Click += new System.EventHandler(this.upgrade5Panel_Click);
             // 
@@ -373,7 +373,7 @@
             this.upgrade6Description.Name = "upgrade6Description";
             this.upgrade6Description.Size = new System.Drawing.Size(189, 40);
             this.upgrade6Description.TabIndex = 29;
-            this.upgrade6Description.Text = "Control the ball until it colides with a sandwich";
+            this.upgrade6Description.Text = "Randomized level. Could be worth the price...";
             this.upgrade6Description.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.upgrade6Description.Click += new System.EventHandler(this.upgrade6Panel_Click);
             // 
@@ -384,9 +384,9 @@
             this.upgrade6Title.ForeColor = System.Drawing.Color.White;
             this.upgrade6Title.Location = new System.Drawing.Point(19, 3);
             this.upgrade6Title.Name = "upgrade6Title";
-            this.upgrade6Title.Size = new System.Drawing.Size(135, 20);
+            this.upgrade6Title.Size = new System.Drawing.Size(220, 20);
             this.upgrade6Title.TabIndex = 28;
-            this.upgrade6Title.Text = "Remote Control";
+            this.upgrade6Title.Text = "Purchase Random Level💀";
             this.upgrade6Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.upgrade6Title.Click += new System.EventHandler(this.upgrade6Panel_Click);
             // 
@@ -502,7 +502,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 20);
             this.label3.TabIndex = 45;
-            this.label3.Text = "20";
+            this.label3.Text = "5";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label3.Click += new System.EventHandler(this.upgrade1Panel_Click);
             // 
