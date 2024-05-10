@@ -76,6 +76,15 @@ namespace BrickBreaker
             new SolidBrush(Color.FromArgb(225,0,0,0)),
             new SolidBrush(Color.FromArgb(250,0,0,0)),
         };
+        System.Windows.Media.MediaPlayer[] music =
+        {
+            new System.Windows.Media.MediaPlayer(),
+            new System.Windows.Media.MediaPlayer(),
+            new System.Windows.Media.MediaPlayer(),
+            new System.Windows.Media.MediaPlayer(),
+            new System.Windows.Media.MediaPlayer()
+        };
+
 
 
         public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -99,14 +108,74 @@ namespace BrickBreaker
         public GameScreen()
         {
             InitializeComponent();
+
+            music[0].Open(new Uri(Application.StartupPath + "\\Resources\\2021-08-30_-_Boss_Time_-_www.FesliyanStudios.com.wav"));
+            music[1].Open(new Uri(Application.StartupPath + "\\Resources\\2021-10-19_-_Funny_Bit_-_www.FesliyanStudios.com (1).wav"));
+            music[2].Open(new Uri(Application.StartupPath + "\\Resources\\2019-12-11_-_Retro_Platforming_-_David_Fesliyan.wav"));
+            music[3].Open(new Uri(Application.StartupPath + "\\Resources\\2020-03-22_-_8_Bit_Surf_-_FesliyanStudios.com_-_David_Renda.wav"));
+            music[4].Open(new Uri(Application.StartupPath + "\\Resources\\2021-08-16_-_8_Bit_Adventure_-_www.FesliyanStudios.com.wav"));
+
+            music[0].MediaEnded += new EventHandler(music0Ended);
+            music[1].MediaEnded += new EventHandler(music1Ended);
+            music[2].MediaEnded += new EventHandler(music2Ended);
+            music[3].MediaEnded += new EventHandler(music3Ended);
+            music[4].MediaEnded += new EventHandler(music4Ended);
+
             OnStart();
 
-
-           // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.55, 200, true, true, true, false, false));
+            
+            // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.55, 200, true, true, true, false, false));
 
 
 
         }
+
+        private void music0Ended(object sender, EventArgs e)
+        {
+            music[0].Stop();
+
+            music[0].Play();
+        }
+
+        private void music1Ended(object sender, EventArgs e)
+        {
+            music[1].Stop();
+
+            music[1].Play();
+        }
+
+        private void music2Ended(object sender, EventArgs e)
+        {
+            music[2].Stop();
+
+            music[2].Play();
+        }
+
+        private void music3Ended(object sender, EventArgs e)
+        {
+            music[3].Stop();
+
+            music[3].Play();
+        }
+
+        private void music4Ended(object sender, EventArgs e)
+        {
+            music[4].Stop();
+
+            music[4].Play();
+        }
+
+        private void BallHit()
+        {
+
+            var ballSound = new System.Windows.Media.MediaPlayer();
+
+            ballSound.Open(new Uri(Application.StartupPath + "\\Resources\\Dodge.wav"));
+
+            ballSound.Play();
+
+        }
+
 
         void generateRandomStuff()
         {
@@ -174,12 +243,25 @@ namespace BrickBreaker
             stick = true;
 
             Nathan_loadLevel();
+        }
 
+        void PlayMusic()
+        {
+            TurnMusicOff();
+            int indexer = currentLevel % 5;
+            music[indexer].Play();
+        }
+
+        void TurnMusicOff()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                music[i].Stop();
+            }
         }
 
         public void OnStart()
         {
-            currentLevel = 2;
             sandwiches = 0;
             //sandwichLabel.Text = $"{sandwiches}";
 
@@ -220,6 +302,7 @@ namespace BrickBreaker
             if (loadGame == true)
             {
                 nextLevel();
+                PlayMusic();
             }
 
             #endregion
@@ -354,9 +437,9 @@ namespace BrickBreaker
                 // Check if ball has collided with any blocks
                 for (int j = 0; j < blocks.Count; j++)
                 {
-                    //stinky bum
                     if (balls[i].BlockCollision(blocks[j]))
                     {
+                        BallHit();
                         score += 1;
                         balls[i] = blocks[j].PassCondition(balls[i]);
 

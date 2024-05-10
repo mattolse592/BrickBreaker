@@ -94,6 +94,7 @@
             this.instructionButton.TabIndex = 4;
             this.instructionButton.Text = "?";
             this.instructionButton.UseVisualStyleBackColor = true;
+            this.instructionButton.Click += new System.EventHandler(this.instructionButton_Click);
             // 
             // arsBackgroundLabel
             // 

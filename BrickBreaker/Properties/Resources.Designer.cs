@@ -63,6 +63,87 @@ namespace BrickBreaker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2019_01_10___Land_of_8_Bits___Stephen_Bennett___FesliyanStudios_com {
+            get {
+                return ResourceManager.GetStream("_2019_01_10___Land_of_8_Bits___Stephen_Bennett___FesliyanStudios_com", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2019_12_11___Retro_Platforming___David_Fesliyan {
+            get {
+                return ResourceManager.GetStream("_2019_12_11___Retro_Platforming___David_Fesliyan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2020_03_22___8_Bit_Surf___FesliyanStudios_com___David_Renda {
+            get {
+                return ResourceManager.GetStream("_2020_03_22___8_Bit_Surf___FesliyanStudios_com___David_Renda", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2020_04_24___Arcade_Kid___FesliyanStudios_com___David_Renda {
+            get {
+                return ResourceManager.GetStream("_2020_04_24___Arcade_Kid___FesliyanStudios_com___David_Renda", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2021_08_16___8_Bit_Adventure___www_FesliyanStudios_com {
+            get {
+                return ResourceManager.GetStream("_2021_08_16___8_Bit_Adventure___www_FesliyanStudios_com", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2021_08_17___8_Bit_Nostalgia___www_FesliyanStudios_com {
+            get {
+                return ResourceManager.GetStream("_2021_08_17___8_Bit_Nostalgia___www_FesliyanStudios_com", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2021_08_30___Boss_Time___www_FesliyanStudios_com {
+            get {
+                return ResourceManager.GetStream("_2021_08_30___Boss_Time___www_FesliyanStudios_com", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2021_10_19___Funny_Bit___www_FesliyanStudios_com__1_ {
+            get {
+                return ResourceManager.GetStream("_2021_10_19___Funny_Bit___www_FesliyanStudios_com__1_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Dodge {
+            get {
+                return ResourceManager.GetStream("Dodge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream Rick_Astley___Never_Gonna_Give_You_Up__Official_Music_Video_ {
             get {
                 return ResourceManager.GetStream("Rick_Astley___Never_Gonna_Give_You_Up__Official_Music_Video_", resourceCulture);
