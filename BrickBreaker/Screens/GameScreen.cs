@@ -665,7 +665,7 @@ namespace BrickBreaker
         private void exitLabel_Click(object sender, EventArgs e)
         {
             XmlRw w = new XmlRw();
-            w.writeStatistics(blocksDestroyed, score, currentLevel);
+            w.writeStatistics(blocksDestroyed, score, currentLevel, sandwiches);
 
             gameTimer.Enabled = false;
             Form1.ChangeScreen(this, new MenuScreen());
