@@ -201,7 +201,7 @@ namespace BrickBreaker
                 }
                 else if (x + (size / 2) < p.x + ((p.width / 4) * 3))
                 {
-                    defaultSpeedY = 6;
+                    defaultSpeedY = 6;  
                     defaultSpeedX = 3;
                     y = p.y - size - 4;
                     if (xSpeed < 0)

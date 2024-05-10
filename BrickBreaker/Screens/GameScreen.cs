@@ -40,7 +40,7 @@ namespace BrickBreaker
         Ball ball;
 
         //upgrade varuables
-        int widthCounter, paddleSpeedCounter, swMultiplierCounter = 0;
+        int widthCounter, paddleSpeedCounter = 0;
         // list of all blocks for current level
         public List<Block> blocks = new List<Block>();
 
@@ -95,13 +95,15 @@ namespace BrickBreaker
 
         //currency
         int sandwiches;
-        Rectangle rec1 = new Rectangle(950, 100, 200, 100);
-        Rectangle rec2 = new Rectangle(950, 200, 200, 100);
-        Rectangle rec3 = new Rectangle(950, 300, 200, 100);
-        Rectangle rec4 = new Rectangle(950, 400, 200, 100);
-        Rectangle rec5 = new Rectangle(950, 500, 200, 100);
-        Rectangle rec6 = new Rectangle(950, 600, 200, 100);
 
+        int multiplier = 1;
+
+        int upgrade1Cost = 5;
+        int upgrade2Cost = 20;
+        int upgrade3Cost = 50;
+        int upgrade4Cost = 30;
+        int upgrade5Cost = 200;
+        int upgrade6Cost = 500;
 
         int score = 0;
         int blocksDestroyed = 0;
@@ -138,8 +140,10 @@ namespace BrickBreaker
         {
             music[0].Stop();
 
+
             music[0].Play();
         }
+
 
         private void music1Ended(object sender, EventArgs e)
         {
@@ -205,7 +209,8 @@ namespace BrickBreaker
 
             Random rand = new Random();
 
-            if (minN != 4 && maxN != 10 && rand.Next(0, 1000) > 5) {
+            if (minN != 4 && maxN != 10 && rand.Next(0, 1000) > 5)
+            {
                 return;
             }
 
@@ -232,7 +237,7 @@ namespace BrickBreaker
 
             for (int i = 0; i < w.blocks.Count; i++)
             {
-                w.blocks[i].hp = rand.Next(11, 999);
+                w.blocks[i].hp = rand.Next(11, 199);
                 w.blocks[i].x += w.blocks[i].x * 57;
                 w.blocks[i].y += w.blocks[i].y * 32;
                 blocks.Add(w.blocks[i]);
@@ -244,10 +249,11 @@ namespace BrickBreaker
 
         public void nextLevel()
         {
-            if (currentLevel == 10)
+            if (currentLevel >= 10)
             {
                 currentLevel = 1;
-            } else if (currentLevel == 9)
+            }
+            else if (currentLevel == 9)
             {
                 generateRandomStuff();
                 currentLevel += 1;
@@ -281,8 +287,9 @@ namespace BrickBreaker
 
         public void OnStart()
         {
+
             sandwiches = 0;
-            //sandwichLabel.Text = $"{sandwiches}";
+
 
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
@@ -330,6 +337,7 @@ namespace BrickBreaker
             //derick 
             width = this.Width;
 
+
             // start the game engine loop
             gameTimer.Enabled = true;
         }
@@ -361,7 +369,7 @@ namespace BrickBreaker
                         }
 
 
-                        balls[0].xSpeed = Math.Abs(ball.xSpeed); 
+                        balls[0].xSpeed = Math.Abs(ball.xSpeed);
 
                         balls[0].defaultSpeedX = (int)(6 * xScale);
                         balls[0].defaultSpeedY = (int)(6 * yScale);
@@ -423,6 +431,9 @@ namespace BrickBreaker
             //temp
             sandwichQuantity.Text = $"{sandwiches}";
 
+            //shop feature
+            ShopBackColor();
+
             Grady();
             generateRandomStuff();
 
@@ -463,7 +474,9 @@ namespace BrickBreaker
                         BallHit();
                         score += 1;
                         balls[i] = blocks[j].PassCondition(balls[i]);
-
+                        //add points to the player
+                        sandwiches = sandwiches + multiplier;
+                        sandwichQuantity.Text = $"{sandwiches}";
                         if (blocks[j].hp <= 0)
                         {
                             blocks.RemoveAt(j);
@@ -570,7 +583,7 @@ namespace BrickBreaker
                             blocks = hole.BeyondHorizon(blocks);
                         }
                     }
-                    
+
 
                     hole.DrawPoints();
                 }
@@ -632,68 +645,134 @@ namespace BrickBreaker
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        //private void label1_Click(object sender, EventArgs e)
+        //{
+        //    sandwiches += 100;
+        //}
+
+
+        //shop
+        #region upgrade panel click events
+        private void upgrade1Panel_Click(object sender, EventArgs e)
         {
-            sandwiches += 100;
+            if (sandwiches >= upgrade1Cost)
+            {
+                sandwiches = sandwiches - upgrade1Cost;
+                sandwichQuantity.Text = $"{sandwiches}";
+                powerups.Add(new Powerup("PW"));
+                widthCounter++;
+                upgrade1Quantity.Text = $"{widthCounter}";
+            }
         }
 
-       
-
-
-
-        //Shop Controls
-        private void GameScreen_MouseDown(object sender, MouseEventArgs e)
+        private void upgrade2Panel_Click(object sender, EventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (sandwiches >= upgrade2Cost)
             {
-                if (rec1.Contains(new Point(e.X, e.Y)) && sandwiches >= 20 && widthCounter <= 39) //paddle width
-                {
-                    sandwiches = sandwiches - 20;
-                    sandwichQuantity.Text = $"{sandwiches}";
-                    powerups.Add(new Powerup("PW"));
-                    widthCounter++;
-                    upgrade1Quantity.Text = $"{widthCounter}";
-                }
-                else if (rec2.Contains(new Point(e.X, e.Y)) && sandwiches >= 20 && paddleSpeedCounter <= 29) //paddle speed
-                {
-                    sandwiches = sandwiches - 20;
-                    sandwichQuantity.Text = $"{sandwiches}";
-                    paddle.speed = paddle.speed + 1 % 4;
-                    paddleSpeedCounter++;
-                    upgrade2Quantity.Text = $"{paddleSpeedCounter}";
+                sandwiches = sandwiches - upgrade2Cost;
+                sandwichQuantity.Text = $"{sandwiches}";
+                paddle.speed = paddle.speed + 1 % 6;
+                paddleSpeedCounter++;
+                upgrade2Quantity.Text = $"{paddleSpeedCounter}";
+            }
+        }
 
-                }
-                else if (rec3.Contains(new Point(e.X, e.Y)) && sandwiches >= 50 && swMultiplierCounter <= 19) // sandwich multiplier
-                {
-                    sandwiches = sandwiches - 50;
+        private void upgrade3Panel_Click(object sender, EventArgs e)
+        {
+            if (sandwiches >= upgrade3Cost)
+            {
+                sandwiches = sandwiches - upgrade3Cost;
+                multiplier++;
+                upgrade3Quantity.Text = multiplier + "x";
+            }
+        }
 
-                    swMultiplierCounter++;
-                    upgrade3Quantity.Text = $"{swMultiplierCounter}";
+        private void upgrade4Quantity_Click(object sender, EventArgs e)
+        {
+            if (sandwiches >= upgrade4Cost)
+            {
+                sandwiches = sandwiches - upgrade4Cost;
+                sandwichQuantity.Text = $"{sandwiches}";
+                powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
+            }
+        }
+        //black hole upgrade v GRADY needs to add a decay or at least disapear when the level renews
+        private void upgrade5Panel_Click(object sender, EventArgs e)
+        {
+            if (sandwiches >= upgrade5Cost)
+            {
+                sandwiches = sandwiches - upgrade5Cost;
+                sandwichQuantity.Text = $"{sandwiches}";
+            }
+        }
+        //purchase randomized level
+        private void upgrade6Panel_Click(object sender, EventArgs e)
+        {
+            if (sandwiches >= upgrade6Cost)
+            {
+                sandwiches = sandwiches - upgrade6Cost;
+                sandwichQuantity.Text = $"{sandwiches}";
+            }
+        }
+        #endregion
+        void ShopBackColor()
+        {
+            if (sandwiches >= upgrade1Cost)
+            {
+                upgrade1Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
+                upgrade1Panel.BackColor = Color.DarkCyan;
+            }
 
-                }
-                else if (rec4.Contains(new Point(e.X, e.Y)) && sandwiches >= 300) //fireball explosion
-                {
-                    sandwiches = sandwiches - 300;
-                    sandwichQuantity.Text = $"{sandwiches}";
-                    powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
-                }
-                else if (rec5.Contains(new Point(e.X, e.Y)) && sandwiches >= 1000) // black hole
-                {
-                    sandwiches = sandwiches - 1000;
-                    sandwichQuantity.Text = $"{sandwiches}";
+            if (sandwiches >= upgrade2Cost)
+            {
+                upgrade2Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
+                upgrade2Panel.BackColor = Color.DarkCyan;
+            }
 
+            if (sandwiches >= upgrade3Cost)
+            {
+                upgrade3Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
+                upgrade3Panel.BackColor = Color.DarkCyan;
+            }
 
-                }
-                else if (rec6.Contains(new Point(e.X, e.Y)) && sandwiches >= 500) //remote
-                {
-                    sandwiches = sandwiches - 500;
-                    sandwichQuantity.Text = $"{sandwiches}";
+            if (sandwiches >= upgrade4Cost)
+            {
+                upgrade4Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
+                upgrade4Panel.BackColor = Color.DarkCyan;
+            }
 
+            if (sandwiches >= upgrade5Cost)
+            {
+                upgrade5Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
+                upgrade5Panel.BackColor = Color.DarkCyan;
+            }
 
-                }
+            if (sandwiches >= upgrade6Cost)
+            {
+                upgrade6Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
+                upgrade6Panel.BackColor = Color.DarkCyan;
             }
 
         }
+
         private void exitLabel_Click(object sender, EventArgs e)
         {
             XmlRw w = new XmlRw();
@@ -815,9 +894,6 @@ namespace BrickBreaker
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 400);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 500);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 600);
-
-            e.Graphics.FillRectangle(transparentBrush, rec1);
-
         }
 
     }

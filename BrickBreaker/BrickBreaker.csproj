@@ -168,6 +168,7 @@
     <Content Include="levels\level9.xml" />
     <Content Include="levels\level_save1.xml" />
     <Content Include="levels\level_save2.xml" />
+
     <None Include="Resources\2019-01-10_-_Land_of_8_Bits_-_Stephen_Bennett_-_FesliyanStudios.com.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -201,6 +202,13 @@
     <None Include="Resources\level-up-enhancement-8-bit-retro-sound-effect-153002.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+
+
+    <None Include="Resources\rick roll night.gif" />
+
+  
+
+
     <Content Include="statistics.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
