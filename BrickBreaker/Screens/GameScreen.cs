@@ -40,7 +40,7 @@ namespace BrickBreaker
         Ball ball;
 
         //upgrade varuables
-        int widthCounter, paddleSpeedCounter, swMultiplierCounter = 0;
+        int widthCounter, paddleSpeedCounter = 0;
         // list of all blocks for current level
         public List<Block> blocks = new List<Block>();
 
@@ -82,15 +82,15 @@ namespace BrickBreaker
 
         //currency
         int sandwiches;
-        Rectangle rec1 = new Rectangle(950, 100, 200, 100);
-        Rectangle rec2 = new Rectangle(950, 200, 200, 100);
-        Rectangle rec3 = new Rectangle(950, 300, 200, 100);
-        Rectangle rec4 = new Rectangle(950, 400, 200, 100);
-        Rectangle rec5 = new Rectangle(950, 500, 200, 100);
-        Rectangle rec6 = new Rectangle(950, 600, 200, 100);
 
         int multiplier = 1;
 
+        int upgrade1Cost = 5;
+        int upgrade2Cost = 20;
+        int upgrade3Cost = 50;
+        int upgrade4Cost = 30;
+        int upgrade5Cost = 200;
+        int upgrade6Cost = 500;
 
         int score = 0;
         int blocksDestroyed = 0;
@@ -104,7 +104,7 @@ namespace BrickBreaker
             OnStart();
 
 
-           // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.55, 200, true, true, true, false, false));
+            // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.55, 200, true, true, true, false, false));
 
 
 
@@ -119,7 +119,8 @@ namespace BrickBreaker
 
             Random rand = new Random();
 
-            if (minN != 4 && maxN != 10 && rand.Next(0, 1000) > 5) {
+            if (minN != 4 && maxN != 10 && rand.Next(0, 1000) > 5)
+            {
                 return;
             }
 
@@ -161,7 +162,8 @@ namespace BrickBreaker
             if (currentLevel >= 10)
             {
                 currentLevel = 1;
-            } else if (currentLevel == 9)
+            }
+            else if (currentLevel == 9)
             {
                 generateRandomStuff();
                 currentLevel += 1;
@@ -259,7 +261,7 @@ namespace BrickBreaker
                         }
 
 
-                        balls[0].xSpeed = Math.Abs(ball.xSpeed); 
+                        balls[0].xSpeed = Math.Abs(ball.xSpeed);
 
                         balls[0].defaultSpeedX = (int)(6 * xScale);
                         balls[0].defaultSpeedY = (int)(6 * yScale);
@@ -363,14 +365,14 @@ namespace BrickBreaker
                     {
                         score += 1;
                         balls[i] = blocks[j].PassCondition(balls[i]);
-
+                        //add points to the player
+                        sandwiches = sandwiches + multiplier;
+                        sandwichQuantity.Text = $"{sandwiches}";
                         if (blocks[j].hp <= 0)
                         {
                             blocks.RemoveAt(j);
                             j--;
                             blocksDestroyed += 1;
-                            sandwiches = sandwiches + (1 * multiplier);
-                            sandwichQuantity.Text = $"{sandwiches}";
                         }
                     }
 
@@ -472,7 +474,7 @@ namespace BrickBreaker
                             blocks = hole.BeyondHorizon(blocks);
                         }
                     }
-                    
+
 
                     hole.DrawPoints();
                 }
@@ -544,22 +546,23 @@ namespace BrickBreaker
         #region upgrade panel click events
         private void upgrade1Panel_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 5)
+            if (sandwiches >= upgrade1Cost)
             {
-                sandwiches = sandwiches - 5;
+                sandwiches = sandwiches - upgrade1Cost;
                 sandwichQuantity.Text = $"{sandwiches}";
                 powerups.Add(new Powerup("PW"));
                 widthCounter++;
+                upgrade1Quantity.Text = $"{widthCounter}";
             }
         }
 
         private void upgrade2Panel_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 20)
+            if (sandwiches >= upgrade2Cost)
             {
-                sandwiches = sandwiches - 20;
+                sandwiches = sandwiches - upgrade2Cost;
                 sandwichQuantity.Text = $"{sandwiches}";
-                paddle.speed = paddle.speed + 1 % 4;
+                paddle.speed = paddle.speed + 1 % 6;
                 paddleSpeedCounter++;
                 upgrade2Quantity.Text = $"{paddleSpeedCounter}";
             }
@@ -567,19 +570,19 @@ namespace BrickBreaker
 
         private void upgrade3Panel_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 50)
+            if (sandwiches >= upgrade3Cost)
             {
-                sandwiches = sandwiches - 50;
-                multiplier = multiplier + 1;
+                sandwiches = sandwiches - upgrade3Cost;
+                multiplier++;
                 upgrade3Quantity.Text = multiplier + "x";
             }
         }
 
         private void upgrade4Quantity_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 30)
+            if (sandwiches >= upgrade4Cost)
             {
-                sandwiches = sandwiches - 30;
+                sandwiches = sandwiches - upgrade4Cost;
                 sandwichQuantity.Text = $"{sandwiches}";
                 powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
             }
@@ -587,80 +590,79 @@ namespace BrickBreaker
         //black hole upgrade v GRADY needs to add a decay or at least disapear when the level renews
         private void upgrade5Panel_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 200)
+            if (sandwiches >= upgrade5Cost)
             {
-                sandwiches = sandwiches - 200;
+                sandwiches = sandwiches - upgrade5Cost;
                 sandwichQuantity.Text = $"{sandwiches}";
             }
         }
         //purchase randomized level
         private void upgrade6Panel_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 500)
+            if (sandwiches >= upgrade6Cost)
             {
-                sandwiches = sandwiches - 1000;
+                sandwiches = sandwiches - upgrade6Cost;
                 sandwichQuantity.Text = $"{sandwiches}";
             }
         }
-
+        #endregion
         void ShopBackColor()
         {
-            if(sandwiches < 20)
+            if (sandwiches >= upgrade1Cost)
+            {
+                upgrade1Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
             {
                 upgrade1Panel.BackColor = Color.DarkCyan;
+            }
+
+            if (sandwiches >= upgrade2Cost)
+            {
+                upgrade2Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
                 upgrade2Panel.BackColor = Color.DarkCyan;
+            }
+
+            if (sandwiches >= upgrade3Cost)
+            {
+                upgrade3Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
                 upgrade3Panel.BackColor = Color.DarkCyan;
-                upgrade4Panel.BackColor = Color.DarkCyan;
-                upgrade5Panel.BackColor = Color.DarkCyan;
-                upgrade6Panel.BackColor = Color.DarkCyan;
             }
-            else if (sandwiches < 50 && sandwiches >= 20)
+
+            if (sandwiches >= upgrade4Cost)
             {
-                upgrade1Panel.BackColor = Color.DeepSkyBlue;
-                upgrade2Panel.BackColor = Color.DeepSkyBlue;
-                upgrade3Panel.BackColor = Color.DarkCyan;
-                upgrade4Panel.BackColor = Color.DarkCyan;
-                upgrade5Panel.BackColor = Color.DarkCyan;
-                upgrade6Panel.BackColor = Color.DarkCyan;
-            }
-            else if(sandwiches < 300 && sandwiches >= 50)
-            {
-                upgrade1Panel.BackColor = Color.DeepSkyBlue;
-                upgrade2Panel.BackColor = Color.DeepSkyBlue;
-                upgrade3Panel.BackColor = Color.DeepSkyBlue;
-                upgrade4Panel.BackColor = Color.DarkCyan;
-                upgrade5Panel.BackColor = Color.DarkCyan;
-                upgrade6Panel.BackColor = Color.DarkCyan;
-            }
-            else if(sandwiches < 500 && sandwiches >= 300)
-            {
-                upgrade1Panel.BackColor = Color.DeepSkyBlue;
-                upgrade2Panel.BackColor = Color.DeepSkyBlue;
-                upgrade3Panel.BackColor = Color.DeepSkyBlue;
                 upgrade4Panel.BackColor = Color.DeepSkyBlue;
-                upgrade5Panel.BackColor = Color.DarkCyan;
-                upgrade6Panel.BackColor = Color.DarkCyan;
             }
-            else if(sandwiches < 1000 && sandwiches >= 500)
+            else
             {
-                upgrade1Panel.BackColor = Color.DeepSkyBlue;
-                upgrade2Panel.BackColor = Color.DeepSkyBlue;
-                upgrade3Panel.BackColor = Color.DeepSkyBlue;
-                upgrade4Panel.BackColor = Color.DeepSkyBlue;
-                upgrade5Panel.BackColor = Color.DarkCyan;
-                upgrade6Panel.BackColor = Color.DeepSkyBlue;
+                upgrade4Panel.BackColor = Color.DarkCyan;
             }
-            else if (sandwiches >= 1000)
+
+            if (sandwiches >= upgrade5Cost)
             {
-                upgrade1Panel.BackColor = Color.DeepSkyBlue;
-                upgrade2Panel.BackColor = Color.DeepSkyBlue;
-                upgrade3Panel.BackColor = Color.DeepSkyBlue;
-                upgrade4Panel.BackColor = Color.DeepSkyBlue;
                 upgrade5Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
+                upgrade5Panel.BackColor = Color.DarkCyan;
+            }
+
+            if (sandwiches >= upgrade6Cost)
+            {
                 upgrade6Panel.BackColor = Color.DeepSkyBlue;
             }
+            else
+            {
+                upgrade6Panel.BackColor = Color.DarkCyan;
+            }
+
         }
-        #endregion
 
         private void exitLabel_Click(object sender, EventArgs e)
         {
@@ -783,9 +785,6 @@ namespace BrickBreaker
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 400);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 500);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 600);
-
-            e.Graphics.FillRectangle(transparentBrush, rec1);
-
         }
 
     }
