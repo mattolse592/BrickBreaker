@@ -55,6 +55,10 @@ namespace BrickBreaker
         //Grady Stuff
         public static int speedModBX = 0, speedModBY = 0, speedModPX = 0, widthModP;
 
+        List<System.Windows.Media.MediaPlayer> ballHits = new List<System.Windows.Media.MediaPlayer> ();
+
+        List<System.Windows.Media.MediaPlayer> winSounds = new List<System.Windows.Media.MediaPlayer>();
+
         public static List<BlackHole> holes = new List<BlackHole>();
 
         List<Powerup> powerups = new List<Powerup>();
@@ -172,7 +176,22 @@ namespace BrickBreaker
 
             ballSound.Open(new Uri(Application.StartupPath + "\\Resources\\Dodge.wav"));
 
-            ballSound.Play();
+            ballHits.Add(ballSound);
+
+            ballHits[ballHits.Count - 1].Play();
+
+        }
+
+        private void GameWin()
+        {
+
+            var winSound = new System.Windows.Media.MediaPlayer();
+
+            winSound.Open(new Uri(Application.StartupPath + "\\Resources\\level-up-enhancement-8-bit-retro-sound-effect-153002.wav"));
+
+            winSounds.Add(winSound);
+
+            winSounds[winSounds.Count - 1].Play();
 
         }
 
@@ -303,6 +322,7 @@ namespace BrickBreaker
             {
                 nextLevel();
                 PlayMusic();
+                ballHits.Clear();
             }
 
             #endregion
@@ -430,6 +450,7 @@ namespace BrickBreaker
                 if (blocks.Count == 0)
                 {
                     gameTimer.Enabled = false;
+                    GameWin();
                     OnStart();
                     return;
                 }

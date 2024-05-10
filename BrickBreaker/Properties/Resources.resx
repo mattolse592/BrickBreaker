@@ -121,6 +121,9 @@
   <data name="Dodge" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dodge.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="level_up_enhancement_8_bit_retro_sound_effect_153002" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\level-up-enhancement-8-bit-retro-sound-effect-153002.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Rick_Astley___Never_Gonna_Give_You_Up__Official_Music_Video_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Rick Astley - Never Gonna Give You Up (Official Music Video).wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

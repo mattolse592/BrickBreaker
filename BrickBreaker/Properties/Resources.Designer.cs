@@ -144,6 +144,15 @@ namespace BrickBreaker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream level_up_enhancement_8_bit_retro_sound_effect_153002 {
+            get {
+                return ResourceManager.GetStream("level_up_enhancement_8_bit_retro_sound_effect_153002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream Rick_Astley___Never_Gonna_Give_You_Up__Official_Music_Video_ {
             get {
                 return ResourceManager.GetStream("Rick_Astley___Never_Gonna_Give_You_Up__Official_Music_Video_", resourceCulture);
