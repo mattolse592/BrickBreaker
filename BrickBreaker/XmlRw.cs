@@ -80,6 +80,28 @@ namespace BrickBreaker
                     Console.WriteLine("oh no2!");
                 }
 
+                reader.ReadToFollowing("total_levels");
+                string levelsStr = reader.ReadString();
+                if (levelsStr != null && levelsStr != "")
+                {
+                    totalLevels += Convert.ToInt32(levelsStr);
+                }
+                else
+                {
+                    Console.WriteLine("oh no2!");
+                }
+
+                reader.ReadToFollowing("sandwiches");
+                string sandwichesStr = reader.ReadString();
+                if (sandwichesStr != null && sandwichesStr != "")
+                {
+                    sandwichesEaten = Convert.ToInt32(sandwichesStr);
+                }
+                else
+                {
+                    Console.WriteLine("oh no2!");
+                }
+
                 //reader.ReadEndElement();
             }
 
@@ -177,7 +199,7 @@ namespace BrickBreaker
             writer.WriteElementString("high_score", highScore.ToString());
             writer.WriteElementString("blocks_destroyed", totalBlocksDestoryed.ToString());
             writer.WriteElementString("total_levels", totalLevels.ToString());
-            writer.WriteElementString("sandwhiches", sandwiches.ToString());
+            writer.WriteElementString("sandwiches", sandwiches.ToString());
 
             writer.Close();
 
