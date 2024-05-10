@@ -95,18 +95,18 @@ namespace BrickBreaker
                 rickRoll.Stop();
                 menuMusic.Play();
 
-            if (ricktimer.Enabled == false)
-            {
-                ricktimer.Enabled = true;
-                mrRoll.Visible = true;
-            }
-            else
-            {
-                ricktimer.Enabled = false;
-                mrRoll.Visible = false;
+                if (ricktimer.Enabled == false)
+                {
+                    ricktimer.Enabled = true;
+                    mrRoll.Visible = true;
+                }
+                else
+                {
+                    ricktimer.Enabled = false;
+                    mrRoll.Visible = false;
+                }
             }
         }
-
         private void ricktimer_Tick(object sender, EventArgs e)
         {
             mrRoll.Location = new Point(mrRoll.Location.X + speedX, mrRoll.Location.Y + speedY);
@@ -122,5 +122,6 @@ namespace BrickBreaker
 
             }
         }
+
     }
 }
