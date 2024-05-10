@@ -113,6 +113,8 @@ namespace BrickBreaker
         {
             InitializeComponent();
 
+            GameStart();
+
             music[0].Open(new Uri(Application.StartupPath + "\\Resources\\2021-08-30_-_Boss_Time_-_www.FesliyanStudios.com.wav"));
             music[1].Open(new Uri(Application.StartupPath + "\\Resources\\2021-10-19_-_Funny_Bit_-_www.FesliyanStudios.com (1).wav"));
             music[2].Open(new Uri(Application.StartupPath + "\\Resources\\2019-12-11_-_Retro_Platforming_-_David_Fesliyan.wav"));
@@ -190,6 +192,19 @@ namespace BrickBreaker
             winSound.Open(new Uri(Application.StartupPath + "\\Resources\\level-up-enhancement-8-bit-retro-sound-effect-153002.wav"));
 
             winSounds.Add(winSound);
+
+            winSounds[winSounds.Count - 1].Play();
+
+        }
+
+        private void GameStart()
+        {
+
+            var startSound = new System.Windows.Media.MediaPlayer();
+
+            startSound.Open(new Uri(Application.StartupPath + "\\Resources\\Microsoft Windows XP Startup Sound.wav"));
+
+            winSounds.Add(startSound);
 
             winSounds[winSounds.Count - 1].Play();
 
