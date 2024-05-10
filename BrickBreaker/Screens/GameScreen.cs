@@ -146,7 +146,7 @@ namespace BrickBreaker
 
             for (int i = 0; i < w.blocks.Count; i++)
             {
-                w.blocks[i].hp = rand.Next(11, 199);
+                w.blocks[i].hp = rand.Next(11, 199);
                 w.blocks[i].x += w.blocks[i].x * 57;
                 w.blocks[i].y += w.blocks[i].y * 32;
                 blocks.Add(w.blocks[i]);
