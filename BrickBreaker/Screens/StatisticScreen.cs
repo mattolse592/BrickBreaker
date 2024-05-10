@@ -21,6 +21,12 @@ namespace BrickBreaker
             level = currentLevel;
             blocks = currentBlocks;
             InitializeComponent();
+
+            XmlRw w = new XmlRw();
+            w.getStatistics();
+
+            this.label12.Text = w.totalBlocksDestoryed.ToString();
+            this.Refresh();
         }
 
         private void backButton_Click(object sender, EventArgs e)

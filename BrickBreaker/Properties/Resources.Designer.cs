@@ -61,6 +61,36 @@ namespace BrickBreaker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blackhole {
+            get {
+                object obj = ResourceManager.GetObject("blackhole", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fireball {
+            get {
+                object obj = ResourceManager.GetObject("fireball", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap random {
+            get {
+                object obj = ResourceManager.GetObject("random", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream _2019_01_10___Land_of_8_Bits___Stephen_Bennett___FesliyanStudios_com {
@@ -165,6 +195,66 @@ namespace BrickBreaker.Properties {
         internal static System.IO.UnmanagedMemoryStream Rick_Astley___Never_Gonna_Give_You_Up__Official_Music_Video_ {
             get {
                 return ResourceManager.GetStream("Rick_Astley___Never_Gonna_Give_You_Up__Official_Music_Video_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap rick_roll_night {
+            get {
+                object obj = ResourceManager.GetObject("rick_roll_night", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sandwich1 {
+            get {
+                object obj = ResourceManager.GetObject("sandwich1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sandwiches {
+            get {
+                object obj = ResourceManager.GetObject("sandwiches", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap speed {
+            get {
+                object obj = ResourceManager.GetObject("speed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap speed1 {
+            get {
+                object obj = ResourceManager.GetObject("speed1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap width {
+            get {
+                object obj = ResourceManager.GetObject("width", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

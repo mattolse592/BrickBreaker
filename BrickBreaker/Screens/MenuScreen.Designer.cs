@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.playButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
@@ -35,6 +36,9 @@
             this.arsBackgroundLabel = new System.Windows.Forms.Label();
             this.yesButton = new System.Windows.Forms.Button();
             this.noButton = new System.Windows.Forms.Button();
+            this.mrRoll = new System.Windows.Forms.PictureBox();
+            this.ricktimer = new System.Windows.Forms.Timer(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.mrRoll)).BeginInit();
             this.SuspendLayout();
             // 
             // playButton
@@ -145,11 +149,29 @@
             this.noButton.Visible = false;
             this.noButton.Click += new System.EventHandler(this.noButton_Click);
             // 
+            // mrRoll
+            // 
+            this.mrRoll.Image = global::BrickBreaker.Properties.Resources.rick_roll_night;
+            this.mrRoll.Location = new System.Drawing.Point(36, 52);
+            this.mrRoll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.mrRoll.Name = "mrRoll";
+            this.mrRoll.Size = new System.Drawing.Size(468, 374);
+            this.mrRoll.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.mrRoll.TabIndex = 8;
+            this.mrRoll.TabStop = false;
+            this.mrRoll.Visible = false;
+            // 
+            // ricktimer
+            // 
+            this.ricktimer.Interval = 50;
+            this.ricktimer.Tick += new System.EventHandler(this.ricktimer_Tick);
+            // 
             // MenuScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.Controls.Add(this.mrRoll);
             this.Controls.Add(this.noButton);
             this.Controls.Add(this.yesButton);
             this.Controls.Add(this.arsBackgroundLabel);
@@ -160,6 +182,7 @@
             this.DoubleBuffered = true;
             this.Name = "MenuScreen";
             this.Size = new System.Drawing.Size(1250, 700);
+            ((System.ComponentModel.ISupportInitialize)(this.mrRoll)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -173,5 +196,7 @@
         private System.Windows.Forms.Label arsBackgroundLabel;
         private System.Windows.Forms.Button yesButton;
         private System.Windows.Forms.Button noButton;
+        private System.Windows.Forms.PictureBox mrRoll;
+        private System.Windows.Forms.Timer ricktimer;
     }
 }
