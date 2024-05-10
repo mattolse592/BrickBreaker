@@ -12,11 +12,39 @@ namespace BrickBreaker
 {
     public partial class MenuScreen : UserControl
     {
+
+        System.Windows.Media.MediaPlayer menuMusic = new System.Windows.Media.MediaPlayer();
+        System.Windows.Media.MediaPlayer rickRoll = new System.Windows.Media.MediaPlayer();
+        bool rolling = false;
+
+
         int speedX = 20;
         int speedY = 20;
+
         public MenuScreen()
         {
             InitializeComponent();
+
+            menuMusic.Open(new Uri(Application.StartupPath + "\\Resources\\2019-01-10_-_Land_of_8_Bits_-_Stephen_Bennett_-_FesliyanStudios.com.wav"));
+            menuMusic.MediaEnded += new EventHandler(menuMusicEnded);
+            menuMusic.Play();
+
+            rickRoll.Open(new Uri(Application.StartupPath + "\\Resources\\Rick Astley - Never Gonna Give You Up (Official Music Video).wav"));
+            rickRoll.MediaEnded += new EventHandler(rickEnded);
+        }
+
+        private void menuMusicEnded(object sender, EventArgs e)
+        {
+            menuMusic.Stop();
+
+            menuMusic.Play();
+        }
+
+        private void rickEnded(object sender, EventArgs e)
+        {
+            rickRoll.Stop();
+
+            rickRoll.Play();
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -27,6 +55,8 @@ namespace BrickBreaker
         private void playButton_Click(object sender, EventArgs e)
         {
             // Goes to the game screen
+            rickRoll.Stop();
+            menuMusic.Stop();
             Form1.ChangeScreen(this, new GameScreen());
         }
 
@@ -53,18 +83,30 @@ namespace BrickBreaker
 
         private void instructionButton_Click(object sender, EventArgs e)
         {
-            if (ricktimer.Enabled == false)
+
+            rolling = !rolling;
+            if (rolling)
             {
-                ricktimer.Enabled = true;
-                mrRoll.Visible = true;
+                menuMusic.Stop();
+                rickRoll.Play();
             }
             else
             {
-                ricktimer.Enabled = false;
-                mrRoll.Visible = false;
+                rickRoll.Stop();
+                menuMusic.Play();
+
+                if (ricktimer.Enabled == false)
+                {
+                    ricktimer.Enabled = true;
+                    mrRoll.Visible = true;
+                }
+                else
+                {
+                    ricktimer.Enabled = false;
+                    mrRoll.Visible = false;
+                }
             }
         }
-
         private void ricktimer_Tick(object sender, EventArgs e)
         {
             mrRoll.Location = new Point(mrRoll.Location.X + speedX, mrRoll.Location.Y + speedY);
@@ -77,7 +119,9 @@ namespace BrickBreaker
             if (mrRoll.Location.Y + mrRoll.Height > this.Height || mrRoll.Location.Y < 0)
             {
                 speedY *= -1;
+
             }
         }
+
     }
 }

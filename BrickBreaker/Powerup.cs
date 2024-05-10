@@ -64,6 +64,7 @@ namespace BrickBreaker
             }
             else if (Type.Contains("BH"))
             {
+                result.Clear();
                 List<Modifier> modifiers = new List<Modifier> { new Modifier("PERM"), new Modifier("IMMINENT") };
                 result.Add(new Ball(balls[0].x, balls[0].y, balls[0].xSpeed, balls[0].ySpeed, balls[0].size, modifiers));
                 Modifiers.Add(new Modifier("remove"));
