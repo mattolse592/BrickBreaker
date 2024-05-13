@@ -47,7 +47,6 @@
             this.upgrade5Description = new System.Windows.Forms.Label();
             this.upgrade5TItle = new System.Windows.Forms.Label();
             this.upgrade6Price = new System.Windows.Forms.Label();
-            this.upgrade6Icon = new System.Windows.Forms.Label();
             this.upgrade6Description = new System.Windows.Forms.Label();
             this.upgrade6Title = new System.Windows.Forms.Label();
             this.statisticsButton = new System.Windows.Forms.Label();
@@ -67,7 +66,6 @@
             this.upgrade5Panel = new System.Windows.Forms.Panel();
             this.upgrade5Icon = new System.Windows.Forms.PictureBox();
             this.upgrade6Panel = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.upgrade2Panel.SuspendLayout();
             this.upgrade1Panel.SuspendLayout();
             this.upgrade3Panel.SuspendLayout();
@@ -76,7 +74,6 @@
             this.upgrade5Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.upgrade5Icon)).BeginInit();
             this.upgrade6Panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // gameTimer
@@ -293,18 +290,6 @@
             this.upgrade6Price.Text = "500";
             this.upgrade6Price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.upgrade6Price.Click += new System.EventHandler(this.upgrade6Panel_Click);
-            // 
-            // upgrade6Icon
-            // 
-            this.upgrade6Icon.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.upgrade6Icon.ForeColor = System.Drawing.Color.White;
-            this.upgrade6Icon.Location = new System.Drawing.Point(210, 26);
-            this.upgrade6Icon.Name = "upgrade6Icon";
-            this.upgrade6Icon.Size = new System.Drawing.Size(60, 48);
-            this.upgrade6Icon.TabIndex = 30;
-            this.upgrade6Icon.Text = "N/A";
-            this.upgrade6Icon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.upgrade6Icon.Click += new System.EventHandler(this.upgrade6Panel_Click);
             // 
             // upgrade6Description
             // 
@@ -541,7 +526,6 @@
             // 
             this.upgrade6Panel.Controls.Add(this.upgrade6Title);
             this.upgrade6Panel.Controls.Add(this.upgrade6Description);
-            this.upgrade6Panel.Controls.Add(this.upgrade6Icon);
             this.upgrade6Panel.Controls.Add(this.upgrade6Price);
             this.upgrade6Panel.Location = new System.Drawing.Point(953, 604);
             this.upgrade6Panel.Name = "upgrade6Panel";
@@ -549,22 +533,11 @@
             this.upgrade6Panel.TabIndex = 45;
             this.upgrade6Panel.Click += new System.EventHandler(this.upgrade6Panel_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::BrickBreaker.Properties.Resources.speed1;
-            this.pictureBox1.Location = new System.Drawing.Point(718, 267);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(49, 47);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 46;
-            this.pictureBox1.TabStop = false;
-            // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.upgrade6Panel);
             this.Controls.Add(this.upgrade5Panel);
             this.Controls.Add(this.upgrade4Panel);
@@ -596,7 +569,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.upgrade5Icon)).EndInit();
             this.upgrade6Panel.ResumeLayout(false);
             this.upgrade6Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -621,7 +593,6 @@
         private System.Windows.Forms.Label upgrade5Description;
         private System.Windows.Forms.Label upgrade5TItle;
         private System.Windows.Forms.Label upgrade6Price;
-        private System.Windows.Forms.Label upgrade6Icon;
         private System.Windows.Forms.Label upgrade6Description;
         private System.Windows.Forms.Label upgrade6Title;
         private System.Windows.Forms.Label statisticsButton;
@@ -641,6 +612,5 @@
         private System.Windows.Forms.Panel upgrade6Panel;
         private System.Windows.Forms.PictureBox upgrade4Icon;
         private System.Windows.Forms.PictureBox upgrade5Icon;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
