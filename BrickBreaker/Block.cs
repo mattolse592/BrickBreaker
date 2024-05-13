@@ -13,14 +13,16 @@ namespace BrickBreaker
         public int height = 25;
 
         public int x;
-        public int y; 
+        public int y;
         public int hp;
+        public int maxHP;
         public Color colour;
+        public Image image;
 
         public static Random rand = new Random();
 
         public List<Modifier> modifiers = new List<Modifier>();
-        
+
 
         const int TICSPEED = 50;
         int fireTic;
@@ -30,7 +32,9 @@ namespace BrickBreaker
             x = _x;
             y = _y;
             hp = _hp;
+            maxHP = _hp;
             colour = _colour;
+            image = Properties.Resources.samsmich_full_health;
             fireTic = TICSPEED;
         }
 
@@ -57,7 +61,7 @@ namespace BrickBreaker
 
                     List<Modifier> hold = new List<Modifier>();
 
-                    foreach(Modifier mod in ball.modifiers)
+                    foreach (Modifier mod in ball.modifiers)
                     {
                         hold.Add(mod);
                     }
@@ -73,7 +77,7 @@ namespace BrickBreaker
         {
             foreach (Modifier modifier in modifiers)
             {
-                if (modifier.mod ==("ONFIRE"))
+                if (modifier.mod == ("ONFIRE"))
                 {
                     fireTic--;
                 }
