@@ -15,7 +15,6 @@ namespace BrickBreaker
         public int x;
         public int y;
         public int hp;
-        public int maxHP;
         public Color colour;
         public Image image;
 
@@ -32,7 +31,6 @@ namespace BrickBreaker
             x = _x;
             y = _y;
             hp = _hp;
-            maxHP = _hp;
             colour = _colour;
             image = Properties.Resources.samsmich_full_health;
             fireTic = TICSPEED;
