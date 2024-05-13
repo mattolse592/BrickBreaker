@@ -32,6 +32,8 @@ namespace BrickBreaker
             w.getStatistics();
 
             this.label12.Text = w.totalBlocksDestoryed.ToString();
+            Console.WriteLine($"sandwiches: {w.sandwichesEaten}");
+            this.label11.Text = w.sandwichesEaten.ToString();
             this.Refresh();
         }
 
