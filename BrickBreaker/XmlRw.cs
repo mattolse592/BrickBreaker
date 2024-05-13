@@ -20,6 +20,8 @@ namespace BrickBreaker
         public int totalBlocksDestoryed = 0;
         public int totalScore = 0;
         public int highScore = 0;
+        public int sandwichesEaten = 0;
+        public int totalLevels = 0;
 
         // Blocks from level
         public List<Block> blocks = new List<Block>();
@@ -78,19 +80,42 @@ namespace BrickBreaker
                     Console.WriteLine("oh no2!");
                 }
 
+                reader.ReadToFollowing("total_levels");
+                string levelsStr = reader.ReadString();
+                if (levelsStr != null && levelsStr != "")
+                {
+                    totalLevels += Convert.ToInt32(levelsStr);
+                }
+                else
+                {
+                    Console.WriteLine("oh no2!");
+                }
+
+                reader.ReadToFollowing("sandwiches");
+                string sandwichesStr = reader.ReadString();
+                if (sandwichesStr != null && sandwichesStr != "")
+                {
+                    sandwichesEaten = Convert.ToInt32(sandwichesStr);
+                }
+                else
+                {
+                    Console.WriteLine("oh no2!");
+                }
+
                 //reader.ReadEndElement();
             }
 
             reader.Close();
         }
 
-        public int writeStatistics(int blocksDestoryed, int score, int level)
+        public int writeStatistics(int blocksDestoryed, int score, int level, int sandwiches)
         {
             XmlReader reader = XmlReader.Create("../../statistics.xml");
 
             int totalBlocksDestoryed = 0;
             int totalScore = 0;
             int highScore = 0;
+            totalLevels += level;
 
             reader.ReadStartElement("statistics");
 
@@ -103,7 +128,7 @@ namespace BrickBreaker
                     totalScore = Convert.ToInt32(totalScoreStr);
                 } else
                 {
-                    Console.WriteLine("oh no0!");
+                    Console.WriteLine("oh no!");
                 }
                 //totalScore = Convert.ToInt32(reader.ReadString());
 
@@ -114,7 +139,7 @@ namespace BrickBreaker
                     highScore = Convert.ToInt32(highScoreStr);
                 } else
                 {
-                    Console.WriteLine("oh no1!");
+                    Console.WriteLine("oh no again!");
                 }
 
                 reader.ReadToFollowing("blocks_destroyed");
@@ -124,11 +149,33 @@ namespace BrickBreaker
                     totalBlocksDestoryed = Convert.ToInt32(blocksDestoryedStr);
                 } else
                 {
-                    Console.WriteLine("oh no2!");
+                    Console.WriteLine("How is this working if these are error messages?");
+                }
+
+                reader.ReadToFollowing("total_levels");
+                string levelsStr = reader.ReadString();
+                if (levelsStr != null && highScoreStr != "")
+                {
+                    totalLevels += Convert.ToInt32(levelsStr);
+                } else
+                {
+                    Console.WriteLine("uh oh spaghheti os");
+                }
+
+                reader.ReadToFollowing("sandwiches");
+                string sandwhichesStr = reader.ReadString();
+                if (sandwhichesStr != null && sandwhichesStr != "")
+                {
+                    sandwichesEaten = Convert.ToInt32(sandwhichesStr);
+                } else
+                {
+                    Console.WriteLine("bruvva where de sandwhiches at?");
                 }
 
                 //reader.ReadEndElement();
             }
+
+            Console.WriteLine("Why are you reading this? Play the game!");
 
             reader.Close();
 
@@ -151,7 +198,8 @@ namespace BrickBreaker
             writer.WriteElementString("total_score", totalScore.ToString());
             writer.WriteElementString("high_score", highScore.ToString());
             writer.WriteElementString("blocks_destroyed", totalBlocksDestoryed.ToString());
-            writer.WriteEndElement();
+            writer.WriteElementString("total_levels", totalLevels.ToString());
+            writer.WriteElementString("sandwiches", sandwiches.ToString());
 
             writer.Close();
 
