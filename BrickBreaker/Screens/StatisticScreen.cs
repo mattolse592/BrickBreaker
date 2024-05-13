@@ -14,12 +14,14 @@ namespace BrickBreaker
     {
         Pen whiteBrush = new Pen(Color.White);
         int level = 0;
+        int sandwiches = 0;
         List<Block> blocks = new List<Block>();
 
-        public StatisticScreen(int currentLevel, List<Block> currentBlocks)
+        public StatisticScreen(int currentLevel, List<Block> currentBlocks, int sandwiches_)
         {
             level = currentLevel;
             blocks = currentBlocks;
+            sandwiches = sandwiches_;
             InitializeComponent();
 
             XmlRw w = new XmlRw();
@@ -37,6 +39,7 @@ namespace BrickBreaker
             gameScreen.blocks = blocks;
             gameScreen.currentLevel = level;
             gameScreen.loadGame = false;
+            gameScreen.sandwiches = sandwiches;
             Form1.ChangeScreen(this, gameScreen);
         }
 

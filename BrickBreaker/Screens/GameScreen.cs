@@ -96,7 +96,7 @@ namespace BrickBreaker
         public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
 
         //currency
-        int sandwiches;
+        public int sandwiches;
 
         int multiplier = 1;
 
@@ -924,7 +924,7 @@ namespace BrickBreaker
         private void statisticsButton_Click(object sender, EventArgs e)
         {
             TurnMusicOff();
-            Form1.ChangeScreen(this, new StatisticScreen(currentLevel, blocks));
+            Form1.ChangeScreen(this, new StatisticScreen(currentLevel, blocks, sandwiches));
         }
 
         // Save level
