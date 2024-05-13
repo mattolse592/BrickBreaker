@@ -142,6 +142,7 @@ namespace BrickBreaker
 
         }
 
+
         private void holeEnded(object sender, EventArgs e)
         {
             holeSong.Stop();
@@ -158,6 +159,7 @@ namespace BrickBreaker
             bonusSong.Play();
         }
 
+
         private void music0Ended(object sender, EventArgs e)
         {
             music[0].Stop();
@@ -165,35 +167,31 @@ namespace BrickBreaker
 
             music[0].Play();
         }
-
-
         private void music1Ended(object sender, EventArgs e)
         {
             music[1].Stop();
 
             music[1].Play();
         }
-
         private void music2Ended(object sender, EventArgs e)
         {
             music[2].Stop();
 
             music[2].Play();
         }
-
         private void music3Ended(object sender, EventArgs e)
         {
             music[3].Stop();
 
             music[3].Play();
         }
-
         private void music4Ended(object sender, EventArgs e)
         {
             music[4].Stop();
 
             music[4].Play();
         }
+        #endregion
 
         private void BallHit()
         {
@@ -360,6 +358,7 @@ namespace BrickBreaker
 
         public void OnStart()
         {
+
             if (numHole < 5)
             {
                 holes.Clear();
@@ -825,13 +824,27 @@ namespace BrickBreaker
             if (sandwiches >= upgrade6Cost)
             {
                 sandwiches = sandwiches - upgrade6Cost;
+                currentLevel = 10;
                 sandwichQuantity.Text = $"{sandwiches}";
+
+
+
+                generateRandomStuff();
 
             }
         }
         #endregion
         void ShopBackColor()
         {
+            if (sandwiches >= 20)
+            {
+                htpButton.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
+                htpButton.BackColor = Color.DarkCyan;
+            }
+
             if (sandwiches >= upgrade1Cost)
             {
                 upgrade1Panel.BackColor = Color.DeepSkyBlue;
@@ -886,6 +899,16 @@ namespace BrickBreaker
                 upgrade6Panel.BackColor = Color.DarkCyan;
             }
 
+        }
+
+        private void htpButton_Click(object sender, EventArgs e)
+        {
+            if (sandwiches >= 20)
+            {
+                sandwiches = sandwiches - 20;
+                sandwichQuantity.Text = $"{sandwiches}";
+                powerups.Add(new Powerup("BE", new List<Modifier> { new Modifier("explode") }));
+            }
         }
 
         private void exitLabel_Click(object sender, EventArgs e)
