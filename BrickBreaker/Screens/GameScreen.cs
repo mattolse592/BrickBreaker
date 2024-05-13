@@ -96,7 +96,7 @@ namespace BrickBreaker
         public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
 
         //currency
-        int sandwiches;
+        public int sandwiches;
 
         int multiplier = 1;
 
@@ -366,7 +366,7 @@ namespace BrickBreaker
             }
 
 
-            sandwiches = 0;
+           // sandwiches = 0;
 
 
             //set all button presses to false.
@@ -927,7 +927,8 @@ namespace BrickBreaker
         private void statisticsButton_Click(object sender, EventArgs e)
         {
             TurnMusicOff();
-            Form1.ChangeScreen(this, new StatisticScreen(currentLevel, blocks));
+            gameTimer.Enabled = false;
+            Form1.ChangeScreen(this, new StatisticScreen(currentLevel, blocks, sandwiches));
         }
 
         // Save level
@@ -940,6 +941,7 @@ namespace BrickBreaker
         public void OnEnd()
         {
             // Goes to the game over screen
+            gameTimer.Enabled = false;
             Form1.ChangeScreen(this, new MenuScreen());
 
             //TODO: save the file to xml
