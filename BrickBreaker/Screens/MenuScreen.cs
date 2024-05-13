@@ -17,6 +17,7 @@ namespace BrickBreaker
         System.Windows.Media.MediaPlayer rickRoll = new System.Windows.Media.MediaPlayer();
         bool rolling = false;
 
+        List<System.Windows.Media.MediaPlayer> winSounds = new List<System.Windows.Media.MediaPlayer>();
 
         int speedX = 20;
         int speedY = 20;
@@ -33,6 +34,18 @@ namespace BrickBreaker
             rickRoll.MediaEnded += new EventHandler(rickEnded);
         }
 
+        private void GameStart()
+        {
+
+            var startSound = new System.Windows.Media.MediaPlayer();
+
+            startSound.Open(new Uri(Application.StartupPath + "\\Resources\\Microsoft Windows XP Startup Sound.wav"));
+
+            winSounds.Add(startSound);
+
+            winSounds[winSounds.Count - 1].Play();
+
+        }
         private void menuMusicEnded(object sender, EventArgs e)
         {
             menuMusic.Stop();
@@ -55,6 +68,7 @@ namespace BrickBreaker
         private void playButton_Click(object sender, EventArgs e)
         {
             // Goes to the game screen
+            GameStart();
             rickRoll.Stop();
             menuMusic.Stop();
             Form1.ChangeScreen(this, new GameScreen());
@@ -89,22 +103,15 @@ namespace BrickBreaker
             {
                 menuMusic.Stop();
                 rickRoll.Play();
+                ricktimer.Enabled = true;
+                mrRoll.Visible = true;
             }
             else
             {
                 rickRoll.Stop();
                 menuMusic.Play();
-
-                if (ricktimer.Enabled == false)
-                {
-                    ricktimer.Enabled = true;
-                    mrRoll.Visible = true;
-                }
-                else
-                {
-                    ricktimer.Enabled = false;
-                    mrRoll.Visible = false;
-                }
+                ricktimer.Enabled = false;
+                mrRoll.Visible = false;
             }
         }
         private void ricktimer_Tick(object sender, EventArgs e)
