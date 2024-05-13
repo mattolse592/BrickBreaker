@@ -191,7 +191,7 @@ namespace BrickBreaker
 
             music[4].Play();
         }
-        #endregion
+        
 
         private void BallHit()
         {
