@@ -230,7 +230,6 @@
             this.upgrade4Icon.Size = new System.Drawing.Size(60, 51);
             this.upgrade4Icon.TabIndex = 20;
             this.upgrade4Icon.Text = "N/A";
-            this.upgrade4Icon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.upgrade4Icon.Click += new System.EventHandler(this.upgrade4Quantity_Click);
             // 
 
@@ -281,7 +280,6 @@
             this.upgrade5Icon.Size = new System.Drawing.Size(60, 49);
             this.upgrade5Icon.TabIndex = 25;
             this.upgrade5Icon.Text = "N/A";
-            this.upgrade5Icon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.upgrade5Icon.Click += new System.EventHandler(this.upgrade5Panel_Click);
             // 
 

@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
-
+using System.Windows.Forms;
+using System.Media;
+using System.Drawing.Drawing2D;
+using System.Security.Cryptography.X509Certificates;
+using System.IO;
 namespace BrickBreaker
 {
     public class Block
@@ -20,7 +26,7 @@ namespace BrickBreaker
         public static Random rand = new Random();
 
         public List<Modifier> modifiers = new List<Modifier>();
-        
+        List<System.Windows.Media.MediaPlayer> ballHits = new List<System.Windows.Media.MediaPlayer>();
 
         const int TICSPEED = 50;
         int fireTic;
@@ -34,12 +40,26 @@ namespace BrickBreaker
             fireTic = TICSPEED;
         }
 
+        public void StatUp(String startUp)
+        {
+
+            var sound = new System.Windows.Media.MediaPlayer();
+
+            sound.Open(new Uri(Application.StartupPath + startUp));
+
+            ballHits.Add(sound);
+
+            ballHits[ballHits.Count - 1].Play();
+
+        }
+
         public Ball PassCondition(Ball ball)
         {
             foreach (Modifier modifier in ball.modifiers)
             {
                 if (modifier.mod.Contains("IMMINENT"))
                 {
+                    GameScreen.holeSong.Play();
                     GameScreen.holes.Add(new BlackHole(ball.x, ball.y, 0.5, 200, true, true, true, true, true));
                     ball.modifiers.Clear();
                     ball.modifiers.Add(new Modifier("PERM"));
@@ -53,6 +73,15 @@ namespace BrickBreaker
 
                 if (modifier.mod.Contains("explode") && !ball.CheckFor("fade"))
                 {
+                    if (modifier.mod.Contains("fire"))
+                    {
+                        StatUp("\\Resources\\barrel-exploding-soundbible (1).wav");
+                    }
+                    else
+                    {
+                        StatUp("Large Fireball-SoundBible.com-301502490.wav");
+                    }
+
                     int explodeSize = 200;
 
                     List<Modifier> hold = new List<Modifier>();

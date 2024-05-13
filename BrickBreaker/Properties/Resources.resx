@@ -59,7 +59,6 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -119,7 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-
   <data name="sandwiches" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sandwiches.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -144,7 +142,6 @@
   <data name="sandwich1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sandwich1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-
   <data name="Dodge" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dodge.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -181,9 +178,34 @@
   <data name="_2021_10_19___Funny_Bit___www_FesliyanStudios_com__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\2021-10-19_-_Funny_Bit_-_www.FesliyanStudios.com (1).wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-<data name="rick_roll_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
-		<value>..\Resources\rick roll night.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-	</data>
-
-
+  <data name="rick_roll_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rick roll night.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="audiomass_output" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\audiomass-output.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BlackHole1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlackHole.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bomb_has_been_planted_sound_effect_cs_go" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bomb-has-been-planted-sound-effect-cs-go.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ffxiv_level_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ffxiv_level_up.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="i_am_become_death_youtube" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\i-am-become-death-youtube.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="world_of_warcraft_lvl_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\world-of-warcraft-lvl-up.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_33174986_ed27_49fb_b3e7_dac93a3def3f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\33174986-ed27-49fb-b3e7-dac93a3def3f.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="barrel_exploding_soundbible__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\barrel-exploding-soundbible (1).wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Large_Fireball_SoundBible_com_301502490" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Large Fireball-SoundBible.com-301502490.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
