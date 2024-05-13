@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <statistics>
   <null xmlns="null">
-    <total_score>8592</total_score>
+    <total_score>8965</total_score>
     <high_score>6952</high_score>
-    <blocks_destroyed>1014</blocks_destroyed>
-    <total_levels>100</total_levels>
-    <sandwiches>0</sandwiches>
+    <blocks_destroyed>1264</blocks_destroyed>
+    <total_levels>119</total_levels>
+    <sandwiches>391</sandwiches>
   </null>
 </statistics>
