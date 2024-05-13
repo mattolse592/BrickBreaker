@@ -704,6 +704,7 @@ namespace BrickBreaker
             if (sandwiches >= upgrade6Cost)
             {
                 sandwiches = sandwiches - upgrade6Cost;
+                currentLevel = 10;
                 sandwichQuantity.Text = $"{sandwiches}";
                 generateRandomStuff();
             }
