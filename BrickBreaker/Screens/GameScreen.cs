@@ -905,6 +905,7 @@ namespace BrickBreaker
         {
             if (sandwiches >= 20)
             {
+                PlayBomb();
                 sandwiches = sandwiches - 20;
                 sandwichQuantity.Text = $"{sandwiches}";
                 powerups.Add(new Powerup("BE", new List<Modifier> { new Modifier("explode") }));
@@ -916,6 +917,8 @@ namespace BrickBreaker
             XmlRw w = new XmlRw();
             w.writeStatistics(blocksDestroyed, score, currentLevel, sandwiches);
 
+
+            TurnMusicOff();
             gameTimer.Enabled = false;
             Form1.ChangeScreen(this, new MenuScreen());
 
