@@ -60,6 +60,7 @@ namespace BrickBreaker
         List<System.Windows.Media.MediaPlayer> winSounds = new List<System.Windows.Media.MediaPlayer>();
 
         public static List<BlackHole> holes = new List<BlackHole>();
+        int numHole = 0;
 
         List<Powerup> powerups = new List<Powerup>();
         List<Ball> balls = new List<Ball>();
@@ -89,7 +90,8 @@ namespace BrickBreaker
             new System.Windows.Media.MediaPlayer()
         };
 
-
+        public static System.Windows.Media.MediaPlayer holeSong = new System.Windows.Media.MediaPlayer();
+        System.Windows.Media.MediaPlayer bonusSong = new System.Windows.Media.MediaPlayer();
 
         public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
 
@@ -120,12 +122,16 @@ namespace BrickBreaker
             music[2].Open(new Uri(Application.StartupPath + "\\Resources\\2019-12-11_-_Retro_Platforming_-_David_Fesliyan.wav"));
             music[3].Open(new Uri(Application.StartupPath + "\\Resources\\2020-03-22_-_8_Bit_Surf_-_FesliyanStudios.com_-_David_Renda.wav"));
             music[4].Open(new Uri(Application.StartupPath + "\\Resources\\2021-08-16_-_8_Bit_Adventure_-_www.FesliyanStudios.com.wav"));
+            holeSong.Open(new Uri(Application.StartupPath + "\\Resources\\BlackHole.wav"));
+            bonusSong.Open(new Uri(Application.StartupPath + "\\Resources\\2020-04-24_-_Arcade_Kid_-_FesliyanStudios.com_-_David_Renda.wav"));
 
             music[0].MediaEnded += new EventHandler(music0Ended);
             music[1].MediaEnded += new EventHandler(music1Ended);
             music[2].MediaEnded += new EventHandler(music2Ended);
             music[3].MediaEnded += new EventHandler(music3Ended);
             music[4].MediaEnded += new EventHandler(music4Ended);
+            holeSong.MediaEnded += new EventHandler(holeEnded);
+            bonusSong.MediaEnded += new EventHandler(bonusEnded);
 
             OnStart();
 
@@ -136,7 +142,24 @@ namespace BrickBreaker
 
         }
 
-        #region music end play functions
+
+        private void holeEnded(object sender, EventArgs e)
+        {
+            holeSong.Stop();
+
+
+            holeSong.Play();
+        }
+
+        private void bonusEnded(object sender, EventArgs e)
+        {
+            bonusSong.Stop();
+
+
+            bonusSong.Play();
+        }
+
+
         private void music0Ended(object sender, EventArgs e)
         {
             music[0].Stop();
@@ -183,6 +206,58 @@ namespace BrickBreaker
 
         }
 
+        private void PlayFireball()
+        {
+
+            var sound = new System.Windows.Media.MediaPlayer();
+
+            sound.Open(new Uri(Application.StartupPath + "\\Resources\\audiomass-output.wav"));
+
+            ballHits.Add(sound);
+
+            ballHits[ballHits.Count - 1].Play();
+
+        }
+
+        private void PlayBomb()
+        {
+
+            var sound = new System.Windows.Media.MediaPlayer();
+
+            sound.Open(new Uri(Application.StartupPath + "\\Resources\\bomb-has-been-planted-sound-effect-cs-go.wav"));
+
+            ballHits.Add(sound);
+
+            ballHits[ballHits.Count - 1].Play();
+
+        }
+
+        private void Death()
+        {
+
+            var sound = new System.Windows.Media.MediaPlayer();
+
+            sound.Open(new Uri(Application.StartupPath + "\\Resources\\i-am-become-death-youtube.wav"));
+
+            ballHits.Add(sound);
+
+            ballHits[ballHits.Count - 1].Play();
+
+        }
+
+        public void StatUp(String startUp)
+        {
+
+            var sound = new System.Windows.Media.MediaPlayer();
+
+            sound.Open(new Uri(Application.StartupPath + startUp));
+
+            ballHits.Add(sound);
+
+            ballHits[ballHits.Count - 1].Play();
+
+        }
+
         private void GameWin()
         {
 
@@ -195,7 +270,6 @@ namespace BrickBreaker
             winSounds[winSounds.Count - 1].Play();
 
         }
-
 
         void generateRandomStuff()
         {
@@ -284,6 +358,17 @@ namespace BrickBreaker
 
         public void OnStart()
         {
+
+            if (numHole < 5)
+            {
+                holes.Clear();
+                holeSong.Stop();
+            }
+
+
+            sandwiches = 0;
+
+
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
 
@@ -379,6 +464,7 @@ namespace BrickBreaker
                     //powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
                     break;
                 case Keys.G:
+                    PlayFireball();
                     powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
                     break;
                 case Keys.H:
@@ -655,6 +741,7 @@ namespace BrickBreaker
                 powerups.Add(new Powerup("PW"));
                 widthCounter++;
                 upgrade1Quantity.Text = $"{widthCounter}";
+                StatUp("\\Resources\\world-of-warcraft-lvl-up.wav");
             }
         }
 
@@ -667,6 +754,7 @@ namespace BrickBreaker
                 paddle.speed = paddle.speed + 1 % 6;
                 paddleSpeedCounter++;
                 upgrade2Quantity.Text = $"{paddleSpeedCounter}";
+                StatUp("\\Resources\\33174986-ed27-49fb-b3e7-dac93a3def3f.wav");
             }
         }
 
@@ -677,6 +765,7 @@ namespace BrickBreaker
                 sandwiches = sandwiches - upgrade3Cost;
                 multiplier++;
                 upgrade3Quantity.Text = multiplier + "x";
+                StatUp("\\Resources\\ffxiv_level_up.wav");
             }
         }
 
@@ -686,16 +775,47 @@ namespace BrickBreaker
             {
                 sandwiches = sandwiches - upgrade4Cost;
                 sandwichQuantity.Text = $"{sandwiches}";
-                powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
+                Random rnd = new Random();
+                if (rnd.Next(0, 2) == 0)
+                {
+                    powerups.Add(new Powerup("BB" + rnd.Next(2, 10).ToString(), new List<Modifier> { new Modifier("fire", 500) }));
+                }
+                else
+                {
+                    powerups.Add(new Powerup("BBC" + rnd.Next(2, 10).ToString(), new List<Modifier> { new Modifier("fire", 500) }));
+                }
+                PlayFireball();
             }
         }
-        //black hole upgrade v GRADY needs to add a decay or at least disapear when the level renews
+        //black hole upgrade 
         private void upgrade5Panel_Click(object sender, EventArgs e)
         {
             if (sandwiches >= upgrade5Cost)
             {
                 sandwiches = sandwiches - upgrade5Cost;
                 sandwichQuantity.Text = $"{sandwiches}";
+                Death();
+                numHole++;
+                powerups.Add(new Powerup("BH"));
+                upgrade5Description.Font = new Font(upgrade5Description.Font.FontFamily, 5);
+                switch (numHole)
+                {
+                    case 1:
+                        upgrade5Description.Text = "They say the real importance of atomic energy does not lie in the weapons that have been made; the real importance lies in all the great benefits which atomic energy, which the various radiations, will bring to mankind.";
+                        break;
+                    case 2:
+                        upgrade5Description.Text = "I am sure that there is truth in it, because there has never in the past been a new field opened up where the real fruits of it have not been invisible at the beginning.";
+                        break;
+                    case 3:
+                        upgrade5Description.Text = "There are others who try to escape the immediacy of this situation by saying that, after all, war has always been very terrible; after all, weapons have always gotten worse and worse;";
+                        break;
+                    case 4:
+                        upgrade5Description.Text = "I think it is for us to accept it as a very grave crisis, to realize that these atomic weapons which we have started to make are very terrible, that they involve a change, that they are not just a slight modification.";
+                        break;
+                    case 5:
+                        upgrade5Description.Text = "“When I came to you with those calculations, we thought we might start a chain reaction that would destroy the world.”\n“What of it?”\n“I believe we did.”";
+                        break;
+                }
             }
         }
         //purchase randomized level
@@ -706,7 +826,11 @@ namespace BrickBreaker
                 sandwiches = sandwiches - upgrade6Cost;
                 currentLevel = 10;
                 sandwichQuantity.Text = $"{sandwiches}";
+
+
+
                 generateRandomStuff();
+
             }
         }
         #endregion
@@ -799,6 +923,7 @@ namespace BrickBreaker
 
         private void statisticsButton_Click(object sender, EventArgs e)
         {
+            TurnMusicOff();
             Form1.ChangeScreen(this, new StatisticScreen(currentLevel, blocks));
         }
 

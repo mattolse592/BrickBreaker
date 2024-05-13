@@ -217,6 +217,8 @@
             this.upgrade4Price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.upgrade4Price.Click += new System.EventHandler(this.upgrade4Quantity_Click);
             // 
+
+
             // upgrade4Description
             // 
             this.upgrade4Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -254,6 +256,7 @@
             this.upgrade5Price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.upgrade5Price.Click += new System.EventHandler(this.upgrade5Panel_Click);
             // 
+
             // upgrade5Description
             // 
             this.upgrade5Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
