@@ -15,12 +15,18 @@ namespace BrickBreaker
         Pen whiteBrush = new Pen(Color.White);
         int level = 0;
         List<Block> blocks = new List<Block>();
+        System.Windows.Media.MediaPlayer bonusSong = new System.Windows.Media.MediaPlayer();
 
         public StatisticScreen(int currentLevel, List<Block> currentBlocks)
         {
             level = currentLevel;
             blocks = currentBlocks;
             InitializeComponent();
+
+            bonusSong.Open(new Uri(Application.StartupPath + "\\Resources\\2019-08-25_-_8bit-Smooth_Presentation_-_David_Fesliyan.wav"));
+            bonusSong.MediaEnded += new EventHandler(bonusEnded);
+
+            bonusSong.Play();
 
             XmlRw w = new XmlRw();
             w.getStatistics();
@@ -29,12 +35,21 @@ namespace BrickBreaker
             this.Refresh();
         }
 
+        private void bonusEnded(object sender, EventArgs e)
+        {
+            bonusSong.Stop();
+
+
+            bonusSong.Play();
+        }
+
         private void backButton_Click(object sender, EventArgs e)
         {
             GameScreen gameScreen = new GameScreen();
             gameScreen.blocks = blocks;
             gameScreen.currentLevel = level;
             gameScreen.loadGame = false;
+            bonusSong.Stop();
             Form1.ChangeScreen(this, gameScreen);
         }
 

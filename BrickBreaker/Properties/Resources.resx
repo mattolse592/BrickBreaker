@@ -208,4 +208,13 @@
   <data name="Large_Fireball_SoundBible_com_301502490" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Large Fireball-SoundBible.com-301502490.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="_2019_08_25___8bit_Smooth_Presentation___David_Fesliyan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2019-08-25_-_8bit-Smooth_Presentation_-_David_Fesliyan.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_270343__littlerobotsoundfactory__shoot_01__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\270343__littlerobotsoundfactory__shoot_01 (1).wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_270344__littlerobotsoundfactory__shoot_00" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\270344__littlerobotsoundfactory__shoot_00.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

@@ -234,8 +234,8 @@ namespace BrickBreaker
             // Collision with right wall
 
             if (x >= (950 - size)) //UC.Width
-
             {
+                //GameScreen.StatUp("")
                 x = 950 - size;
                 xSpeed *= -1;
             }
