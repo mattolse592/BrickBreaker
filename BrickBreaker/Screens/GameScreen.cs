@@ -1,6 +1,6 @@
 ﻿/*  Created by: Matthew, Nathan, Grady, Valentina, and Duhrick
  *  Project: Brick Breaker Team Porject
- *  Date: 
+ *  Date: May 13, 2024
  */
 using System;
 using System.Collections.Generic;
@@ -134,14 +134,9 @@ namespace BrickBreaker
             bonusSong.MediaEnded += new EventHandler(bonusEnded);
 
             OnStart();
-
-            
-            // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.55, 200, true, true, true, false, false));
-
-
-
         }
 
+        #region sound plyaers
 
         private void holeEnded(object sender, EventArgs e)
         {
@@ -271,6 +266,22 @@ namespace BrickBreaker
 
         }
 
+        void PlayMusic()
+        {
+            TurnMusicOff();
+            int indexer = currentLevel % 5;
+            music[indexer].Play();
+        }
+
+        void TurnMusicOff()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                music[i].Stop();
+            }
+        }
+        #endregion
+
         void generateRandomStuff()
         {
             if (minN == 0 || currentLevel != 10)
@@ -341,33 +352,14 @@ namespace BrickBreaker
             Nathan_loadLevel();
         }
 
-        void PlayMusic()
-        {
-            TurnMusicOff();
-            int indexer = currentLevel % 5;
-            music[indexer].Play();
-        }
-
-        void TurnMusicOff()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                music[i].Stop();
-            }
-        }
-
         public void OnStart()
         {
-
+            // if the black hole was purchased less than 5 times, clear it
             if (numHole < 5)
             {
                 holes.Clear();
                 holeSong.Stop();
             }
-
-
-           // sandwiches = 0;
-
 
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
@@ -507,9 +499,6 @@ namespace BrickBreaker
                 paddle.Move("right");
             }
 
-            //temp
-            sandwichQuantity.Text = $"{sandwiches}";
-
             //shop feature
             ShopBackColor();
 
@@ -540,7 +529,7 @@ namespace BrickBreaker
                 if (blocks.Count == 0)
                 {
                     gameTimer.Enabled = false;
-                    GameWin();
+                    GameWin(); // play sounds
                     OnStart();
                     return;
                 }
@@ -560,7 +549,7 @@ namespace BrickBreaker
                         {
                             blocks.RemoveAt(j);
                             j--;
-                            blocksDestroyed += 1;
+                            blocksDestroyed++;
                         }
                     }
 
@@ -723,12 +712,6 @@ namespace BrickBreaker
                     break;
             }
         }
-
-        //private void label1_Click(object sender, EventArgs e)
-        //{
-        //    sandwiches += 100;
-        //}
-
 
         //shop
         #region upgrade panel click events
