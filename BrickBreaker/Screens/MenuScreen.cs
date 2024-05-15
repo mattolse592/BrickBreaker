@@ -16,11 +16,16 @@ namespace BrickBreaker
         System.Windows.Media.MediaPlayer menuMusic = new System.Windows.Media.MediaPlayer();
         System.Windows.Media.MediaPlayer rickRoll = new System.Windows.Media.MediaPlayer();
         bool rolling = false;
+        public static Font font = new Font(new FontFamily("Antiquity Print"), 55, FontStyle.Bold, GraphicsUnit.Pixel);
+
 
         List<System.Windows.Media.MediaPlayer> winSounds = new List<System.Windows.Media.MediaPlayer>();
 
         int speedX = 20;
         int speedY = 20;
+
+        int redR = 0;
+        bool reddening = true;
 
         public MenuScreen()
         {
@@ -32,6 +37,8 @@ namespace BrickBreaker
 
             rickRoll.Open(new Uri(Application.StartupPath + "\\Resources\\Rick Astley - Never Gonna Give You Up (Official Music Video).wav"));
             rickRoll.MediaEnded += new EventHandler(rickEnded);
+
+            ricktimer.Start();
         }
 
         private void GameStart()
@@ -72,6 +79,7 @@ namespace BrickBreaker
             rickRoll.Stop();
             menuMusic.Stop();
             Form1.ChangeScreen(this, new GameScreen());
+            ricktimer.Stop();
         }
 
         private void resetButton_Click(object sender, EventArgs e)
@@ -103,14 +111,12 @@ namespace BrickBreaker
             {
                 menuMusic.Stop();
                 rickRoll.Play();
-                ricktimer.Enabled = true;
                 mrRoll.Visible = true;
             }
             else
             {
                 rickRoll.Stop();
                 menuMusic.Play();
-                ricktimer.Enabled = false;
                 mrRoll.Visible = false;
             }
         }
@@ -128,7 +134,35 @@ namespace BrickBreaker
                 speedY *= -1;
 
             }
+
+            if (redR >= 255)
+            {
+                redR = 255;
+                reddening = false;
+            }
+            else if (redR <= 0)
+            {
+                redR = 0;
+                reddening = true;
+            }
+
+            if (reddening)
+            {
+                redR += 5;
+            }
+            else
+            {
+                redR -= 5;
+            }
+
+            Refresh();
         }
 
+        private void MenuScreen_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(Properties.Resources.Sign, new Rectangle(225, -75, 800, 300));
+            e.Graphics.DrawString("Rick's BrickBreakin'", font, new SolidBrush(Color.FromArgb(255, redR, redR ,redR)), new Point(250,25));
+            e.Graphics.DrawString("DELI", font, new SolidBrush(Color.FromArgb(255, redR, redR, redR)), new Point(500, 25 + 75));
+        }
     }
 }

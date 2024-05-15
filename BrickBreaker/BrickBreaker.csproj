@@ -252,6 +252,11 @@
     <None Include="Resources\270343__littlerobotsoundfactory__shoot_01 %281%29.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\mixkit-8-bit-lose-2031.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\OIG2.pTh6GHhGAf_JzgqTzd.jpg" />
+    <None Include="Resources\OIG3__12_-removebg-preview.png" />
     <Content Include="statistics.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

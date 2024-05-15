@@ -279,6 +279,25 @@ namespace BrickBreaker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mixkit_8_bit_lose_2031 {
+            get {
+                return ResourceManager.GetStream("mixkit_8_bit_lose_2031", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OpeningScreen {
+            get {
+                object obj = ResourceManager.GetObject("OpeningScreen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap random {
@@ -323,6 +342,16 @@ namespace BrickBreaker.Properties {
         internal static System.Drawing.Bitmap sandwiches {
             get {
                 object obj = ResourceManager.GetObject("sandwiches", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Sign {
+            get {
+                object obj = ResourceManager.GetObject("Sign", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -224,26 +224,29 @@ namespace BrickBreaker
 
         }
 
-        public void WallCollision(UserControl UC)
+        public String WallCollision(UserControl UC)
         {
             // Collision with left wall
             if (x <= 0)
             {
                 xSpeed *= -1;
+                return ("\\Resources\\270343__littlerobotsoundfactory__shoot_01 (1).wav");
             }
             // Collision with right wall
 
             if (x >= (950 - size)) //UC.Width
             {
-                //GameScreen.StatUp("")
                 x = 950 - size;
                 xSpeed *= -1;
+                return("\\Resources\\270343__littlerobotsoundfactory__shoot_01 (1).wav");
             }
             // Collision with top wall
             if (y <= 2)
             {
                 ySpeed *= -1;
+                return ("\\Resources\\270344__littlerobotsoundfactory__shoot_00.wav");
             }
+            return ("");
         }
 
         public bool BottomCollision(UserControl UC)

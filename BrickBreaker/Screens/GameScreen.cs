@@ -350,7 +350,7 @@ namespace BrickBreaker
 
         void TurnMusicOff()
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < music.Length; i++)
             {
                 music[i].Stop();
             }
@@ -532,7 +532,12 @@ namespace BrickBreaker
                 balls[i].Move();
 
                 // Check for collision with top and side walls
-                balls[i].WallCollision(this);
+                String hold = balls[i].WallCollision(this);
+
+                if (hold != "")
+                {
+                    StatUp(hold);
+                }
 
                 // Check for collision of ball with paddle, (incl. paddle movement)
                 balls[i].PaddleCollision(paddle);
@@ -589,6 +594,11 @@ namespace BrickBreaker
                     }
                     else if (balls[i].BottomCollision(this) || (balls[i].CheckFor("temp") && (tempBall.xSpeed != balls[i].xSpeed || tempBall.ySpeed != balls[i].ySpeed)))
                     {
+                        if (balls[i].BottomCollision(this))
+                        {
+                            StatUp("\\Resources\\mixkit-8-bit-lose-2031.wav");
+                        }
+
                         if (balls[i].CheckFor("PERM"))
                         {
                             stick = true;
