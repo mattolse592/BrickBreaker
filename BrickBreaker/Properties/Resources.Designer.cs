@@ -72,6 +72,15 @@ namespace BrickBreaker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2019_08_25___8bit_Smooth_Presentation___David_Fesliyan {
+            get {
+                return ResourceManager.GetStream("_2019_08_25___8bit_Smooth_Presentation___David_Fesliyan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream _2019_12_11___Retro_Platforming___David_Fesliyan {
             get {
                 return ResourceManager.GetStream("_2019_12_11___Retro_Platforming___David_Fesliyan", resourceCulture);
@@ -129,6 +138,24 @@ namespace BrickBreaker.Properties {
         internal static System.IO.UnmanagedMemoryStream _2021_10_19___Funny_Bit___www_FesliyanStudios_com__1_ {
             get {
                 return ResourceManager.GetStream("_2021_10_19___Funny_Bit___www_FesliyanStudios_com__1_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _270343__littlerobotsoundfactory__shoot_01__1_ {
+            get {
+                return ResourceManager.GetStream("_270343__littlerobotsoundfactory__shoot_01__1_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _270344__littlerobotsoundfactory__shoot_00 {
+            get {
+                return ResourceManager.GetStream("_270344__littlerobotsoundfactory__shoot_00", resourceCulture);
             }
         }
         
