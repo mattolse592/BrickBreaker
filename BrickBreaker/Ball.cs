@@ -146,7 +146,7 @@ namespace BrickBreaker
             return blockRec.IntersectsWith(ballRec);
         }
 
-        public void PaddleCollision(Paddle p)
+        public String PaddleCollision(Paddle p)
         {
             Rectangle ballRec = new Rectangle(x, y, size, size);
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
@@ -220,8 +220,9 @@ namespace BrickBreaker
                         xSpeed *= -1;
                     }
                 }
+                return ("\\Resources\\8-bit-game-2-186976.wav");
             }
-
+            return ("");
         }
 
         public String WallCollision(UserControl UC)

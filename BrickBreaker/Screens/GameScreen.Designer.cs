@@ -52,7 +52,6 @@
             this.statisticsButton = new System.Windows.Forms.Label();
             this.htpButton = new System.Windows.Forms.Label();
             this.exitLabel = new System.Windows.Forms.Label();
-            this.sandwichQuantity = new System.Windows.Forms.Label();
             this.upgrade2Panel = new System.Windows.Forms.Panel();
             this.upgrade1Panel = new System.Windows.Forms.Panel();
             this.upgrade1Quantity = new System.Windows.Forms.Label();
@@ -217,8 +216,6 @@
             this.upgrade4Price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.upgrade4Price.Click += new System.EventHandler(this.upgrade4Quantity_Click);
             // 
-
-
             // upgrade4Description
             // 
             this.upgrade4Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -256,7 +253,6 @@
             this.upgrade5Price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.upgrade5Price.Click += new System.EventHandler(this.upgrade5Panel_Click);
             // 
-
             // upgrade5Description
             // 
             this.upgrade5Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -321,15 +317,16 @@
             // 
             // statisticsButton
             // 
+            this.statisticsButton.BackColor = System.Drawing.Color.Tan;
             this.statisticsButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.statisticsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.statisticsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statisticsButton.Font = new System.Drawing.Font("Antiquity print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statisticsButton.ForeColor = System.Drawing.Color.White;
-            this.statisticsButton.Location = new System.Drawing.Point(976, 26);
+            this.statisticsButton.Location = new System.Drawing.Point(955, 0);
             this.statisticsButton.Name = "statisticsButton";
             this.statisticsButton.Size = new System.Drawing.Size(79, 47);
             this.statisticsButton.TabIndex = 33;
-            this.statisticsButton.Text = "Statistics";
+            this.statisticsButton.Text = "Office";
             this.statisticsButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.statisticsButton.Click += new System.EventHandler(this.statisticsButton_Click);
             // 
@@ -337,40 +334,30 @@
             // 
             this.htpButton.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.htpButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.htpButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.htpButton.Font = new System.Drawing.Font("Antiquity print", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.htpButton.ForeColor = System.Drawing.Color.White;
-            this.htpButton.Location = new System.Drawing.Point(1070, 26);
+            this.htpButton.Location = new System.Drawing.Point(955, 52);
             this.htpButton.Name = "htpButton";
-            this.htpButton.Size = new System.Drawing.Size(77, 47);
+            this.htpButton.Size = new System.Drawing.Size(79, 47);
             this.htpButton.TabIndex = 34;
-            this.htpButton.Text = "bomb 20";
+            this.htpButton.Text = "Bomb 20";
             this.htpButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.htpButton.Click += new System.EventHandler(this.htpButton_Click);
             // 
             // exitLabel
             // 
+            this.exitLabel.BackColor = System.Drawing.Color.Tan;
             this.exitLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.exitLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exitLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitLabel.Font = new System.Drawing.Font("Antiquity print", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitLabel.ForeColor = System.Drawing.Color.White;
-            this.exitLabel.Location = new System.Drawing.Point(1159, 26);
+            this.exitLabel.Location = new System.Drawing.Point(1059, 0);
             this.exitLabel.Name = "exitLabel";
-            this.exitLabel.Size = new System.Drawing.Size(77, 47);
+            this.exitLabel.Size = new System.Drawing.Size(77, 99);
             this.exitLabel.TabIndex = 35;
-            this.exitLabel.Text = "Exit";
+            this.exitLabel.Text = "Clock Out";
             this.exitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.exitLabel.Click += new System.EventHandler(this.exitLabel_Click);
-            // 
-            // sandwichQuantity
-            // 
-            this.sandwichQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sandwichQuantity.ForeColor = System.Drawing.Color.White;
-            this.sandwichQuantity.Location = new System.Drawing.Point(3, 661);
-            this.sandwichQuantity.Name = "sandwichQuantity";
-            this.sandwichQuantity.Size = new System.Drawing.Size(60, 30);
-            this.sandwichQuantity.TabIndex = 36;
-            this.sandwichQuantity.Text = "20";
-            this.sandwichQuantity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // upgrade2Panel
             // 
@@ -547,7 +534,6 @@
             this.Controls.Add(this.upgrade3Panel);
             this.Controls.Add(this.upgrade1Panel);
             this.Controls.Add(this.upgrade2Panel);
-            this.Controls.Add(this.sandwichQuantity);
             this.Controls.Add(this.exitLabel);
             this.Controls.Add(this.htpButton);
             this.Controls.Add(this.statisticsButton);
@@ -601,7 +587,6 @@
         private System.Windows.Forms.Label statisticsButton;
         private System.Windows.Forms.Label htpButton;
         private System.Windows.Forms.Label exitLabel;
-        private System.Windows.Forms.Label sandwichQuantity;
         private System.Windows.Forms.Panel upgrade2Panel;
         private System.Windows.Forms.Panel upgrade1Panel;
         private System.Windows.Forms.Label upgrade1Quantity;

@@ -163,6 +163,9 @@ namespace BrickBreaker
             e.Graphics.DrawImage(Properties.Resources.Sign, new Rectangle(225, -75, 800, 300));
             e.Graphics.DrawString("Rick's BrickBreakin'", font, new SolidBrush(Color.FromArgb(255, redR, redR ,redR)), new Point(250,25));
             e.Graphics.DrawString("DELI", font, new SolidBrush(Color.FromArgb(255, redR, redR, redR)), new Point(500, 25 + 75));
+            //Benny Bagel! (by Grady Rueffer)
+            e.Graphics.DrawImage(Properties.Resources.BennyBagel__6_f, new Rectangle(25, 350, 300, 250));
+            e.Graphics.DrawImage(Properties.Resources.BennyBagel__6_, new Rectangle(this.Width - 25 - 300, 350, 300, 250));
         }
     }
 }

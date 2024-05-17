@@ -68,6 +68,7 @@ namespace BrickBreaker
         SolidBrush bombBrush = new SolidBrush(Color.Black);
         SolidBrush fireBallOuter = new SolidBrush(Color.OrangeRed);
         SolidBrush permBrush = new SolidBrush(Color.Purple);
+        SolidBrush tagBrush = new SolidBrush(Color.BurlyWood);
         Pen blackHoleAcc = new Pen(Color.RoyalBlue);
         SolidBrush[] fadeBrush = {
             new SolidBrush(Color.FromArgb(25,0,0,0)),
@@ -92,9 +93,33 @@ namespace BrickBreaker
 
         public static System.Windows.Media.MediaPlayer holeSong = new System.Windows.Media.MediaPlayer();
         System.Windows.Media.MediaPlayer bonusSong = new System.Windows.Media.MediaPlayer();
+        bool bonus = false;
 
         public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
+        public static Font font = new Font(new FontFamily("Antiquity Print"), 30, FontStyle.Bold, GraphicsUnit.Pixel);
+        public static Font mascot = new Font(new FontFamily("Antiquity Print"), 7, FontStyle.Bold, GraphicsUnit.Pixel);
 
+
+        Random rnd = new Random();
+
+        Image[] sandwichImages = new Image[7];
+        Image[] bennyBagel = 
+        { 
+            Properties.Resources.BennyBagel__1_,
+            Properties.Resources.BennyBagel__2_,
+            Properties.Resources.BennyBagel__3_,
+            Properties.Resources.BennyBagel__4_,
+            Properties.Resources.BennyBagel__5_,
+            Properties.Resources.BennyBagel__6_f,
+            Properties.Resources.BennyBagel__7_,
+            Properties.Resources.BennyBagel__8_,
+            Properties.Resources.BennyBagel__9_
+        };
+
+        Image plate = Properties.Resources.Plate;
+        Image deli = Properties.Resources.Deli;
+        Image SandwichIcon = Properties.Resources.sandwich1;
+        
         //currency
         public int sandwiches;
 
@@ -116,6 +141,15 @@ namespace BrickBreaker
         public GameScreen()
         {
             InitializeComponent();
+
+            sandwichImages[0] = Properties.Resources.Sandwich__1_;
+            sandwichImages[1] = Properties.Resources.Sandwich__2_;
+            sandwichImages[2] = Properties.Resources.Sandwich__3_;
+            sandwichImages[3] = Properties.Resources.Sandwich__7_;
+            sandwichImages[4] = Properties.Resources.Sandwich__6_;
+            sandwichImages[5] = Properties.Resources.Sandwich__5_;
+            sandwichImages[6] = Properties.Resources.Sandwich__4_;
+
 
             music[0].Open(new Uri(Application.StartupPath + "\\Resources\\2021-08-30_-_Boss_Time_-_www.FesliyanStudios.com.wav"));
             music[1].Open(new Uri(Application.StartupPath + "\\Resources\\2021-10-19_-_Funny_Bit_-_www.FesliyanStudios.com (1).wav"));
@@ -341,7 +375,7 @@ namespace BrickBreaker
             Nathan_loadLevel();
         }
 
-        void PlayMusic()
+        public void PlayMusic()
         {
             TurnMusicOff();
             int indexer = currentLevel % 5;
@@ -407,6 +441,11 @@ namespace BrickBreaker
             {
                 nextLevel();
                 PlayMusic();
+                if (bonus)
+                {
+                    bonusSong.Stop();
+                    bonus = false;
+                }
                 ballHits.Clear();
             }
 
@@ -507,9 +546,6 @@ namespace BrickBreaker
                 paddle.Move("right");
             }
 
-            //temp
-            sandwichQuantity.Text = $"{sandwiches}";
-
             //shop feature
             ShopBackColor();
 
@@ -540,7 +576,11 @@ namespace BrickBreaker
                 }
 
                 // Check for collision of ball with paddle, (incl. paddle movement)
-                balls[i].PaddleCollision(paddle);
+                String pad = balls[i].PaddleCollision(paddle);
+                if (pad != "")
+                {
+                    StatUp(pad);
+                }
 
                 if (blocks.Count == 0)
                 {
@@ -560,7 +600,6 @@ namespace BrickBreaker
                         balls[i] = blocks[j].PassCondition(balls[i]);
                         //add points to the player
                         sandwiches = sandwiches + multiplier;
-                        sandwichQuantity.Text = $"{sandwiches}";
                         if (blocks[j].hp <= 0)
                         {
                             blocks.RemoveAt(j);
@@ -596,6 +635,7 @@ namespace BrickBreaker
                     {
                         if (balls[i].BottomCollision(this))
                         {
+                            sandwiches -= 5;
                             StatUp("\\Resources\\mixkit-8-bit-lose-2031.wav");
                         }
 
@@ -615,6 +655,7 @@ namespace BrickBreaker
                 // Check for ball hitting bottom of screen
                 else if (balls[i].BottomCollision(this) || (balls[i].CheckFor("temp") && (tempBall.xSpeed != balls[i].xSpeed || tempBall.ySpeed != balls[i].ySpeed)))
                 {
+                    sandwiches -= 5;
                     if (balls[i].CheckFor("PERM"))
                     {
                         stick = true;
@@ -725,6 +766,7 @@ namespace BrickBreaker
                             block.width = 200;
                             block.height = 150;
                         }
+                        block.maxHp = block.hp;
                         blocks.Add(block);
                     }
                     break;
@@ -747,7 +789,6 @@ namespace BrickBreaker
             if (sandwiches >= upgrade1Cost)
             {
                 sandwiches = sandwiches - upgrade1Cost;
-                sandwichQuantity.Text = $"{sandwiches}";
                 powerups.Add(new Powerup("PW"));
                 widthCounter++;
                 upgrade1Quantity.Text = $"{widthCounter}";
@@ -760,7 +801,6 @@ namespace BrickBreaker
             if (sandwiches >= upgrade2Cost)
             {
                 sandwiches = sandwiches - upgrade2Cost;
-                sandwichQuantity.Text = $"{sandwiches}";
                 paddle.speed = paddle.speed + 1 % 6;
                 paddleSpeedCounter++;
                 upgrade2Quantity.Text = $"{paddleSpeedCounter}";
@@ -784,7 +824,6 @@ namespace BrickBreaker
             if (sandwiches >= upgrade4Cost)
             {
                 sandwiches = sandwiches - upgrade4Cost;
-                sandwichQuantity.Text = $"{sandwiches}";
                 Random rnd = new Random();
                 if (rnd.Next(0, 2) == 0)
                 {
@@ -803,7 +842,6 @@ namespace BrickBreaker
             if (sandwiches >= upgrade5Cost)
             {
                 sandwiches = sandwiches - upgrade5Cost;
-                sandwichQuantity.Text = $"{sandwiches}";
                 Death();
                 numHole++;
                 powerups.Add(new Powerup("BH"));
@@ -835,9 +873,10 @@ namespace BrickBreaker
             {
                 sandwiches = sandwiches - upgrade6Cost;
                 currentLevel = 10;
-                sandwichQuantity.Text = $"{sandwiches}";
 
-
+                TurnMusicOff();
+                bonus = true;
+                bonusSong.Play();
 
                 generateRandomStuff();
 
@@ -848,65 +887,65 @@ namespace BrickBreaker
         {
             if (sandwiches >= 20)
             {
-                htpButton.BackColor = Color.DeepSkyBlue;
+                htpButton.BackColor = Color.Tan;
             }
             else
             {
-                htpButton.BackColor = Color.DarkCyan;
+                htpButton.BackColor = Color.Peru;
             }
 
             if (sandwiches >= upgrade1Cost)
             {
-                upgrade1Panel.BackColor = Color.DeepSkyBlue;
+                upgrade1Panel.BackColor = Color.Tan;
             }
             else
             {
-                upgrade1Panel.BackColor = Color.DarkCyan;
+                upgrade1Panel.BackColor = Color.Peru;
             }
 
             if (sandwiches >= upgrade2Cost)
             {
-                upgrade2Panel.BackColor = Color.DeepSkyBlue;
+                upgrade2Panel.BackColor = Color.Tan;
             }
             else
             {
-                upgrade2Panel.BackColor = Color.DarkCyan;
+                upgrade2Panel.BackColor = Color.Peru;
             }
 
             if (sandwiches >= upgrade3Cost)
             {
-                upgrade3Panel.BackColor = Color.DeepSkyBlue;
+                upgrade3Panel.BackColor = Color.Tan;
             }
             else
             {
-                upgrade3Panel.BackColor = Color.DarkCyan;
+                upgrade3Panel.BackColor = Color.Peru;
             }
 
             if (sandwiches >= upgrade4Cost)
             {
-                upgrade4Panel.BackColor = Color.DeepSkyBlue;
+                upgrade4Panel.BackColor = Color.Tan;
             }
             else
             {
-                upgrade4Panel.BackColor = Color.DarkCyan;
+                upgrade4Panel.BackColor = Color.Peru;
             }
 
             if (sandwiches >= upgrade5Cost)
             {
-                upgrade5Panel.BackColor = Color.DeepSkyBlue;
+                upgrade5Panel.BackColor = Color.Tan;
             }
             else
             {
-                upgrade5Panel.BackColor = Color.DarkCyan;
+                upgrade5Panel.BackColor = Color.Peru;
             }
 
             if (sandwiches >= upgrade6Cost)
             {
-                upgrade6Panel.BackColor = Color.DeepSkyBlue;
+                upgrade6Panel.BackColor = Color.Tan;
             }
             else
             {
-                upgrade6Panel.BackColor = Color.DarkCyan;
+                upgrade6Panel.BackColor = Color.Peru;
             }
 
         }
@@ -917,7 +956,6 @@ namespace BrickBreaker
             {
                 PlayBomb();
                 sandwiches = sandwiches - 20;
-                sandwichQuantity.Text = $"{sandwiches}";
                 powerups.Add(new Powerup("BE", new List<Modifier> { new Modifier("explode") }));
             }
         }
@@ -959,6 +997,8 @@ namespace BrickBreaker
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.DrawImage(deli, 0, 0, 950, this.Height);
+
             foreach (BlackHole hole in holes)
             {
                 e.Graphics.FillEllipse(bombBrush, hole.schwartzchild);
@@ -974,8 +1014,7 @@ namespace BrickBreaker
             }
 
             // Draws paddle
-            paddleBrush.Color = paddle.colour;
-            e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+            e.Graphics.DrawImage(plate, paddle.x, paddle.y, paddle.width, paddle.height);
 
             //Grady
             foreach (Ball b in balls)
@@ -1027,8 +1066,37 @@ namespace BrickBreaker
             //draw blocks
             foreach (Block b in blocks)
             {
-                SolidBrush brush = new SolidBrush(b.colour);
-                e.Graphics.FillRectangle(brush, b.x, b.y, b.width, b.height);
+                e.Graphics.FillRectangle(bombBrush, b.x, b.y, b.width, b.height);
+
+                if (b.hp >= b.maxHp)
+                {
+                    e.Graphics.DrawImage(sandwichImages[0], b.x, b.y, b.width, b.height);
+                }
+                else if (b.hp >= (float)6 * ((float)b.maxHp / 7))
+                {
+                    e.Graphics.DrawImage(sandwichImages[1], b.x, b.y, b.width, b.height);
+                }
+                else if (b.hp >= (float)5 * ((float)b.maxHp / 7))
+                {
+                    e.Graphics.DrawImage(sandwichImages[2], b.x, b.y, b.width, b.height);
+                }
+                else if (b.hp >= (float)4 * ((float)b.maxHp / 7))
+                {
+                    e.Graphics.DrawImage(sandwichImages[3], b.x, b.y, b.width, b.height);
+                }
+                else if (b.hp >= (float)3 * ((float)b.maxHp / 7))
+                {
+                    e.Graphics.DrawImage(sandwichImages[4], b.x, b.y, b.width, b.height);
+                }
+                else if (b.hp >= (float)2 * ((float)b.maxHp / 7))
+                {
+                    e.Graphics.DrawImage(sandwichImages[5], b.x, b.y, b.width, b.height);
+                }
+                else 
+                {
+                    e.Graphics.DrawImage(sandwichImages[6], b.x, b.y, b.width, b.height);
+                }
+
                 e.Graphics.DrawString(b.hp.ToString(), healthFont, ballBrush, b.x, b.y);
             }
 
@@ -1038,6 +1106,7 @@ namespace BrickBreaker
                 e.Graphics.DrawLine(sidebarPen, new Point(balls[0].throwX, 0), new Point(balls[0].x + (balls[0].size / 2), balls[0].y + 2));
             }
 
+            e.Graphics.FillRectangle(tagBrush, 950, 0, this.Width - 950, this.Height);
             //Valentina
             //Shop sidebar
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 1, 700);
@@ -1048,6 +1117,13 @@ namespace BrickBreaker
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 400);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 500);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 600);
+
+            e.Graphics.DrawImage(SandwichIcon, 0, this.Height - 75, 100, 75);
+            e.Graphics.DrawString(sandwiches.ToString(), font, new SolidBrush(Color.LightGreen), 5, this.Height - 62);
+
+            //Benny Bagel!
+            e.Graphics.DrawImage(bennyBagel[rnd.Next(0, 9)], this.Width - 95, 10, 75, 75);
+            e.Graphics.DrawString("Benny Bagel", mascot, paddleBrush, this.Width - 85, 87);
         }
 
     }
