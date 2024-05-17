@@ -27,7 +27,7 @@ namespace BrickBreaker
         public static Random rand = new Random();
 
         public List<Modifier> modifiers = new List<Modifier>();
-
+        List<System.Windows.Media.MediaPlayer> ballHits = new List<System.Windows.Media.MediaPlayer>();
 
 
         List<System.Windows.Media.MediaPlayer> ballHits = new List<System.Windows.Media.MediaPlayer>();

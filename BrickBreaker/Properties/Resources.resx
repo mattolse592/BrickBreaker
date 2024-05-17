@@ -118,19 +118,103 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rick_roll_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rick roll night.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="sandwiches" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sandwiches.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="speed1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\speed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fireball" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fireball.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="random" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\random.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blackhole" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blackhole.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="width" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\width.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="speed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\speed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sandwich1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sandwich1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dodge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Dodge.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="level_up_enhancement_8_bit_retro_sound_effect_153002" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\level-up-enhancement-8-bit-retro-sound-effect-153002.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Microsoft_Windows_XP_Startup_Sound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Microsoft Windows XP Startup Sound.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Rick_Astley___Never_Gonna_Give_You_Up__Official_Music_Video_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Rick Astley - Never Gonna Give You Up (Official Music Video).wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="samsmich_almost_dead" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\samsmich almost dead.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="_2019_01_10___Land_of_8_Bits___Stephen_Bennett___FesliyanStudios_com" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2019-01-10_-_Land_of_8_Bits_-_Stephen_Bennett_-_FesliyanStudios.com.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="samsmich_full_health" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\samsmich full health.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="_2019_12_11___Retro_Platforming___David_Fesliyan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2019-12-11_-_Retro_Platforming_-_David_Fesliyan.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="samsmich_half_health" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\samsmich half health.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="_2020_03_22___8_Bit_Surf___FesliyanStudios_com___David_Renda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2020-03-22_-_8_Bit_Surf_-_FesliyanStudios.com_-_David_Renda.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_2020_04_24___Arcade_Kid___FesliyanStudios_com___David_Renda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2020-04-24_-_Arcade_Kid_-_FesliyanStudios.com_-_David_Renda.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_2021_08_16___8_Bit_Adventure___www_FesliyanStudios_com" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2021-08-16_-_8_Bit_Adventure_-_www.FesliyanStudios.com.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_2021_08_17___8_Bit_Nostalgia___www_FesliyanStudios_com" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_2021_08_30___Boss_Time___www_FesliyanStudios_com" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2021-08-30_-_Boss_Time_-_www.FesliyanStudios.com.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_2021_10_19___Funny_Bit___www_FesliyanStudios_com__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2021-10-19_-_Funny_Bit_-_www.FesliyanStudios.com (1).wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rick_roll_night" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rick roll night.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="audiomass_output" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\audiomass-output.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BlackHole1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlackHole.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bomb_has_been_planted_sound_effect_cs_go" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bomb-has-been-planted-sound-effect-cs-go.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ffxiv_level_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ffxiv_level_up.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="i_am_become_death_youtube" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\i-am-become-death-youtube.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="world_of_warcraft_lvl_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\world-of-warcraft-lvl-up.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_33174986_ed27_49fb_b3e7_dac93a3def3f" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\33174986-ed27-49fb-b3e7-dac93a3def3f.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="barrel_exploding_soundbible__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\barrel-exploding-soundbible (1).wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Large_Fireball_SoundBible_com_301502490" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Large Fireball-SoundBible.com-301502490.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_2019_08_25___8bit_Smooth_Presentation___David_Fesliyan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2019-08-25_-_8bit-Smooth_Presentation_-_David_Fesliyan.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_270343__littlerobotsoundfactory__shoot_01__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\270343__littlerobotsoundfactory__shoot_01 (1).wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_270344__littlerobotsoundfactory__shoot_00" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\270344__littlerobotsoundfactory__shoot_00.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

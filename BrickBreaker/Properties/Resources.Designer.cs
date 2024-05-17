@@ -63,6 +63,234 @@ namespace BrickBreaker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2019_01_10___Land_of_8_Bits___Stephen_Bennett___FesliyanStudios_com {
+            get {
+                return ResourceManager.GetStream("_2019_01_10___Land_of_8_Bits___Stephen_Bennett___FesliyanStudios_com", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2019_08_25___8bit_Smooth_Presentation___David_Fesliyan {
+            get {
+                return ResourceManager.GetStream("_2019_08_25___8bit_Smooth_Presentation___David_Fesliyan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2019_12_11___Retro_Platforming___David_Fesliyan {
+            get {
+                return ResourceManager.GetStream("_2019_12_11___Retro_Platforming___David_Fesliyan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2020_03_22___8_Bit_Surf___FesliyanStudios_com___David_Renda {
+            get {
+                return ResourceManager.GetStream("_2020_03_22___8_Bit_Surf___FesliyanStudios_com___David_Renda", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2020_04_24___Arcade_Kid___FesliyanStudios_com___David_Renda {
+            get {
+                return ResourceManager.GetStream("_2020_04_24___Arcade_Kid___FesliyanStudios_com___David_Renda", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2021_08_16___8_Bit_Adventure___www_FesliyanStudios_com {
+            get {
+                return ResourceManager.GetStream("_2021_08_16___8_Bit_Adventure___www_FesliyanStudios_com", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2021_08_17___8_Bit_Nostalgia___www_FesliyanStudios_com {
+            get {
+                return ResourceManager.GetStream("_2021_08_17___8_Bit_Nostalgia___www_FesliyanStudios_com", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2021_08_30___Boss_Time___www_FesliyanStudios_com {
+            get {
+                return ResourceManager.GetStream("_2021_08_30___Boss_Time___www_FesliyanStudios_com", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _2021_10_19___Funny_Bit___www_FesliyanStudios_com__1_ {
+            get {
+                return ResourceManager.GetStream("_2021_10_19___Funny_Bit___www_FesliyanStudios_com__1_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _270343__littlerobotsoundfactory__shoot_01__1_ {
+            get {
+                return ResourceManager.GetStream("_270343__littlerobotsoundfactory__shoot_01__1_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _270344__littlerobotsoundfactory__shoot_00 {
+            get {
+                return ResourceManager.GetStream("_270344__littlerobotsoundfactory__shoot_00", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _33174986_ed27_49fb_b3e7_dac93a3def3f {
+            get {
+                return ResourceManager.GetStream("_33174986_ed27_49fb_b3e7_dac93a3def3f", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream audiomass_output {
+            get {
+                return ResourceManager.GetStream("audiomass_output", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream barrel_exploding_soundbible__1_ {
+            get {
+                return ResourceManager.GetStream("barrel_exploding_soundbible__1_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blackhole {
+            get {
+                object obj = ResourceManager.GetObject("blackhole", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream BlackHole1 {
+            get {
+                return ResourceManager.GetStream("BlackHole1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream bomb_has_been_planted_sound_effect_cs_go {
+            get {
+                return ResourceManager.GetStream("bomb_has_been_planted_sound_effect_cs_go", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Dodge {
+            get {
+                return ResourceManager.GetStream("Dodge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream ffxiv_level_up {
+            get {
+                return ResourceManager.GetStream("ffxiv_level_up", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fireball {
+            get {
+                object obj = ResourceManager.GetObject("fireball", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream i_am_become_death_youtube {
+            get {
+                return ResourceManager.GetStream("i_am_become_death_youtube", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Large_Fireball_SoundBible_com_301502490 {
+            get {
+                return ResourceManager.GetStream("Large_Fireball_SoundBible_com_301502490", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream level_up_enhancement_8_bit_retro_sound_effect_153002 {
+            get {
+                return ResourceManager.GetStream("level_up_enhancement_8_bit_retro_sound_effect_153002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Microsoft_Windows_XP_Startup_Sound {
+            get {
+                return ResourceManager.GetStream("Microsoft_Windows_XP_Startup_Sound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap random {
+            get {
+                object obj = ResourceManager.GetObject("random", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream Rick_Astley___Never_Gonna_Give_You_Up__Official_Music_Video_ {
             get {
                 return ResourceManager.GetStream("Rick_Astley___Never_Gonna_Give_You_Up__Official_Music_Video_", resourceCulture);
@@ -75,6 +303,56 @@ namespace BrickBreaker.Properties {
         internal static System.Drawing.Bitmap rick_roll_night {
             get {
                 object obj = ResourceManager.GetObject("rick_roll_night", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sandwich1 {
+            get {
+                object obj = ResourceManager.GetObject("sandwich1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sandwiches {
+            get {
+                object obj = ResourceManager.GetObject("sandwiches", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap speed {
+            get {
+                object obj = ResourceManager.GetObject("speed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap speed1 {
+            get {
+                object obj = ResourceManager.GetObject("speed1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap width {
+            get {
+                object obj = ResourceManager.GetObject("width", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

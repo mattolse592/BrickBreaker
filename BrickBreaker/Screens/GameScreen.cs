@@ -1,6 +1,6 @@
 ﻿/*  Created by: Matthew, Nathan, Grady, Valentina, and Duhrick
  *  Project: Brick Breaker Team Porject
- *  Date: 
+ *  Date: May 13, 2024
  */
 using System;
 using System.Collections.Generic;
@@ -40,7 +40,7 @@ namespace BrickBreaker
         Ball ball;
 
         //upgrade varuables
-        int widthCounter, paddleSpeedCounter, swMultiplierCounter = 0;
+        int widthCounter, paddleSpeedCounter = 0;
         // list of all blocks for current level
         public List<Block> blocks = new List<Block>();
 
@@ -55,7 +55,12 @@ namespace BrickBreaker
         //Grady Stuff
         public static int speedModBX = 0, speedModBY = 0, speedModPX = 0, widthModP;
 
+        List<System.Windows.Media.MediaPlayer> ballHits = new List<System.Windows.Media.MediaPlayer> ();
+
+        List<System.Windows.Media.MediaPlayer> winSounds = new List<System.Windows.Media.MediaPlayer>();
+
         public static List<BlackHole> holes = new List<BlackHole>();
+        int numHole = 0;
 
         List<Powerup> powerups = new List<Powerup>();
         List<Ball> balls = new List<Ball>();
@@ -76,21 +81,31 @@ namespace BrickBreaker
             new SolidBrush(Color.FromArgb(225,0,0,0)),
             new SolidBrush(Color.FromArgb(250,0,0,0)),
         };
+        System.Windows.Media.MediaPlayer[] music =
+        {
+            new System.Windows.Media.MediaPlayer(),
+            new System.Windows.Media.MediaPlayer(),
+            new System.Windows.Media.MediaPlayer(),
+            new System.Windows.Media.MediaPlayer(),
+            new System.Windows.Media.MediaPlayer()
+        };
 
+        public static System.Windows.Media.MediaPlayer holeSong = new System.Windows.Media.MediaPlayer();
+        System.Windows.Media.MediaPlayer bonusSong = new System.Windows.Media.MediaPlayer();
 
         public static Font healthFont = new Font(new FontFamily("Arial"), 15, FontStyle.Bold, GraphicsUnit.Pixel);
 
         //currency
-        int sandwiches;
-        Rectangle rec1 = new Rectangle(950, 100, 200, 100);
-        Rectangle rec2 = new Rectangle(950, 200, 200, 100);
-        Rectangle rec3 = new Rectangle(950, 300, 200, 100);
-        Rectangle rec4 = new Rectangle(950, 400, 200, 100);
-        Rectangle rec5 = new Rectangle(950, 500, 200, 100);
-        Rectangle rec6 = new Rectangle(950, 600, 200, 100);
+        public int sandwiches;
 
         int multiplier = 1;
 
+        int upgrade1Cost = 5;
+        int upgrade2Cost = 20;
+        int upgrade3Cost = 50;
+        int upgrade4Cost = 30;
+        int upgrade5Cost = 200;
+        int upgrade6Cost = 500;
 
         int score = 0;
         int blocksDestroyed = 0;
@@ -101,14 +116,171 @@ namespace BrickBreaker
         public GameScreen()
         {
             InitializeComponent();
+
+            music[0].Open(new Uri(Application.StartupPath + "\\Resources\\2021-08-30_-_Boss_Time_-_www.FesliyanStudios.com.wav"));
+            music[1].Open(new Uri(Application.StartupPath + "\\Resources\\2021-10-19_-_Funny_Bit_-_www.FesliyanStudios.com (1).wav"));
+            music[2].Open(new Uri(Application.StartupPath + "\\Resources\\2019-12-11_-_Retro_Platforming_-_David_Fesliyan.wav"));
+            music[3].Open(new Uri(Application.StartupPath + "\\Resources\\2020-03-22_-_8_Bit_Surf_-_FesliyanStudios.com_-_David_Renda.wav"));
+            music[4].Open(new Uri(Application.StartupPath + "\\Resources\\2021-08-16_-_8_Bit_Adventure_-_www.FesliyanStudios.com.wav"));
+            holeSong.Open(new Uri(Application.StartupPath + "\\Resources\\BlackHole.wav"));
+            bonusSong.Open(new Uri(Application.StartupPath + "\\Resources\\2020-04-24_-_Arcade_Kid_-_FesliyanStudios.com_-_David_Renda.wav"));
+
+            music[0].MediaEnded += new EventHandler(music0Ended);
+            music[1].MediaEnded += new EventHandler(music1Ended);
+            music[2].MediaEnded += new EventHandler(music2Ended);
+            music[3].MediaEnded += new EventHandler(music3Ended);
+            music[4].MediaEnded += new EventHandler(music4Ended);
+            holeSong.MediaEnded += new EventHandler(holeEnded);
+            bonusSong.MediaEnded += new EventHandler(bonusEnded);
+
             OnStart();
+        }
+
+        #region sound plyaers
+
+        private void holeEnded(object sender, EventArgs e)
+        {
+            holeSong.Stop();
 
 
-           // holes.Add(new BlackHole(this.Width / 2, this.Height / 2, 0.55, 200, true, true, true, false, false));
+            holeSong.Play();
+        }
+
+        private void bonusEnded(object sender, EventArgs e)
+        {
+            bonusSong.Stop();
 
 
+            bonusSong.Play();
+        }
+
+
+        private void music0Ended(object sender, EventArgs e)
+        {
+            music[0].Stop();
+
+
+            music[0].Play();
+        }
+        private void music1Ended(object sender, EventArgs e)
+        {
+            music[1].Stop();
+
+            music[1].Play();
+        }
+        private void music2Ended(object sender, EventArgs e)
+        {
+            music[2].Stop();
+
+            music[2].Play();
+        }
+        private void music3Ended(object sender, EventArgs e)
+        {
+            music[3].Stop();
+
+            music[3].Play();
+        }
+        private void music4Ended(object sender, EventArgs e)
+        {
+            music[4].Stop();
+
+            music[4].Play();
+        }
+        
+
+        private void BallHit()
+        {
+
+            var ballSound = new System.Windows.Media.MediaPlayer();
+
+            ballSound.Open(new Uri(Application.StartupPath + "\\Resources\\Dodge.wav"));
+
+            ballHits.Add(ballSound);
+
+            ballHits[ballHits.Count - 1].Play();
 
         }
+
+        private void PlayFireball()
+        {
+
+            var sound = new System.Windows.Media.MediaPlayer();
+
+            sound.Open(new Uri(Application.StartupPath + "\\Resources\\audiomass-output.wav"));
+
+            ballHits.Add(sound);
+
+            ballHits[ballHits.Count - 1].Play();
+
+        }
+
+        private void PlayBomb()
+        {
+
+            var sound = new System.Windows.Media.MediaPlayer();
+
+            sound.Open(new Uri(Application.StartupPath + "\\Resources\\bomb-has-been-planted-sound-effect-cs-go.wav"));
+
+            ballHits.Add(sound);
+
+            ballHits[ballHits.Count - 1].Play();
+
+        }
+
+        private void Death()
+        {
+
+            var sound = new System.Windows.Media.MediaPlayer();
+
+            sound.Open(new Uri(Application.StartupPath + "\\Resources\\i-am-become-death-youtube.wav"));
+
+            ballHits.Add(sound);
+
+            ballHits[ballHits.Count - 1].Play();
+
+        }
+
+        public void StatUp(String startUp)
+        {
+
+            var sound = new System.Windows.Media.MediaPlayer();
+
+            sound.Open(new Uri(Application.StartupPath + startUp));
+
+            ballHits.Add(sound);
+
+            ballHits[ballHits.Count - 1].Play();
+
+        }
+
+        private void GameWin()
+        {
+
+            var winSound = new System.Windows.Media.MediaPlayer();
+
+            winSound.Open(new Uri(Application.StartupPath + "\\Resources\\level-up-enhancement-8-bit-retro-sound-effect-153002.wav"));
+
+            winSounds.Add(winSound);
+
+            winSounds[winSounds.Count - 1].Play();
+
+        }
+
+        void PlayMusic()
+        {
+            TurnMusicOff();
+            int indexer = currentLevel % 5;
+            music[indexer].Play();
+        }
+
+        void TurnMusicOff()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                music[i].Stop();
+            }
+        }
+        #endregion
 
         void generateRandomStuff()
         {
@@ -119,7 +291,8 @@ namespace BrickBreaker
 
             Random rand = new Random();
 
-            if (minN != 4 && maxN != 10 && rand.Next(0, 1000) > 5) {
+            if (minN != 4 && maxN != 10 && rand.Next(0, 1000) > 5)
+            {
                 return;
             }
 
@@ -146,7 +319,7 @@ namespace BrickBreaker
 
             for (int i = 0; i < w.blocks.Count; i++)
             {
-                w.blocks[i].hp = rand.Next(11, 999);
+                w.blocks[i].hp = rand.Next(11, 199);
                 w.blocks[i].x += w.blocks[i].x * 57;
                 w.blocks[i].y += w.blocks[i].y * 32;
                 blocks.Add(w.blocks[i]);
@@ -161,7 +334,8 @@ namespace BrickBreaker
             if (currentLevel >= 10)
             {
                 currentLevel = 1;
-            } else if (currentLevel == 9)
+            }
+            else if (currentLevel == 9)
             {
                 generateRandomStuff();
                 currentLevel += 1;
@@ -176,12 +350,16 @@ namespace BrickBreaker
             stick = true;
 
             Nathan_loadLevel();
-
         }
 
         public void OnStart()
         {
-            sandwichQuantity.Text = $"{sandwiches}";
+            // if the black hole was purchased less than 5 times, clear it
+            if (numHole < 5)
+            {
+                holes.Clear();
+                holeSong.Stop();
+            }
 
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
@@ -220,6 +398,8 @@ namespace BrickBreaker
             if (loadGame == true)
             {
                 nextLevel();
+                PlayMusic();
+                ballHits.Clear();
             }
 
             #endregion
@@ -259,7 +439,7 @@ namespace BrickBreaker
                         }
 
 
-                        balls[0].xSpeed = Math.Abs(ball.xSpeed); 
+                        balls[0].xSpeed = Math.Abs(ball.xSpeed);
 
                         balls[0].defaultSpeedX = (int)(6 * xScale);
                         balls[0].defaultSpeedY = (int)(6 * yScale);
@@ -276,6 +456,7 @@ namespace BrickBreaker
                     //powerups.Add(new Powerup("P", new List<Modifier> { new Modifier("fire") }));
                     break;
                 case Keys.G:
+                    PlayFireball();
                     powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
                     break;
                 case Keys.H:
@@ -318,9 +499,6 @@ namespace BrickBreaker
                 paddle.Move("right");
             }
 
-            //temp
-            sandwichQuantity.Text = $"{sandwiches}";
-
             //shop feature
             ShopBackColor();
 
@@ -351,6 +529,7 @@ namespace BrickBreaker
                 if (blocks.Count == 0)
                 {
                     gameTimer.Enabled = false;
+                    GameWin(); // play sounds
                     OnStart();
                     return;
                 }
@@ -358,19 +537,19 @@ namespace BrickBreaker
                 // Check if ball has collided with any blocks
                 for (int j = 0; j < blocks.Count; j++)
                 {
-                    //stinky bum
                     if (balls[i].BlockCollision(blocks[j]))
                     {
+                        BallHit();
                         score += 1;
                         balls[i] = blocks[j].PassCondition(balls[i]);
-
+                        //add points to the player
+                        sandwiches = sandwiches + multiplier;
+                        sandwichQuantity.Text = $"{sandwiches}";
                         if (blocks[j].hp <= 0)
                         {
                             blocks.RemoveAt(j);
                             j--;
-                            blocksDestroyed += 1;
-                            sandwiches = sandwiches + (1 * multiplier);
-                            sandwichQuantity.Text = $"{sandwiches}";
+                            blocksDestroyed++;
                         }
                     }
 
@@ -472,7 +651,7 @@ namespace BrickBreaker
                             blocks = hole.BeyondHorizon(blocks);
                         }
                     }
-                    
+
 
                     hole.DrawPoints();
                 }
@@ -534,138 +713,195 @@ namespace BrickBreaker
             }
         }
 
-        //private void label1_Click(object sender, EventArgs e)
-        //{
-        //    sandwiches += 100;
-        //}
-
-
         //shop
+        #region upgrade panel click events
         private void upgrade1Panel_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 20)
+            if (sandwiches >= upgrade1Cost)
             {
-                sandwiches = sandwiches - 20;
+                sandwiches = sandwiches - upgrade1Cost;
                 sandwichQuantity.Text = $"{sandwiches}";
                 powerups.Add(new Powerup("PW"));
                 widthCounter++;
+                upgrade1Quantity.Text = $"{widthCounter}";
+                StatUp("\\Resources\\world-of-warcraft-lvl-up.wav");
             }
         }
 
         private void upgrade2Panel_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 20)
+            if (sandwiches >= upgrade2Cost)
             {
-                sandwiches = sandwiches - 20;
+                sandwiches = sandwiches - upgrade2Cost;
                 sandwichQuantity.Text = $"{sandwiches}";
-                paddle.speed = paddle.speed + 1 % 4;
+                paddle.speed = paddle.speed + 1 % 6;
                 paddleSpeedCounter++;
                 upgrade2Quantity.Text = $"{paddleSpeedCounter}";
+                StatUp("\\Resources\\33174986-ed27-49fb-b3e7-dac93a3def3f.wav");
             }
         }
 
         private void upgrade3Panel_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 50)
+            if (sandwiches >= upgrade3Cost)
             {
-                sandwiches = sandwiches - 50;
-                multiplier = multiplier + 1;
+                sandwiches = sandwiches - upgrade3Cost;
+                multiplier++;
                 upgrade3Quantity.Text = multiplier + "x";
+                StatUp("\\Resources\\ffxiv_level_up.wav");
             }
         }
 
         private void upgrade4Quantity_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 300)
+            if (sandwiches >= upgrade4Cost)
             {
-                sandwiches = sandwiches - 300;
+                sandwiches = sandwiches - upgrade4Cost;
                 sandwichQuantity.Text = $"{sandwiches}";
-                powerups.Add(new Powerup("BB4", new List<Modifier> { new Modifier("fire", 500) }));
+                Random rnd = new Random();
+                if (rnd.Next(0, 2) == 0)
+                {
+                    powerups.Add(new Powerup("BB" + rnd.Next(2, 10).ToString(), new List<Modifier> { new Modifier("fire", 500) }));
+                }
+                else
+                {
+                    powerups.Add(new Powerup("BBC" + rnd.Next(2, 10).ToString(), new List<Modifier> { new Modifier("fire", 500) }));
+                }
+                PlayFireball();
             }
         }
-
+        //black hole upgrade 
         private void upgrade5Panel_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 1000)
+            if (sandwiches >= upgrade5Cost)
             {
-                sandwiches = sandwiches - 1000;
+                sandwiches = sandwiches - upgrade5Cost;
                 sandwichQuantity.Text = $"{sandwiches}";
+                Death();
+                numHole++;
+                powerups.Add(new Powerup("BH"));
+                upgrade5Description.Font = new Font(upgrade5Description.Font.FontFamily, 5);
+                switch (numHole)
+                {
+                    case 1:
+                        upgrade5Description.Text = "They say the real importance of atomic energy does not lie in the weapons that have been made; the real importance lies in all the great benefits which atomic energy, which the various radiations, will bring to mankind.";
+                        break;
+                    case 2:
+                        upgrade5Description.Text = "I am sure that there is truth in it, because there has never in the past been a new field opened up where the real fruits of it have not been invisible at the beginning.";
+                        break;
+                    case 3:
+                        upgrade5Description.Text = "There are others who try to escape the immediacy of this situation by saying that, after all, war has always been very terrible; after all, weapons have always gotten worse and worse;";
+                        break;
+                    case 4:
+                        upgrade5Description.Text = "I think it is for us to accept it as a very grave crisis, to realize that these atomic weapons which we have started to make are very terrible, that they involve a change, that they are not just a slight modification.";
+                        break;
+                    case 5:
+                        upgrade5Description.Text = "“When I came to you with those calculations, we thought we might start a chain reaction that would destroy the world.”\n“What of it?”\n“I believe we did.”";
+                        break;
+                }
             }
         }
-
+        //purchase randomized level
         private void upgrade6Panel_Click(object sender, EventArgs e)
         {
-            if (sandwiches >= 500)
+            if (sandwiches >= upgrade6Cost)
             {
-                sandwiches = sandwiches - 1000;
+                sandwiches = sandwiches - upgrade6Cost;
+                currentLevel = 10;
                 sandwichQuantity.Text = $"{sandwiches}";
+
+
+
+                generateRandomStuff();
+
             }
         }
-
+        #endregion
         void ShopBackColor()
         {
-            if(sandwiches < 20)
+            if (sandwiches >= 20)
+            {
+                htpButton.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
+                htpButton.BackColor = Color.DarkCyan;
+            }
+
+            if (sandwiches >= upgrade1Cost)
+            {
+                upgrade1Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
             {
                 upgrade1Panel.BackColor = Color.DarkCyan;
+            }
+
+            if (sandwiches >= upgrade2Cost)
+            {
+                upgrade2Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
                 upgrade2Panel.BackColor = Color.DarkCyan;
+            }
+
+            if (sandwiches >= upgrade3Cost)
+            {
+                upgrade3Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
                 upgrade3Panel.BackColor = Color.DarkCyan;
-                upgrade4Panel.BackColor = Color.DarkCyan;
-                upgrade5Panel.BackColor = Color.DarkCyan;
-                upgrade6Panel.BackColor = Color.DarkCyan;
             }
-            else if (sandwiches < 50 && sandwiches >= 20)
+
+            if (sandwiches >= upgrade4Cost)
             {
-                upgrade1Panel.BackColor = Color.DeepSkyBlue;
-                upgrade2Panel.BackColor = Color.DeepSkyBlue;
-                upgrade3Panel.BackColor = Color.DarkCyan;
-                upgrade4Panel.BackColor = Color.DarkCyan;
-                upgrade5Panel.BackColor = Color.DarkCyan;
-                upgrade6Panel.BackColor = Color.DarkCyan;
-            }
-            else if(sandwiches < 300 && sandwiches >= 50)
-            {
-                upgrade1Panel.BackColor = Color.DeepSkyBlue;
-                upgrade2Panel.BackColor = Color.DeepSkyBlue;
-                upgrade3Panel.BackColor = Color.DeepSkyBlue;
-                upgrade4Panel.BackColor = Color.DarkCyan;
-                upgrade5Panel.BackColor = Color.DarkCyan;
-                upgrade6Panel.BackColor = Color.DarkCyan;
-            }
-            else if(sandwiches < 500 && sandwiches >= 300)
-            {
-                upgrade1Panel.BackColor = Color.DeepSkyBlue;
-                upgrade2Panel.BackColor = Color.DeepSkyBlue;
-                upgrade3Panel.BackColor = Color.DeepSkyBlue;
                 upgrade4Panel.BackColor = Color.DeepSkyBlue;
-                upgrade5Panel.BackColor = Color.DarkCyan;
-                upgrade6Panel.BackColor = Color.DarkCyan;
             }
-            else if(sandwiches < 1000 && sandwiches >= 500)
+            else
             {
-                upgrade1Panel.BackColor = Color.DeepSkyBlue;
-                upgrade2Panel.BackColor = Color.DeepSkyBlue;
-                upgrade3Panel.BackColor = Color.DeepSkyBlue;
-                upgrade4Panel.BackColor = Color.DeepSkyBlue;
-                upgrade5Panel.BackColor = Color.DarkCyan;
-                upgrade6Panel.BackColor = Color.DeepSkyBlue;
+                upgrade4Panel.BackColor = Color.DarkCyan;
             }
-            else if (sandwiches >= 1000)
+
+            if (sandwiches >= upgrade5Cost)
             {
-                upgrade1Panel.BackColor = Color.DeepSkyBlue;
-                upgrade2Panel.BackColor = Color.DeepSkyBlue;
-                upgrade3Panel.BackColor = Color.DeepSkyBlue;
-                upgrade4Panel.BackColor = Color.DeepSkyBlue;
                 upgrade5Panel.BackColor = Color.DeepSkyBlue;
+            }
+            else
+            {
+                upgrade5Panel.BackColor = Color.DarkCyan;
+            }
+
+            if (sandwiches >= upgrade6Cost)
+            {
                 upgrade6Panel.BackColor = Color.DeepSkyBlue;
             }
+            else
+            {
+                upgrade6Panel.BackColor = Color.DarkCyan;
+            }
+
         }
 
+        private void htpButton_Click(object sender, EventArgs e)
+        {
+            if (sandwiches >= 20)
+            {
+                PlayBomb();
+                sandwiches = sandwiches - 20;
+                sandwichQuantity.Text = $"{sandwiches}";
+                powerups.Add(new Powerup("BE", new List<Modifier> { new Modifier("explode") }));
+            }
+        }
 
         private void exitLabel_Click(object sender, EventArgs e)
         {
             XmlRw w = new XmlRw();
-            w.writeStatistics(blocksDestroyed, score, currentLevel);
+            w.writeStatistics(blocksDestroyed, score, currentLevel, sandwiches);
 
+
+            TurnMusicOff();
             gameTimer.Enabled = false;
             Form1.ChangeScreen(this, new MenuScreen());
 
@@ -673,7 +909,9 @@ namespace BrickBreaker
 
         private void statisticsButton_Click(object sender, EventArgs e)
         {
-            Form1.ChangeScreen(this, new StatisticScreen(currentLevel, blocks));
+            TurnMusicOff();
+            gameTimer.Enabled = false;
+            Form1.ChangeScreen(this, new StatisticScreen(currentLevel, blocks, sandwiches));
         }
 
         // Save level
@@ -686,6 +924,7 @@ namespace BrickBreaker
         public void OnEnd()
         {
             // Goes to the game over screen
+            gameTimer.Enabled = false;
             Form1.ChangeScreen(this, new MenuScreen());
 
             //TODO: save the file to xml
@@ -783,9 +1022,6 @@ namespace BrickBreaker
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 400);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 500);
             e.Graphics.DrawRectangle(sidebarPen, 950, 0, 300, 600);
-
-            e.Graphics.FillRectangle(transparentBrush, rec1);
-
         }
 
     }

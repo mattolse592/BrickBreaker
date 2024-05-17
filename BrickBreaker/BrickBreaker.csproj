@@ -79,6 +79,11 @@
     <Compile Include="Paddle.cs" />
     <Compile Include="Powerup.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Screens\StatisticScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -110,14 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Screens\InstructionScreen.resx">
       <DependentUpon>InstructionScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -168,11 +168,90 @@
     <Content Include="levels\level9.xml" />
     <Content Include="levels\level_save1.xml" />
     <Content Include="levels\level_save2.xml" />
+    <None Include="Resources\fireball.png" />
+    <None Include="Resources\blackhole.png" />
+    <None Include="Resources\speed.png" />
+    <None Include="Resources\width.png" />
+    <None Include="Resources\sandwiches.png" />
+    <None Include="Resources\random.png" />
+    <None Include="Resources\sandwich1.png" />
+    <None Include="Resources\2019-01-10_-_Land_of_8_Bits_-_Stephen_Bennett_-_FesliyanStudios.com.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\2019-12-11_-_Retro_Platforming_-_David_Fesliyan.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\2020-04-24_-_Arcade_Kid_-_FesliyanStudios.com_-_David_Renda.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\2021-08-16_-_8_Bit_Adventure_-_www.FesliyanStudios.com.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\2021-10-19_-_Funny_Bit_-_www.FesliyanStudios.com %281%29.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\2021-08-30_-_Boss_Time_-_www.FesliyanStudios.com.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\2020-03-22_-_8_Bit_Surf_-_FesliyanStudios.com_-_David_Renda.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\2021-08-17_-_8_Bit_Nostalgia_-_www.FesliyanStudios.com.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Rick Astley - Never Gonna Give You Up %28Official Music Video%29.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Dodge.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\level-up-enhancement-8-bit-retro-sound-effect-153002.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\rick roll night.gif" />
-    <None Include="Resources\Rick Astley - Never Gonna Give You Up %28Official Music Video%29.wav" />
-    <None Include="Resources\samsmich half health.png" />
-    <None Include="Resources\samsmich almost dead.png" />
-    <None Include="Resources\samsmich full health.png" />
+    <None Include="Resources\Microsoft Windows XP Startup Sound.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\rick roll night.gif" />
+    <None Include="Resources\Microsoft Windows XP Startup Sound.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\audiomass-output.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\world-of-warcraft-lvl-up.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\ffxiv_level_up.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\33174986-ed27-49fb-b3e7-dac93a3def3f.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\bomb-has-been-planted-sound-effect-cs-go.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\i-am-become-death-youtube.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\BlackHole.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\barrel-exploding-soundbible %281%29.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Large Fireball-SoundBible.com-301502490.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\2019-08-25_-_8bit-Smooth_Presentation_-_David_Fesliyan.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\270344__littlerobotsoundfactory__shoot_00.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\270343__littlerobotsoundfactory__shoot_01 %281%29.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="statistics.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
