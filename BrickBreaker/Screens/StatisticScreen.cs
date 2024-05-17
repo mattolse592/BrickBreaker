@@ -53,6 +53,7 @@ namespace BrickBreaker
             gameScreen.blocks = blocks;
             gameScreen.currentLevel = level;
             gameScreen.loadGame = false;
+            gameScreen.PlayMusic();
 
             bonusSong.Stop();
 
