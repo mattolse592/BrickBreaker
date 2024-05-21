@@ -30,7 +30,6 @@ namespace BrickBreaker
         List<System.Windows.Media.MediaPlayer> ballHits = new List<System.Windows.Media.MediaPlayer>();
 
 
-        List<System.Windows.Media.MediaPlayer> ballHits = new List<System.Windows.Media.MediaPlayer>();
 
 
         const int TICSPEED = 50;

@@ -124,14 +124,14 @@ namespace BrickBreaker
                     xSpeed *= -1;
                 }
 
-                if (y + size < b.y + 6)
+                if (y + size < b.y + 10 && ySpeed > 0)
                 {
                     ySpeed *= -1;
 
                     y = b.y - size - 2;
                 }
 
-                else if (y > b.y + b.height - 6)
+                else if (y > b.y + b.height - 10 && ySpeed < 0)
                 {
                     ySpeed *= -1;
 

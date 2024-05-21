@@ -441,8 +441,8 @@ namespace BrickBreaker
 
                         balls[0].xSpeed = Math.Abs(ball.xSpeed);
 
-                        balls[0].defaultSpeedX = (int)(6 * xScale);
-                        balls[0].defaultSpeedY = (int)(6 * yScale);
+                        balls[0].defaultSpeedX = (int)(16 * xScale);
+                        balls[0].defaultSpeedY = (int)(16 * yScale);
 
                         if (balls[0].x + (balls[0].size / 2) > balls[0].throwX)
                         {
@@ -1001,8 +1001,8 @@ namespace BrickBreaker
             foreach (Block b in blocks)
             {
                 SolidBrush brush = new SolidBrush(b.colour);
-                e.Graphics.DrawImage(b.image, b.x, b.y, b.width, b.height);
-               // e.Graphics.FillRectangle(brush, b.x, b.y, b.width, b.height);
+            
+                e.Graphics.FillRectangle(brush, b.x, b.y, b.width, b.height);
                 e.Graphics.DrawString(b.hp.ToString(), healthFont, ballBrush, b.x, b.y);
             }
 
