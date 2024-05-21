@@ -300,7 +300,7 @@ namespace BrickBreaker
 
         }
 
-        void PlayMusic()
+        public void PlayMusic()
         {
             TurnMusicOff();
             int indexer = currentLevel % 5;
@@ -385,7 +385,7 @@ namespace BrickBreaker
 
             Nathan_loadLevel();
         }
-
+        /*
         public void PlayMusic()
         {
             TurnMusicOff();
@@ -400,7 +400,7 @@ namespace BrickBreaker
                 music[i].Stop();
             }
         }
-
+        */
        public void OnStart()
         {
             // if the black hole was purchased less than 5 times, clear it
