@@ -616,11 +616,32 @@ namespace BrickBreaker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream world_of_warcraft_lvl_up {
+        internal static System.Drawing.Bitmap samsmich_almost_dead {
             get {
-                return ResourceManager.GetStream("world_of_warcraft_lvl_up", resourceCulture);
+                object obj = ResourceManager.GetObject("samsmich_almost_dead", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap samsmich_full_health {
+            get {
+                object obj = ResourceManager.GetObject("samsmich_full_health", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap samsmich_half_health {
+            get {
+                object obj = ResourceManager.GetObject("samsmich_half_health", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
