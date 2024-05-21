@@ -36,8 +36,8 @@
             this.arsBackgroundLabel = new System.Windows.Forms.Label();
             this.yesButton = new System.Windows.Forms.Button();
             this.noButton = new System.Windows.Forms.Button();
-            this.mrRoll = new System.Windows.Forms.PictureBox();
             this.ricktimer = new System.Windows.Forms.Timer(this.components);
+            this.mrRoll = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.mrRoll)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +48,7 @@
             this.playButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.playButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.playButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.playButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playButton.Font = new System.Drawing.Font("Antiquity print", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playButton.ForeColor = System.Drawing.Color.SaddleBrown;
             this.playButton.Location = new System.Drawing.Point(525, 239);
             this.playButton.Name = "playButton";
@@ -63,7 +63,7 @@
             this.exitButton.BackColor = System.Drawing.Color.White;
             this.exitButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitButton.Font = new System.Drawing.Font("Antiquity print", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitButton.ForeColor = System.Drawing.Color.SaddleBrown;
             this.exitButton.Location = new System.Drawing.Point(525, 539);
             this.exitButton.Name = "exitButton";
@@ -78,7 +78,7 @@
             this.resetButton.BackColor = System.Drawing.Color.White;
             this.resetButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetButton.Font = new System.Drawing.Font("Antiquity print", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resetButton.ForeColor = System.Drawing.Color.SaddleBrown;
             this.resetButton.Location = new System.Drawing.Point(525, 389);
             this.resetButton.Name = "resetButton";
@@ -90,20 +90,20 @@
             // 
             // instructionButton
             // 
-            this.instructionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.instructionButton.Font = new System.Drawing.Font("Antiquity print", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.instructionButton.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.instructionButton.Location = new System.Drawing.Point(1157, 609);
+            this.instructionButton.Location = new System.Drawing.Point(961, 609);
             this.instructionButton.Name = "instructionButton";
-            this.instructionButton.Size = new System.Drawing.Size(60, 60);
+            this.instructionButton.Size = new System.Drawing.Size(256, 60);
             this.instructionButton.TabIndex = 4;
-            this.instructionButton.Text = "?";
+            this.instructionButton.Text = "Meet Rick";
             this.instructionButton.UseVisualStyleBackColor = true;
             this.instructionButton.Click += new System.EventHandler(this.instructionButton_Click);
             // 
             // arsBackgroundLabel
             // 
             this.arsBackgroundLabel.BackColor = System.Drawing.Color.Silver;
-            this.arsBackgroundLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.arsBackgroundLabel.Font = new System.Drawing.Font("Antiquity print", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.arsBackgroundLabel.ForeColor = System.Drawing.Color.SaddleBrown;
             this.arsBackgroundLabel.Location = new System.Drawing.Point(846, 114);
             this.arsBackgroundLabel.Name = "arsBackgroundLabel";
@@ -120,7 +120,7 @@
             this.yesButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Maroon;
             this.yesButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.yesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.yesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.yesButton.Font = new System.Drawing.Font("Antiquity print", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.yesButton.ForeColor = System.Drawing.Color.Black;
             this.yesButton.Location = new System.Drawing.Point(1019, 239);
             this.yesButton.Name = "yesButton";
@@ -138,7 +138,7 @@
             this.noButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Snow;
             this.noButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.noButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noButton.Font = new System.Drawing.Font("Antiquity print", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.noButton.ForeColor = System.Drawing.Color.Black;
             this.noButton.Location = new System.Drawing.Point(894, 239);
             this.noButton.Name = "noButton";
@@ -148,6 +148,11 @@
             this.noButton.UseVisualStyleBackColor = false;
             this.noButton.Visible = false;
             this.noButton.Click += new System.EventHandler(this.noButton_Click);
+            // 
+            // ricktimer
+            // 
+            this.ricktimer.Interval = 50;
+            this.ricktimer.Tick += new System.EventHandler(this.ricktimer_Tick);
             // 
             // mrRoll
             // 
@@ -161,16 +166,13 @@
             this.mrRoll.TabStop = false;
             this.mrRoll.Visible = false;
             // 
-            // ricktimer
-            // 
-            this.ricktimer.Interval = 50;
-            this.ricktimer.Tick += new System.EventHandler(this.ricktimer_Tick);
-            // 
             // MenuScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.BackgroundImage = global::BrickBreaker.Properties.Resources.OpeningScreen;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.mrRoll);
             this.Controls.Add(this.noButton);
             this.Controls.Add(this.yesButton);
@@ -182,6 +184,7 @@
             this.DoubleBuffered = true;
             this.Name = "MenuScreen";
             this.Size = new System.Drawing.Size(1250, 700);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MenuScreen_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.mrRoll)).EndInit();
             this.ResumeLayout(false);
 
